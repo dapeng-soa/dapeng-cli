@@ -1,0 +1,609 @@
+2018-05-07 16:01:37.322 [main] INFO  org.clamshellcli.impl.CliShell - [loadComponents] ==>console=org.clamshellcli.impl.CliConsole@69d9c55
+2018-05-07 16:01:37.449 [main] INFO  com.github.dapeng.plugins.commands.ZkController - [loadCommands] ==> Step into load commands....
+2018-05-07 16:01:37.449 [main] INFO  com.github.dapeng.plugins.commands.ZkController - loadCommands ==> ServiceLoader: java.util.ServiceLoader[org.clamshellcli.api.Command]
+2018-05-07 16:01:37.450 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[exit]com.github.dapeng.plugins.ExitCmd@bd8db5a
+2018-05-07 16:01:37.450 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[help]com.github.dapeng.plugins.HelpCmd@2f943d71
+2018-05-07 16:01:37.450 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[sysinfo]com.github.dapeng.plugins.SysInfoCmd@80503
+2018-05-07 16:01:37.450 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[metadata]com.github.dapeng.plugins.MetadataCmd@4b553d26
+2018-05-07 16:01:37.450 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[json]com.github.dapeng.plugins.JsonCmd@69a3d1d
+2018-05-07 16:01:37.450 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[zk]com.github.dapeng.plugins.ZkCmd@86be70a
+2018-05-07 16:01:37.450 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[service]com.github.dapeng.plugins.ServiceCmd@480bdb19
+2018-05-07 16:01:37.451 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[request]com.github.dapeng.plugins.RequestCmd@2a556333
+2018-05-07 16:01:37.451 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[set]com.github.dapeng.plugins.SetCmd@7d70d1b1
+2018-05-07 16:01:37.451 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[unset]com.github.dapeng.plugins.UnSetCmd@2a742aa2
+2018-05-07 16:01:37.453 [main] INFO  org.clamshellcli.impl.CliShell - [executeCmd] ==>**************************
+2018-05-07 16:01:37.453 [main] INFO  org.clamshellcli.impl.CmdController - [handle] ==>step into handle... cmdLine=[help ],this.respondsTo=[(.*)\b(.*)]
+2018-05-07 16:01:37.453 [main] INFO  org.clamshellcli.impl.CmdController - [handle] ==>respondsTo.matcher(cmdLine).matches()=[true]
+2018-05-07 16:01:37.453 [main] INFO  org.clamshellcli.impl.CmdController - [handle] ==> commands=[{exit=com.github.dapeng.plugins.ExitCmd@7e2d773b, help=com.github.dapeng.plugins.HelpCmd@2173f6d9, zk=com.github.dapeng.plugins.ZkCmd@307f6b8c, request=com.github.dapeng.plugins.RequestCmd@7a187f14, metadata=com.github.dapeng.plugins.MetadataCmd@6f195bc3, set=com.github.dapeng.plugins.SetCmd@51e2adc7, service=com.github.dapeng.plugins.ServiceCmd@1a8a8f7c, sysinfo=com.github.dapeng.plugins.SysInfoCmd@2353b3e6, json=com.github.dapeng.plugins.JsonCmd@631330c, unset=com.github.dapeng.plugins.UnSetCmd@42f93a98}],tokens = [[help]]
+2018-05-07 16:01:37.453 [main] INFO  org.clamshellcli.impl.CmdController - [handle] ==>Command[com.github.dapeng.plugins.HelpCmd@2173f6d9] execute
+2018-05-07 16:01:37.453 [main] INFO  com.github.dapeng.plugins.HelpCmd - [execute] ==> help command execute....
+2018-05-07 16:01:37.453 [main] INFO  com.github.dapeng.plugins.HelpCmd - [execute] ==> args =null,ctx.getIoConsole()=org.clamshellcli.impl.CliConsole@69d9c55
+2018-05-07 16:01:48.498 [main] INFO  org.clamshellcli.impl.CliShell - [loadComponents] ==>console=org.clamshellcli.impl.CliConsole@69d9c55
+2018-05-07 16:01:48.622 [main] INFO  com.github.dapeng.plugins.commands.ZkController - [loadCommands] ==> Step into load commands....
+2018-05-07 16:01:48.622 [main] INFO  com.github.dapeng.plugins.commands.ZkController - loadCommands ==> ServiceLoader: java.util.ServiceLoader[org.clamshellcli.api.Command]
+2018-05-07 16:01:48.622 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[exit]com.github.dapeng.plugins.ExitCmd@bd8db5a
+2018-05-07 16:01:48.623 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[help]com.github.dapeng.plugins.HelpCmd@2f943d71
+2018-05-07 16:01:48.623 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[sysinfo]com.github.dapeng.plugins.SysInfoCmd@80503
+2018-05-07 16:01:48.623 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[metadata]com.github.dapeng.plugins.MetadataCmd@4b553d26
+2018-05-07 16:01:48.623 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[json]com.github.dapeng.plugins.JsonCmd@69a3d1d
+2018-05-07 16:01:48.623 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[zk]com.github.dapeng.plugins.ZkCmd@86be70a
+2018-05-07 16:01:48.623 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[service]com.github.dapeng.plugins.ServiceCmd@480bdb19
+2018-05-07 16:01:48.623 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[request]com.github.dapeng.plugins.RequestCmd@2a556333
+2018-05-07 16:01:48.623 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[set]com.github.dapeng.plugins.SetCmd@7d70d1b1
+2018-05-07 16:01:48.623 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[unset]com.github.dapeng.plugins.UnSetCmd@2a742aa2
+2018-05-07 16:01:48.625 [main] INFO  org.clamshellcli.impl.CliShell - [executeCmd] ==>**************************
+2018-05-07 16:01:48.625 [main] INFO  org.clamshellcli.impl.CmdController - [handle] ==>step into handle... cmdLine=[service -l ],this.respondsTo=[(.*)\b(.*)]
+2018-05-07 16:01:48.625 [main] INFO  org.clamshellcli.impl.CmdController - [handle] ==>respondsTo.matcher(cmdLine).matches()=[true]
+2018-05-07 16:01:48.626 [main] INFO  org.clamshellcli.impl.CmdController - [handle] ==> commands=[{exit=com.github.dapeng.plugins.ExitCmd@7e2d773b, help=com.github.dapeng.plugins.HelpCmd@2173f6d9, zk=com.github.dapeng.plugins.ZkCmd@307f6b8c, request=com.github.dapeng.plugins.RequestCmd@7a187f14, metadata=com.github.dapeng.plugins.MetadataCmd@6f195bc3, set=com.github.dapeng.plugins.SetCmd@51e2adc7, service=com.github.dapeng.plugins.ServiceCmd@1a8a8f7c, sysinfo=com.github.dapeng.plugins.SysInfoCmd@2353b3e6, json=com.github.dapeng.plugins.JsonCmd@631330c, unset=com.github.dapeng.plugins.UnSetCmd@42f93a98}],tokens = [[service, -l]]
+2018-05-07 16:01:48.626 [main] INFO  org.clamshellcli.impl.CmdController - [handle] ==>Command[com.github.dapeng.plugins.ServiceCmd@1a8a8f7c] execute
+2018-05-07 16:01:57.679 [main] INFO  org.apache.zookeeper.ZooKeeper - Client environment:zookeeper.version=3.4.7-1713338, built on 11/09/2015 04:32 GMT
+2018-05-07 16:01:57.679 [main] INFO  org.apache.zookeeper.ZooKeeper - Client environment:host.name=SKY-20180329AXQ
+2018-05-07 16:01:57.679 [main] INFO  org.apache.zookeeper.ZooKeeper - Client environment:java.version=1.8.0_161
+2018-05-07 16:01:57.679 [main] INFO  org.apache.zookeeper.ZooKeeper - Client environment:java.vendor=Oracle Corporation
+2018-05-07 16:01:57.679 [main] INFO  org.apache.zookeeper.ZooKeeper - Client environment:java.home=E:\develop\jre
+2018-05-07 16:01:57.680 [main] INFO  org.apache.zookeeper.ZooKeeper - Client environment:java.class.path=cli.jar
+2018-05-07 16:01:57.680 [main] INFO  org.apache.zookeeper.ZooKeeper - Client environment:java.library.path=C:\ProgramData\Oracle\Java\javapath;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files\Docker\Docker\Resources\bin;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;E:\develop\Git\cmd;E:\develop\scala-2.12.4\bin;E:\develop\sbt\bin;E:\develop\apache-maven-3.5.3\bin;E:\develop\jdk1.8.0_161\bin;C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps;;.
+2018-05-07 16:01:57.680 [main] INFO  org.apache.zookeeper.ZooKeeper - Client environment:java.io.tmpdir=C:\Users\ADMINI~1\AppData\Local\Temp\
+2018-05-07 16:01:57.680 [main] INFO  org.apache.zookeeper.ZooKeeper - Client environment:java.compiler=<NA>
+2018-05-07 16:01:57.680 [main] INFO  org.apache.zookeeper.ZooKeeper - Client environment:os.name=Windows 10
+2018-05-07 16:01:57.680 [main] INFO  org.apache.zookeeper.ZooKeeper - Client environment:os.arch=amd64
+2018-05-07 16:01:57.680 [main] INFO  org.apache.zookeeper.ZooKeeper - Client environment:os.version=10.0
+2018-05-07 16:01:57.680 [main] INFO  org.apache.zookeeper.ZooKeeper - Client environment:user.name=Administrator
+2018-05-07 16:01:57.680 [main] INFO  org.apache.zookeeper.ZooKeeper - Client environment:user.home=C:\Users\Administrator
+2018-05-07 16:01:57.680 [main] INFO  org.apache.zookeeper.ZooKeeper - Client environment:user.dir=E:\workspace\dapeng-cli\dist
+2018-05-07 16:01:57.682 [main] INFO  org.apache.zookeeper.ZooKeeper - Initiating client connection, connectString=127.0.0.1:2181 sessionTimeout=15000 watcher=com.github.dapeng.utils.ZookeeperUtils$$Lambda$2/1293618474@710726a3
+2018-05-07 16:01:57.710 [main-SendThread(127.0.0.1:2181)] INFO  org.apache.zookeeper.ClientCnxn - Opening socket connection to server 127.0.0.1/127.0.0.1:2181. Will not attempt to authenticate using SASL (unknown error)
+2018-05-07 16:01:57.713 [main-SendThread(127.0.0.1:2181)] INFO  org.apache.zookeeper.ClientCnxn - Socket connection established to 127.0.0.1/127.0.0.1:2181, initiating session
+2018-05-07 16:01:57.955 [main-SendThread(127.0.0.1:2181)] INFO  org.apache.zookeeper.ClientCnxn - Session establishment complete on server 127.0.0.1/127.0.0.1:2181, sessionid = 0x1000000d7050072, negotiated timeout = 15000
+2018-05-07 16:01:58.074 [main] INFO  com.github.dapeng.utils.ZookeeperUtils - [getRunTimeServices] ==> runtimeServiceCashes =[com.github.dapeng.hello.service.HelloService, 123123, com.today.soa.idgen.service.IDService, com.today.api.admin.service.AdminService, com.today.api.supplier.service.SupplierService, com.github.dapeng.basic.api.counter.service.CounterService, com.today.api.admin.service.PermissionService]
+2018-05-07 16:03:00.230 [main] INFO  org.clamshellcli.impl.CliShell - [loadComponents] ==>console=org.clamshellcli.impl.CliConsole@69d9c55
+2018-05-07 16:03:00.350 [main] INFO  com.github.dapeng.plugins.commands.ZkController - [loadCommands] ==> Step into load commands....
+2018-05-07 16:03:00.350 [main] INFO  com.github.dapeng.plugins.commands.ZkController - loadCommands ==> ServiceLoader: java.util.ServiceLoader[org.clamshellcli.api.Command]
+2018-05-07 16:03:00.352 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[exit]com.github.dapeng.plugins.ExitCmd@bd8db5a
+2018-05-07 16:03:00.352 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[help]com.github.dapeng.plugins.HelpCmd@2f943d71
+2018-05-07 16:03:00.352 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[sysinfo]com.github.dapeng.plugins.SysInfoCmd@80503
+2018-05-07 16:03:00.352 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[metadata]com.github.dapeng.plugins.MetadataCmd@4b553d26
+2018-05-07 16:03:00.352 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[json]com.github.dapeng.plugins.JsonCmd@69a3d1d
+2018-05-07 16:03:00.352 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[zk]com.github.dapeng.plugins.ZkCmd@86be70a
+2018-05-07 16:03:00.352 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[service]com.github.dapeng.plugins.ServiceCmd@480bdb19
+2018-05-07 16:03:00.352 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[request]com.github.dapeng.plugins.RequestCmd@2a556333
+2018-05-07 16:03:00.352 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[set]com.github.dapeng.plugins.SetCmd@7d70d1b1
+2018-05-07 16:03:00.352 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[unset]com.github.dapeng.plugins.UnSetCmd@2a742aa2
+2018-05-07 16:03:00.354 [main] INFO  org.clamshellcli.impl.CliShell - [executeCmd] ==>**************************
+2018-05-07 16:03:00.355 [main] INFO  org.clamshellcli.impl.CmdController - [handle] ==>step into handle... cmdLine=[help request ],this.respondsTo=[(.*)\b(.*)]
+2018-05-07 16:03:00.355 [main] INFO  org.clamshellcli.impl.CmdController - [handle] ==>respondsTo.matcher(cmdLine).matches()=[true]
+2018-05-07 16:03:00.355 [main] INFO  org.clamshellcli.impl.CmdController - [handle] ==> commands=[{exit=com.github.dapeng.plugins.ExitCmd@7e2d773b, help=com.github.dapeng.plugins.HelpCmd@2173f6d9, zk=com.github.dapeng.plugins.ZkCmd@307f6b8c, request=com.github.dapeng.plugins.RequestCmd@7a187f14, metadata=com.github.dapeng.plugins.MetadataCmd@6f195bc3, set=com.github.dapeng.plugins.SetCmd@51e2adc7, service=com.github.dapeng.plugins.ServiceCmd@1a8a8f7c, sysinfo=com.github.dapeng.plugins.SysInfoCmd@2353b3e6, json=com.github.dapeng.plugins.JsonCmd@631330c, unset=com.github.dapeng.plugins.UnSetCmd@42f93a98}],tokens = [[help, request]]
+2018-05-07 16:03:00.355 [main] INFO  org.clamshellcli.impl.CmdController - [handle] ==>Command[com.github.dapeng.plugins.HelpCmd@2173f6d9] execute
+2018-05-07 16:03:00.355 [main] INFO  com.github.dapeng.plugins.HelpCmd - [execute] ==> help command execute....
+2018-05-07 16:03:00.355 [main] INFO  com.github.dapeng.plugins.HelpCmd - [execute] ==> args =[request],ctx.getIoConsole()=org.clamshellcli.impl.CliConsole@69d9c55
+2018-05-07 16:03:00.355 [main] INFO  com.github.dapeng.plugins.HelpCmd - [printCommandHelp] ==>commands=[{exit=com.github.dapeng.plugins.ExitCmd@bd8db5a, help=com.github.dapeng.plugins.HelpCmd@2f943d71, zk=com.github.dapeng.plugins.ZkCmd@86be70a, request=com.github.dapeng.plugins.RequestCmd@2a556333, metadata=com.github.dapeng.plugins.MetadataCmd@4b553d26, set=com.github.dapeng.plugins.SetCmd@7d70d1b1, service=com.github.dapeng.plugins.ServiceCmd@480bdb19, sysinfo=com.github.dapeng.plugins.SysInfoCmd@80503, json=com.github.dapeng.plugins.JsonCmd@69a3d1d, unset=com.github.dapeng.plugins.UnSetCmd@2a742aa2}]
+2018-05-07 17:51:45.046 [main] INFO  org.clamshellcli.impl.CliShell - [loadComponents] ==>console=org.clamshellcli.impl.CliConsole@69d9c55
+2018-05-07 17:51:45.165 [main] INFO  com.github.dapeng.plugins.commands.ZkController - [loadCommands] ==> Step into load commands....
+2018-05-07 17:51:45.165 [main] INFO  com.github.dapeng.plugins.commands.ZkController - loadCommands ==> ServiceLoader: java.util.ServiceLoader[org.clamshellcli.api.Command]
+2018-05-07 17:51:45.166 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[exit]com.github.dapeng.plugins.ExitCmd@bd8db5a
+2018-05-07 17:51:45.166 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[help]com.github.dapeng.plugins.HelpCmd@2f943d71
+2018-05-07 17:51:45.166 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[sysinfo]com.github.dapeng.plugins.SysInfoCmd@80503
+2018-05-07 17:51:45.166 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[metadata]com.github.dapeng.plugins.MetadataCmd@4b553d26
+2018-05-07 17:51:45.166 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[json]com.github.dapeng.plugins.JsonCmd@69a3d1d
+2018-05-07 17:51:45.166 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[zk]com.github.dapeng.plugins.ZkCmd@86be70a
+2018-05-07 17:51:45.166 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[service]com.github.dapeng.plugins.ServiceCmd@480bdb19
+2018-05-07 17:51:45.166 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[request]com.github.dapeng.plugins.RequestCmd@2a556333
+2018-05-07 17:51:45.166 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[set]com.github.dapeng.plugins.SetCmd@7d70d1b1
+2018-05-07 17:51:45.166 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[unset]com.github.dapeng.plugins.UnSetCmd@2a742aa2
+2018-05-07 17:51:45.168 [main] INFO  org.clamshellcli.impl.CliShell - [executeCmd] ==>**************************
+2018-05-07 17:51:45.168 [main] INFO  org.clamshellcli.impl.CmdController - [handle] ==>step into handle... cmdLine=[request ],this.respondsTo=[(.*)\b(.*)]
+2018-05-07 17:51:45.169 [main] INFO  org.clamshellcli.impl.CmdController - [handle] ==>respondsTo.matcher(cmdLine).matches()=[true]
+2018-05-07 17:51:45.169 [main] INFO  org.clamshellcli.impl.CmdController - [handle] ==> commands=[{exit=com.github.dapeng.plugins.ExitCmd@7e2d773b, help=com.github.dapeng.plugins.HelpCmd@2173f6d9, zk=com.github.dapeng.plugins.ZkCmd@307f6b8c, request=com.github.dapeng.plugins.RequestCmd@7a187f14, metadata=com.github.dapeng.plugins.MetadataCmd@6f195bc3, set=com.github.dapeng.plugins.SetCmd@51e2adc7, service=com.github.dapeng.plugins.ServiceCmd@1a8a8f7c, sysinfo=com.github.dapeng.plugins.SysInfoCmd@2353b3e6, json=com.github.dapeng.plugins.JsonCmd@631330c, unset=com.github.dapeng.plugins.UnSetCmd@42f93a98}],tokens = [[request]]
+2018-05-07 17:51:45.169 [main] INFO  org.clamshellcli.impl.CmdController - [handle] ==>Command[com.github.dapeng.plugins.RequestCmd@7a187f14] execute
+2018-05-07 17:52:01.446 [main] INFO  org.clamshellcli.impl.CliShell - [loadComponents] ==>console=org.clamshellcli.impl.CliConsole@69d9c55
+2018-05-07 17:52:01.566 [main] INFO  com.github.dapeng.plugins.commands.ZkController - [loadCommands] ==> Step into load commands....
+2018-05-07 17:52:01.566 [main] INFO  com.github.dapeng.plugins.commands.ZkController - loadCommands ==> ServiceLoader: java.util.ServiceLoader[org.clamshellcli.api.Command]
+2018-05-07 17:52:01.566 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[exit]com.github.dapeng.plugins.ExitCmd@80503
+2018-05-07 17:52:01.566 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[help]com.github.dapeng.plugins.HelpCmd@4b553d26
+2018-05-07 17:52:01.566 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[sysinfo]com.github.dapeng.plugins.SysInfoCmd@69a3d1d
+2018-05-07 17:52:01.567 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[metadata]com.github.dapeng.plugins.MetadataCmd@86be70a
+2018-05-07 17:52:01.567 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[json]com.github.dapeng.plugins.JsonCmd@480bdb19
+2018-05-07 17:52:01.567 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[zk]com.github.dapeng.plugins.ZkCmd@2a556333
+2018-05-07 17:52:01.567 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[service]com.github.dapeng.plugins.ServiceCmd@7d70d1b1
+2018-05-07 17:52:01.567 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[request]com.github.dapeng.plugins.RequestCmd@2a742aa2
+2018-05-07 17:52:01.567 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[set]com.github.dapeng.plugins.SetCmd@3cb1ffe6
+2018-05-07 17:52:01.567 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[unset]com.github.dapeng.plugins.UnSetCmd@3dfc5fb8
+2018-05-07 17:52:07.294 [Thread-2] INFO  org.clamshellcli.impl.CmdController - [handle] ==>step into handle... cmdLine=[request],this.respondsTo=[(.*)\b(.*)]
+2018-05-07 17:52:07.294 [Thread-2] INFO  org.clamshellcli.impl.CmdController - [handle] ==>respondsTo.matcher(cmdLine).matches()=[true]
+2018-05-07 17:52:07.294 [Thread-2] INFO  org.clamshellcli.impl.CmdController - [handle] ==> commands=[{exit=com.github.dapeng.plugins.ExitCmd@4bdf5637, help=com.github.dapeng.plugins.HelpCmd@7bdf3a94, zk=com.github.dapeng.plugins.ZkCmd@485a83a2, request=com.github.dapeng.plugins.RequestCmd@7fa62f1d, metadata=com.github.dapeng.plugins.MetadataCmd@4ef9a030, set=com.github.dapeng.plugins.SetCmd@4cf038e1, service=com.github.dapeng.plugins.ServiceCmd@502be54e, sysinfo=com.github.dapeng.plugins.SysInfoCmd@1ebbe691, json=com.github.dapeng.plugins.JsonCmd@1dc02d56, unset=com.github.dapeng.plugins.UnSetCmd@503a293f}],tokens = [[request]]
+2018-05-07 17:52:07.294 [Thread-2] INFO  org.clamshellcli.impl.CmdController - [handle] ==>Command[com.github.dapeng.plugins.RequestCmd@7fa62f1d] execute
+2018-05-07 17:52:23.614 [Thread-2] INFO  org.clamshellcli.impl.CmdController - [handle] ==>step into handle... cmdLine=[help request],this.respondsTo=[(.*)\b(.*)]
+2018-05-07 17:52:23.614 [Thread-2] INFO  org.clamshellcli.impl.CmdController - [handle] ==>respondsTo.matcher(cmdLine).matches()=[true]
+2018-05-07 17:52:23.614 [Thread-2] INFO  org.clamshellcli.impl.CmdController - [handle] ==> commands=[{exit=com.github.dapeng.plugins.ExitCmd@4bdf5637, help=com.github.dapeng.plugins.HelpCmd@7bdf3a94, zk=com.github.dapeng.plugins.ZkCmd@485a83a2, request=com.github.dapeng.plugins.RequestCmd@7fa62f1d, metadata=com.github.dapeng.plugins.MetadataCmd@4ef9a030, set=com.github.dapeng.plugins.SetCmd@4cf038e1, service=com.github.dapeng.plugins.ServiceCmd@502be54e, sysinfo=com.github.dapeng.plugins.SysInfoCmd@1ebbe691, json=com.github.dapeng.plugins.JsonCmd@1dc02d56, unset=com.github.dapeng.plugins.UnSetCmd@503a293f}],tokens = [[help, request]]
+2018-05-07 17:52:23.615 [Thread-2] INFO  org.clamshellcli.impl.CmdController - [handle] ==>Command[com.github.dapeng.plugins.HelpCmd@7bdf3a94] execute
+2018-05-07 17:52:23.615 [Thread-2] INFO  com.github.dapeng.plugins.HelpCmd - [execute] ==> help command execute....
+2018-05-07 17:52:23.615 [Thread-2] INFO  com.github.dapeng.plugins.HelpCmd - [execute] ==> args =[request],ctx.getIoConsole()=org.clamshellcli.impl.CliConsole@69d9c55
+2018-05-07 17:52:23.615 [Thread-2] INFO  com.github.dapeng.plugins.HelpCmd - [printCommandHelp] ==>commands=[{exit=com.github.dapeng.plugins.ExitCmd@80503, help=com.github.dapeng.plugins.HelpCmd@4b553d26, zk=com.github.dapeng.plugins.ZkCmd@2a556333, request=com.github.dapeng.plugins.RequestCmd@2a742aa2, metadata=com.github.dapeng.plugins.MetadataCmd@86be70a, set=com.github.dapeng.plugins.SetCmd@3cb1ffe6, service=com.github.dapeng.plugins.ServiceCmd@7d70d1b1, sysinfo=com.github.dapeng.plugins.SysInfoCmd@69a3d1d, json=com.github.dapeng.plugins.JsonCmd@480bdb19, unset=com.github.dapeng.plugins.UnSetCmd@3dfc5fb8}]
+2018-05-07 17:52:37.086 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - ZkCompleter.complete ==>input = requset
+2018-05-07 17:52:37.087 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> remove before result:[[]]
+2018-05-07 17:52:37.137 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> filterKeys :[soa/runtime]----ignoreKeys:[]
+2018-05-07 17:52:37.137 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> remove after result:[[]]
+2018-05-07 17:52:37.138 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - ConsoleReader.complete ==> buf.buffer =requset,candidates:[],candidates.size=0,position=0  
+2018-05-07 17:52:38.693 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - ZkCompleter.complete ==>input = requset
+2018-05-07 17:52:38.694 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> remove before result:[[]]
+2018-05-07 17:52:38.694 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> filterKeys :[soa/runtime]----ignoreKeys:[]
+2018-05-07 17:52:38.694 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> remove after result:[[]]
+2018-05-07 17:52:38.694 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - ConsoleReader.complete ==> buf.buffer =requset,candidates:[],candidates.size=0,position=0  
+2018-05-07 17:52:39.392 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - ZkCompleter.complete ==>input = requset
+2018-05-07 17:52:39.393 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> remove before result:[[]]
+2018-05-07 17:52:39.393 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> filterKeys :[soa/runtime]----ignoreKeys:[]
+2018-05-07 17:52:39.393 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> remove after result:[[]]
+2018-05-07 17:52:39.394 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - ConsoleReader.complete ==> buf.buffer =requset,candidates:[],candidates.size=0,position=0  
+2018-05-07 17:52:39.614 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - ZkCompleter.complete ==>input = requset
+2018-05-07 17:52:39.615 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> remove before result:[[]]
+2018-05-07 17:52:39.615 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> filterKeys :[soa/runtime]----ignoreKeys:[]
+2018-05-07 17:52:39.615 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> remove after result:[[]]
+2018-05-07 17:52:39.616 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - ConsoleReader.complete ==> buf.buffer =requset,candidates:[],candidates.size=0,position=0  
+2018-05-07 17:52:40.862 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - ZkCompleter.complete ==>input = requset 
+2018-05-07 17:52:40.863 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> remove before result:[[]]
+2018-05-07 17:52:40.863 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> filterKeys :[soa/runtime]----ignoreKeys:[]
+2018-05-07 17:52:40.864 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> remove after result:[[]]
+2018-05-07 17:52:40.864 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - ConsoleReader.complete ==> buf.buffer =requset ,candidates:[],candidates.size=0,position=0  
+2018-05-07 17:52:41.183 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - ZkCompleter.complete ==>input = requset 
+2018-05-07 17:52:41.183 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> remove before result:[[]]
+2018-05-07 17:52:41.184 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> filterKeys :[soa/runtime]----ignoreKeys:[]
+2018-05-07 17:52:41.184 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> remove after result:[[]]
+2018-05-07 17:52:41.184 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - ConsoleReader.complete ==> buf.buffer =requset ,candidates:[],candidates.size=0,position=0  
+2018-05-07 17:52:41.365 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - ZkCompleter.complete ==>input = requset 
+2018-05-07 17:52:41.366 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> remove before result:[[]]
+2018-05-07 17:52:41.366 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> filterKeys :[soa/runtime]----ignoreKeys:[]
+2018-05-07 17:52:41.366 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> remove after result:[[]]
+2018-05-07 17:52:41.366 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - ConsoleReader.complete ==> buf.buffer =requset ,candidates:[],candidates.size=0,position=0  
+2018-05-07 17:52:41.533 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - ZkCompleter.complete ==>input = requset 
+2018-05-07 17:52:41.534 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> remove before result:[[]]
+2018-05-07 17:52:41.534 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> filterKeys :[soa/runtime]----ignoreKeys:[]
+2018-05-07 17:52:41.534 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> remove after result:[[]]
+2018-05-07 17:52:41.534 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - ConsoleReader.complete ==> buf.buffer =requset ,candidates:[],candidates.size=0,position=0  
+2018-05-07 17:52:43.206 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - ZkCompleter.complete ==>input = requset -
+2018-05-07 17:52:43.206 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> remove before result:[[]]
+2018-05-07 17:52:43.206 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> filterKeys :[soa/runtime]----ignoreKeys:[]
+2018-05-07 17:52:43.206 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> remove after result:[[]]
+2018-05-07 17:52:43.206 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - ConsoleReader.complete ==> buf.buffer =requset -,candidates:[],candidates.size=0,position=0  
+2018-05-07 17:52:43.463 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - ZkCompleter.complete ==>input = requset -
+2018-05-07 17:52:43.465 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> remove before result:[[]]
+2018-05-07 17:52:43.465 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> filterKeys :[soa/runtime]----ignoreKeys:[]
+2018-05-07 17:52:43.465 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> remove after result:[[]]
+2018-05-07 17:52:43.466 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - ConsoleReader.complete ==> buf.buffer =requset -,candidates:[],candidates.size=0,position=0  
+2018-05-07 17:52:43.646 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - ZkCompleter.complete ==>input = requset -
+2018-05-07 17:52:43.648 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> remove before result:[[]]
+2018-05-07 17:52:43.648 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> filterKeys :[soa/runtime]----ignoreKeys:[]
+2018-05-07 17:52:43.648 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> remove after result:[[]]
+2018-05-07 17:52:43.649 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - ConsoleReader.complete ==> buf.buffer =requset -,candidates:[],candidates.size=0,position=0  
+2018-05-07 17:52:44.398 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - ZkCompleter.complete ==>input = requset -m
+2018-05-07 17:52:44.399 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> remove before result:[[]]
+2018-05-07 17:52:44.399 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> filterKeys :[soa/runtime]----ignoreKeys:[]
+2018-05-07 17:52:44.399 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> remove after result:[[]]
+2018-05-07 17:52:44.401 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - ConsoleReader.complete ==> buf.buffer =requset -m,candidates:[],candidates.size=0,position=0  
+2018-05-07 17:52:44.614 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - ZkCompleter.complete ==>input = requset -m
+2018-05-07 17:52:44.615 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> remove before result:[[]]
+2018-05-07 17:52:44.615 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> filterKeys :[soa/runtime]----ignoreKeys:[]
+2018-05-07 17:52:44.615 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> remove after result:[[]]
+2018-05-07 17:52:44.616 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - ConsoleReader.complete ==> buf.buffer =requset -m,candidates:[],candidates.size=0,position=0  
+2018-05-07 17:52:44.791 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - ZkCompleter.complete ==>input = requset -m
+2018-05-07 17:52:44.792 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> remove before result:[[]]
+2018-05-07 17:52:44.792 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> filterKeys :[soa/runtime]----ignoreKeys:[]
+2018-05-07 17:52:44.792 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> remove after result:[[]]
+2018-05-07 17:52:44.792 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - ConsoleReader.complete ==> buf.buffer =requset -m,candidates:[],candidates.size=0,position=0  
+2018-05-07 17:52:44.957 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - ZkCompleter.complete ==>input = requset -m
+2018-05-07 17:52:44.958 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> remove before result:[[]]
+2018-05-07 17:52:44.958 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> filterKeys :[soa/runtime]----ignoreKeys:[]
+2018-05-07 17:52:44.959 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> remove after result:[[]]
+2018-05-07 17:52:44.959 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - ConsoleReader.complete ==> buf.buffer =requset -m,candidates:[],candidates.size=0,position=0  
+2018-05-07 17:52:45.133 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - ZkCompleter.complete ==>input = requset -m
+2018-05-07 17:52:45.134 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> remove before result:[[]]
+2018-05-07 17:52:45.134 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> filterKeys :[soa/runtime]----ignoreKeys:[]
+2018-05-07 17:52:45.134 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> remove after result:[[]]
+2018-05-07 17:52:45.135 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - ConsoleReader.complete ==> buf.buffer =requset -m,candidates:[],candidates.size=0,position=0  
+2018-05-07 17:54:30.106 [main] INFO  org.clamshellcli.impl.CliShell - [loadComponents] ==>console=org.clamshellcli.impl.CliConsole@12843fce
+2018-05-07 17:54:30.234 [main] INFO  com.github.dapeng.plugins.commands.ZkController - [loadCommands] ==> Step into load commands....
+2018-05-07 17:54:30.235 [main] INFO  com.github.dapeng.plugins.commands.ZkController - loadCommands ==> ServiceLoader: java.util.ServiceLoader[org.clamshellcli.api.Command]
+2018-05-07 17:54:30.235 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[exit]com.github.dapeng.plugins.ExitCmd@bd8db5a
+2018-05-07 17:54:30.235 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[help]com.github.dapeng.plugins.HelpCmd@2f943d71
+2018-05-07 17:54:30.235 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[sysinfo]com.github.dapeng.plugins.SysInfoCmd@80503
+2018-05-07 17:54:30.235 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[metadata]com.github.dapeng.plugins.MetadataCmd@4b553d26
+2018-05-07 17:54:30.235 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[json]com.github.dapeng.plugins.JsonCmd@69a3d1d
+2018-05-07 17:54:30.236 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[zk]com.github.dapeng.plugins.ZkCmd@86be70a
+2018-05-07 17:54:30.236 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[service]com.github.dapeng.plugins.ServiceCmd@480bdb19
+2018-05-07 17:54:30.236 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[request]com.github.dapeng.plugins.RequestCmd@2a556333
+2018-05-07 17:54:30.236 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[set]com.github.dapeng.plugins.SetCmd@7d70d1b1
+2018-05-07 17:54:30.236 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[unset]com.github.dapeng.plugins.UnSetCmd@2a742aa2
+2018-05-07 17:54:30.238 [main] INFO  org.clamshellcli.impl.CliShell - [executeCmd] ==>**************************
+2018-05-07 17:54:30.238 [main] INFO  org.clamshellcli.impl.CmdController - [handle] ==>step into handle... cmdLine=[help request ],this.respondsTo=[(.*)\b(.*)]
+2018-05-07 17:54:30.238 [main] INFO  org.clamshellcli.impl.CmdController - [handle] ==>respondsTo.matcher(cmdLine).matches()=[true]
+2018-05-07 17:54:30.239 [main] INFO  org.clamshellcli.impl.CmdController - [handle] ==> commands=[{exit=com.github.dapeng.plugins.ExitCmd@7e2d773b, help=com.github.dapeng.plugins.HelpCmd@2173f6d9, zk=com.github.dapeng.plugins.ZkCmd@307f6b8c, request=com.github.dapeng.plugins.RequestCmd@7a187f14, metadata=com.github.dapeng.plugins.MetadataCmd@6f195bc3, set=com.github.dapeng.plugins.SetCmd@51e2adc7, service=com.github.dapeng.plugins.ServiceCmd@1a8a8f7c, sysinfo=com.github.dapeng.plugins.SysInfoCmd@2353b3e6, json=com.github.dapeng.plugins.JsonCmd@631330c, unset=com.github.dapeng.plugins.UnSetCmd@42f93a98}],tokens = [[help, request]]
+2018-05-07 17:54:30.239 [main] INFO  org.clamshellcli.impl.CmdController - [handle] ==>Command[com.github.dapeng.plugins.HelpCmd@2173f6d9] execute
+2018-05-07 17:54:30.239 [main] INFO  com.github.dapeng.plugins.HelpCmd - [execute] ==> help command execute....
+2018-05-07 17:54:30.239 [main] INFO  com.github.dapeng.plugins.HelpCmd - [execute] ==> args =[request],ctx.getIoConsole()=org.clamshellcli.impl.CliConsole@12843fce
+2018-05-07 17:54:30.239 [main] INFO  com.github.dapeng.plugins.HelpCmd - [printCommandHelp] ==>commands=[{exit=com.github.dapeng.plugins.ExitCmd@bd8db5a, help=com.github.dapeng.plugins.HelpCmd@2f943d71, zk=com.github.dapeng.plugins.ZkCmd@86be70a, request=com.github.dapeng.plugins.RequestCmd@2a556333, metadata=com.github.dapeng.plugins.MetadataCmd@4b553d26, set=com.github.dapeng.plugins.SetCmd@7d70d1b1, service=com.github.dapeng.plugins.ServiceCmd@480bdb19, sysinfo=com.github.dapeng.plugins.SysInfoCmd@80503, json=com.github.dapeng.plugins.JsonCmd@69a3d1d, unset=com.github.dapeng.plugins.UnSetCmd@2a742aa2}]
+2018-05-07 17:54:39.840 [main] INFO  org.clamshellcli.impl.CliShell - [loadComponents] ==>console=org.clamshellcli.impl.CliConsole@12843fce
+2018-05-07 17:54:39.965 [main] INFO  com.github.dapeng.plugins.commands.ZkController - [loadCommands] ==> Step into load commands....
+2018-05-07 17:54:39.966 [main] INFO  com.github.dapeng.plugins.commands.ZkController - loadCommands ==> ServiceLoader: java.util.ServiceLoader[org.clamshellcli.api.Command]
+2018-05-07 17:54:39.966 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[exit]com.github.dapeng.plugins.ExitCmd@80503
+2018-05-07 17:54:39.966 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[help]com.github.dapeng.plugins.HelpCmd@4b553d26
+2018-05-07 17:54:39.966 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[sysinfo]com.github.dapeng.plugins.SysInfoCmd@69a3d1d
+2018-05-07 17:54:39.966 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[metadata]com.github.dapeng.plugins.MetadataCmd@86be70a
+2018-05-07 17:54:39.966 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[json]com.github.dapeng.plugins.JsonCmd@480bdb19
+2018-05-07 17:54:39.966 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[zk]com.github.dapeng.plugins.ZkCmd@2a556333
+2018-05-07 17:54:39.967 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[service]com.github.dapeng.plugins.ServiceCmd@7d70d1b1
+2018-05-07 17:54:39.967 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[request]com.github.dapeng.plugins.RequestCmd@2a742aa2
+2018-05-07 17:54:39.967 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[set]com.github.dapeng.plugins.SetCmd@3cb1ffe6
+2018-05-07 17:54:39.967 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[unset]com.github.dapeng.plugins.UnSetCmd@3dfc5fb8
+2018-05-07 17:55:20.614 [main] INFO  org.clamshellcli.impl.CliShell - [loadComponents] ==>console=org.clamshellcli.impl.CliConsole@69d9c55
+2018-05-07 17:55:20.736 [main] INFO  com.github.dapeng.plugins.commands.ZkController - [loadCommands] ==> Step into load commands....
+2018-05-07 17:55:20.736 [main] INFO  com.github.dapeng.plugins.commands.ZkController - loadCommands ==> ServiceLoader: java.util.ServiceLoader[org.clamshellcli.api.Command]
+2018-05-07 17:55:20.737 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[exit]com.github.dapeng.plugins.ExitCmd@80503
+2018-05-07 17:55:20.737 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[help]com.github.dapeng.plugins.HelpCmd@4b553d26
+2018-05-07 17:55:20.737 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[sysinfo]com.github.dapeng.plugins.SysInfoCmd@69a3d1d
+2018-05-07 17:55:20.737 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[metadata]com.github.dapeng.plugins.MetadataCmd@86be70a
+2018-05-07 17:55:20.737 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[json]com.github.dapeng.plugins.JsonCmd@480bdb19
+2018-05-07 17:55:20.737 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[zk]com.github.dapeng.plugins.ZkCmd@2a556333
+2018-05-07 17:55:20.737 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[service]com.github.dapeng.plugins.ServiceCmd@7d70d1b1
+2018-05-07 17:55:20.737 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[request]com.github.dapeng.plugins.RequestCmd@2a742aa2
+2018-05-07 17:55:20.737 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[set]com.github.dapeng.plugins.SetCmd@3cb1ffe6
+2018-05-07 17:55:20.737 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[unset]com.github.dapeng.plugins.UnSetCmd@3dfc5fb8
+2018-05-07 17:55:22.425 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - ConsoleReader.complete ==> buf.buffer =re,candidates:[request],candidates.size=1,position=3  
+2018-05-07 17:55:22.425 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - CandidateListCompletionHandler.setBuffer ==> cmdArgs=[re]
+2018-05-07 17:55:22.426 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>value=[request]
+2018-05-07 17:55:22.426 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>reader.getCursorBuffer()=[re]
+2018-05-07 17:55:22.426 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>autoFill=[request]
+2018-05-07 17:55:22.426 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>cmdKeys=[[re]]
+2018-05-07 17:55:22.426 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>patternCmd=[re]
+2018-05-07 17:55:22.427 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==> ------------------------------------------------------
+2018-05-07 17:55:22.427 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>value=[request]
+2018-05-07 17:55:22.427 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>reader.getCursorBuffer()=[re]
+2018-05-07 17:55:22.427 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>autoFill=[quest]
+2018-05-07 17:55:22.427 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>cmdKeys=[[re]]
+2018-05-07 17:55:22.428 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>patternCmd=[re]
+2018-05-07 17:55:24.325 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - ZkCompleter.complete ==>input = request 
+2018-05-07 17:55:24.325 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> remove before result:[[-s, -v, -m, -f, -metadata]]
+2018-05-07 17:55:24.378 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> filterKeys :[soa/runtime]----ignoreKeys:[]
+2018-05-07 17:55:24.378 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> remove after result:[[-s, -v, -m, -f, -metadata]]
+2018-05-07 17:55:24.378 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - ConsoleReader.complete ==> buf.buffer =request ,candidates:[-s, -v, -m, -f, -metadata],candidates.size=5,position=9  
+2018-05-07 17:55:24.379 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - CandidateListCompletionHandler.setBuffer ==> cmdArgs=[request]
+2018-05-07 17:55:24.379 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>value=[-]
+2018-05-07 17:55:24.379 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>reader.getCursorBuffer()=[request ]
+2018-05-07 17:55:24.379 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>autoFill=[-]
+2018-05-07 17:55:24.379 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>cmdKeys=[[request]]
+2018-05-07 17:55:24.379 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>patternCmd=[request]
+2018-05-07 17:55:24.379 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==> ------------------------------------------------------
+2018-05-07 17:55:24.379 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>value=[-]
+2018-05-07 17:55:24.379 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>reader.getCursorBuffer()=[request ]
+2018-05-07 17:55:24.379 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>autoFill=[ -]
+2018-05-07 17:55:24.379 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>cmdKeys=[[request]]
+2018-05-07 17:55:24.379 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>patternCmd=[request]
+2018-05-07 17:55:24.379 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [complete] ==> printCandidates(reader, candidates) 
+2018-05-07 17:55:28.119 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - ZkCompleter.complete ==>input = request  -m
+2018-05-07 17:55:28.119 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> remove before result:[[]]
+2018-05-07 17:55:28.119 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> filterKeys :[soa/runtime]----ignoreKeys:[]
+2018-05-07 17:55:28.120 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> remove after result:[[]]
+2018-05-07 17:55:28.121 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - ConsoleReader.complete ==> buf.buffer =request  -m,candidates:[],candidates.size=0,position=0  
+2018-05-07 17:55:30.397 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - ZkCompleter.complete ==>input = request  -me
+2018-05-07 17:55:30.400 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> remove before result:[[-metadata]]
+2018-05-07 17:55:30.400 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> filterKeys :[soa/runtime]----ignoreKeys:[]
+2018-05-07 17:55:30.401 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> remove after result:[[-metadata]]
+2018-05-07 17:55:30.401 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - ConsoleReader.complete ==> buf.buffer =request  -me,candidates:[-metadata],candidates.size=1,position=13  
+2018-05-07 17:55:30.401 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - CandidateListCompletionHandler.setBuffer ==> cmdArgs=[request, -me]
+2018-05-07 17:55:30.401 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>value=[-metadata]
+2018-05-07 17:55:30.402 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>reader.getCursorBuffer()=[request  -me]
+2018-05-07 17:55:30.402 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>autoFill=[-metadata]
+2018-05-07 17:55:30.402 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>cmdKeys=[[request, -me]]
+2018-05-07 17:55:30.402 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>patternCmd=[-me]
+2018-05-07 17:55:30.403 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - backspace ==> patternCmd=[-me],size=[3],tailBlankCount=[0]
+2018-05-07 17:55:30.403 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==> ------------------------------------------------------
+2018-05-07 17:55:30.404 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>value=[-metadata]
+2018-05-07 17:55:30.404 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>reader.getCursorBuffer()=[request  ]
+2018-05-07 17:55:30.404 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>autoFill=[-metadata]
+2018-05-07 17:55:30.404 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>cmdKeys=[[request, -me]]
+2018-05-07 17:55:30.404 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>patternCmd=[-me]
+2018-05-07 17:55:37.869 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - ZkCompleter.complete ==>input = request  -metadata sox
+2018-05-07 17:55:46.884 [Thread-2] INFO  org.apache.zookeeper.ZooKeeper - Client environment:zookeeper.version=3.4.7-1713338, built on 11/09/2015 04:32 GMT
+2018-05-07 17:55:46.884 [Thread-2] INFO  org.apache.zookeeper.ZooKeeper - Client environment:host.name=SKY-20180329AXQ
+2018-05-07 17:55:46.884 [Thread-2] INFO  org.apache.zookeeper.ZooKeeper - Client environment:java.version=1.8.0_161
+2018-05-07 17:55:46.884 [Thread-2] INFO  org.apache.zookeeper.ZooKeeper - Client environment:java.vendor=Oracle Corporation
+2018-05-07 17:55:46.884 [Thread-2] INFO  org.apache.zookeeper.ZooKeeper - Client environment:java.home=E:\develop\jre
+2018-05-07 17:55:46.884 [Thread-2] INFO  org.apache.zookeeper.ZooKeeper - Client environment:java.class.path=cli.jar
+2018-05-07 17:55:46.884 [Thread-2] INFO  org.apache.zookeeper.ZooKeeper - Client environment:java.library.path=C:\ProgramData\Oracle\Java\javapath;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Program Files\Docker\Docker\Resources\bin;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;E:\develop\Git\cmd;E:\develop\scala-2.12.4\bin;E:\develop\sbt\bin;E:\develop\apache-maven-3.5.3\bin;E:\develop\jdk1.8.0_161\bin;C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps;;.
+2018-05-07 17:55:46.885 [Thread-2] INFO  org.apache.zookeeper.ZooKeeper - Client environment:java.io.tmpdir=C:\Users\ADMINI~1\AppData\Local\Temp\
+2018-05-07 17:55:46.885 [Thread-2] INFO  org.apache.zookeeper.ZooKeeper - Client environment:java.compiler=<NA>
+2018-05-07 17:55:46.885 [Thread-2] INFO  org.apache.zookeeper.ZooKeeper - Client environment:os.name=Windows 10
+2018-05-07 17:55:46.885 [Thread-2] INFO  org.apache.zookeeper.ZooKeeper - Client environment:os.arch=amd64
+2018-05-07 17:55:46.885 [Thread-2] INFO  org.apache.zookeeper.ZooKeeper - Client environment:os.version=10.0
+2018-05-07 17:55:46.885 [Thread-2] INFO  org.apache.zookeeper.ZooKeeper - Client environment:user.name=Administrator
+2018-05-07 17:55:46.885 [Thread-2] INFO  org.apache.zookeeper.ZooKeeper - Client environment:user.home=C:\Users\Administrator
+2018-05-07 17:55:46.885 [Thread-2] INFO  org.apache.zookeeper.ZooKeeper - Client environment:user.dir=E:\workspace\dapeng-cli\dist
+2018-05-07 17:55:46.886 [Thread-2] INFO  org.apache.zookeeper.ZooKeeper - Initiating client connection, connectString=127.0.0.1:2181 sessionTimeout=15000 watcher=com.github.dapeng.utils.ZookeeperUtils$$Lambda$9/192457866@48622c33
+2018-05-07 17:55:46.917 [Thread-2-SendThread(127.0.0.1:2181)] INFO  org.apache.zookeeper.ClientCnxn - Opening socket connection to server 127.0.0.1/127.0.0.1:2181. Will not attempt to authenticate using SASL (unknown error)
+2018-05-07 17:55:46.922 [Thread-2-SendThread(127.0.0.1:2181)] INFO  org.apache.zookeeper.ClientCnxn - Socket connection established to 127.0.0.1/127.0.0.1:2181, initiating session
+2018-05-07 17:55:47.069 [Thread-2-SendThread(127.0.0.1:2181)] INFO  org.apache.zookeeper.ClientCnxn - Session establishment complete on server 127.0.0.1/127.0.0.1:2181, sessionid = 0x1000000d7050073, negotiated timeout = 15000
+2018-05-07 17:55:47.165 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> remove before result:[[]]
+2018-05-07 17:55:47.165 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> filterKeys :[soa/runtime]----ignoreKeys:[]
+2018-05-07 17:55:47.165 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> remove after result:[[]]
+2018-05-07 17:55:47.166 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - ConsoleReader.complete ==> buf.buffer =request  -metadata sox,candidates:[],candidates.size=0,position=0  
+2018-05-07 17:55:57.521 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - ConsoleReader.complete ==> buf.buffer =req,candidates:[request],candidates.size=1,position=4  
+2018-05-07 17:55:57.522 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - CandidateListCompletionHandler.setBuffer ==> cmdArgs=[req]
+2018-05-07 17:55:57.522 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>value=[request]
+2018-05-07 17:55:57.522 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>reader.getCursorBuffer()=[req]
+2018-05-07 17:55:57.522 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>autoFill=[request]
+2018-05-07 17:55:57.522 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>cmdKeys=[[req]]
+2018-05-07 17:55:57.522 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>patternCmd=[req]
+2018-05-07 17:55:57.522 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==> ------------------------------------------------------
+2018-05-07 17:55:57.522 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>value=[request]
+2018-05-07 17:55:57.522 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>reader.getCursorBuffer()=[req]
+2018-05-07 17:55:57.522 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>autoFill=[uest]
+2018-05-07 17:55:57.522 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>cmdKeys=[[req]]
+2018-05-07 17:55:57.522 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>patternCmd=[req]
+2018-05-07 17:55:59.397 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - ZkCompleter.complete ==>input = request -m
+2018-05-07 17:55:59.397 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> remove before result:[[]]
+2018-05-07 17:55:59.397 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> filterKeys :[soa/runtime]----ignoreKeys:[]
+2018-05-07 17:55:59.397 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> remove after result:[[]]
+2018-05-07 17:55:59.398 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - ConsoleReader.complete ==> buf.buffer =request -m,candidates:[],candidates.size=0,position=0  
+2018-05-07 17:56:00.333 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - ZkCompleter.complete ==>input = request -me
+2018-05-07 17:56:00.333 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> remove before result:[[-metadata]]
+2018-05-07 17:56:00.333 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> filterKeys :[soa/runtime]----ignoreKeys:[]
+2018-05-07 17:56:00.333 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> remove after result:[[-metadata]]
+2018-05-07 17:56:00.333 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - ConsoleReader.complete ==> buf.buffer =request -me,candidates:[-metadata],candidates.size=1,position=12  
+2018-05-07 17:56:00.334 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - CandidateListCompletionHandler.setBuffer ==> cmdArgs=[request, -me]
+2018-05-07 17:56:00.334 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>value=[-metadata]
+2018-05-07 17:56:00.334 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>reader.getCursorBuffer()=[request -me]
+2018-05-07 17:56:00.334 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>autoFill=[-metadata]
+2018-05-07 17:56:00.334 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>cmdKeys=[[request, -me]]
+2018-05-07 17:56:00.334 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>patternCmd=[-me]
+2018-05-07 17:56:00.334 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - backspace ==> patternCmd=[-me],size=[3],tailBlankCount=[0]
+2018-05-07 17:56:00.334 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==> ------------------------------------------------------
+2018-05-07 17:56:00.334 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>value=[-metadata]
+2018-05-07 17:56:00.334 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>reader.getCursorBuffer()=[request ]
+2018-05-07 17:56:00.334 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>autoFill=[-metadata]
+2018-05-07 17:56:00.334 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>cmdKeys=[[request, -me]]
+2018-05-07 17:56:00.335 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>patternCmd=[-me]
+2018-05-07 17:56:03.013 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - ZkCompleter.complete ==>input = request -metadata soa
+2018-05-07 17:56:03.014 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> remove before result:[[/soa, /soa/runtime/services/com.today.soa.idgen.service.IDService]]
+2018-05-07 17:56:03.014 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> filterKeys :[soa/runtime]----ignoreKeys:[/soa/runtime/services/com.today.soa.idgen.service.IDService]
+2018-05-07 17:56:03.014 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> remove after result:[[/soa]]
+2018-05-07 17:56:03.014 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - ConsoleReader.complete ==> buf.buffer =request -metadata soa,candidates:[/soa],candidates.size=1,position=22  
+2018-05-07 17:56:03.014 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - CandidateListCompletionHandler.setBuffer ==> cmdArgs=[request, -metadata, soa]
+2018-05-07 17:56:03.014 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>value=[/soa]
+2018-05-07 17:56:03.014 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>reader.getCursorBuffer()=[request -metadata soa]
+2018-05-07 17:56:03.014 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>autoFill=[/soa]
+2018-05-07 17:56:03.014 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>cmdKeys=[[request, -metadata, soa]]
+2018-05-07 17:56:03.014 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>patternCmd=[soa]
+2018-05-07 17:56:03.014 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - backspace ==> patternCmd=[soa],size=[3],tailBlankCount=[0]
+2018-05-07 17:56:03.015 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==> ------------------------------------------------------
+2018-05-07 17:56:03.015 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>value=[/soa]
+2018-05-07 17:56:03.015 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>reader.getCursorBuffer()=[request -metadata ]
+2018-05-07 17:56:03.015 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>autoFill=[/soa]
+2018-05-07 17:56:03.016 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>cmdKeys=[[request, -metadata, soa]]
+2018-05-07 17:56:03.016 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>patternCmd=[soa]
+2018-05-07 17:56:04.328 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - ZkCompleter.complete ==>input = request -metadata /soa
+2018-05-07 17:56:04.344 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> remove before result:[[/soa/runtime, /soa/config, /soa/master]]
+2018-05-07 17:56:04.344 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> filterKeys :[soa/runtime]----ignoreKeys:[/soa/runtime]
+2018-05-07 17:56:04.344 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> remove after result:[[/soa/config, /soa/master]]
+2018-05-07 17:56:04.345 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - ConsoleReader.complete ==> buf.buffer =request -metadata /soa,candidates:[/soa/config, /soa/master],candidates.size=2,position=23  
+2018-05-07 17:56:04.345 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - CandidateListCompletionHandler.setBuffer ==> cmdArgs=[request, -metadata, /soa]
+2018-05-07 17:56:04.345 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>value=[/soa/]
+2018-05-07 17:56:04.345 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>reader.getCursorBuffer()=[request -metadata /soa]
+2018-05-07 17:56:04.345 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>autoFill=[/soa/]
+2018-05-07 17:56:04.345 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>cmdKeys=[[request, -metadata, /soa]]
+2018-05-07 17:56:04.345 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>patternCmd=[/soa]
+2018-05-07 17:56:04.346 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - backspace ==> patternCmd=[/soa],size=[4],tailBlankCount=[0]
+2018-05-07 17:56:04.346 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==> ------------------------------------------------------
+2018-05-07 17:56:04.346 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>value=[/soa/]
+2018-05-07 17:56:04.346 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>reader.getCursorBuffer()=[request -metadata ]
+2018-05-07 17:56:04.347 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>autoFill=[/soa/]
+2018-05-07 17:56:04.347 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>cmdKeys=[[request, -metadata, /soa]]
+2018-05-07 17:56:04.347 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>patternCmd=[/soa]
+2018-05-07 17:56:04.347 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [complete] ==> printCandidates(reader, candidates) 
+2018-05-07 17:56:14.501 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - ZkCompleter.complete ==>input = request -metadata /soa/conf
+2018-05-07 17:56:14.508 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> remove before result:[[/soa/config]]
+2018-05-07 17:56:14.508 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> filterKeys :[soa/runtime]----ignoreKeys:[]
+2018-05-07 17:56:14.508 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> remove after result:[[/soa/config]]
+2018-05-07 17:56:14.508 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - ConsoleReader.complete ==> buf.buffer =request -metadata /soa/conf,candidates:[/soa/config],candidates.size=1,position=28  
+2018-05-07 17:56:14.508 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - CandidateListCompletionHandler.setBuffer ==> cmdArgs=[request, -metadata, /soa/conf]
+2018-05-07 17:56:14.508 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>value=[/soa/config]
+2018-05-07 17:56:14.508 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>reader.getCursorBuffer()=[request -metadata /soa/conf]
+2018-05-07 17:56:14.508 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>autoFill=[/soa/config]
+2018-05-07 17:56:14.508 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>cmdKeys=[[request, -metadata, /soa/conf]]
+2018-05-07 17:56:14.508 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>patternCmd=[/soa/conf]
+2018-05-07 17:56:14.509 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - backspace ==> patternCmd=[/soa/conf],size=[9],tailBlankCount=[0]
+2018-05-07 17:56:14.509 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==> ------------------------------------------------------
+2018-05-07 17:56:14.509 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>value=[/soa/config]
+2018-05-07 17:56:14.509 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>reader.getCursorBuffer()=[request -metadata ]
+2018-05-07 17:56:14.509 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>autoFill=[/soa/config]
+2018-05-07 17:56:14.509 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>cmdKeys=[[request, -metadata, /soa/conf]]
+2018-05-07 17:56:14.510 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>patternCmd=[/soa/conf]
+2018-05-07 17:56:17.949 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - ZkCompleter.complete ==>input = request -metadata Hell
+2018-05-07 17:56:17.949 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> remove before result:[[/soa/config/services/com.github.dapeng.hello.service.HelloService, /soa/runtime/services/com.github.dapeng.hello.service.HelloService, /soa/config/routes/com.github.dapeng.hello.service.HelloService]]
+2018-05-07 17:56:17.949 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> filterKeys :[soa/runtime]----ignoreKeys:[/soa/runtime/services/com.github.dapeng.hello.service.HelloService]
+2018-05-07 17:56:17.949 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> remove after result:[[/soa/config/services/com.github.dapeng.hello.service.HelloService, /soa/config/routes/com.github.dapeng.hello.service.HelloService]]
+2018-05-07 17:56:17.950 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - ConsoleReader.complete ==> buf.buffer =request -metadata Hell,candidates:[/soa/config/services/com.github.dapeng.hello.service.HelloService, /soa/config/routes/com.github.dapeng.hello.service.HelloService],candidates.size=2,position=23  
+2018-05-07 17:56:17.950 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - CandidateListCompletionHandler.setBuffer ==> cmdArgs=[request, -metadata, Hell]
+2018-05-07 17:56:17.950 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>value=[/soa/config/]
+2018-05-07 17:56:17.950 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>reader.getCursorBuffer()=[request -metadata Hell]
+2018-05-07 17:56:17.950 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>autoFill=[/soa/config/]
+2018-05-07 17:56:17.950 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>cmdKeys=[[request, -metadata, Hell]]
+2018-05-07 17:56:17.950 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>patternCmd=[Hell]
+2018-05-07 17:56:17.950 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - backspace ==> patternCmd=[Hell],size=[4],tailBlankCount=[0]
+2018-05-07 17:56:17.950 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==> ------------------------------------------------------
+2018-05-07 17:56:17.950 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>value=[/soa/config/]
+2018-05-07 17:56:17.950 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>reader.getCursorBuffer()=[request -metadata ]
+2018-05-07 17:56:17.950 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>autoFill=[/soa/config/]
+2018-05-07 17:56:17.950 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>cmdKeys=[[request, -metadata, Hell]]
+2018-05-07 17:56:17.950 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>patternCmd=[Hell]
+2018-05-07 17:56:17.951 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [complete] ==> printCandidates(reader, candidates) 
+2018-05-07 17:56:31.989 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - ZkCompleter.complete ==>input = request -metadata /soa/config/ser
+2018-05-07 17:56:31.996 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> remove before result:[[/soa/config/services, /soa/config/service]]
+2018-05-07 17:56:31.996 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> filterKeys :[soa/runtime]----ignoreKeys:[]
+2018-05-07 17:56:31.996 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> remove after result:[[/soa/config/services, /soa/config/service]]
+2018-05-07 17:56:31.996 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - ConsoleReader.complete ==> buf.buffer =request -metadata /soa/config/ser,candidates:[/soa/config/services, /soa/config/service],candidates.size=2,position=34  
+2018-05-07 17:56:31.996 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - CandidateListCompletionHandler.setBuffer ==> cmdArgs=[request, -metadata, /soa/config/ser]
+2018-05-07 17:56:31.996 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>value=[/soa/config/service]
+2018-05-07 17:56:31.996 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>reader.getCursorBuffer()=[request -metadata /soa/config/ser]
+2018-05-07 17:56:31.996 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>autoFill=[/soa/config/service]
+2018-05-07 17:56:31.996 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>cmdKeys=[[request, -metadata, /soa/config/ser]]
+2018-05-07 17:56:31.996 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>patternCmd=[/soa/config/ser]
+2018-05-07 17:56:31.996 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - backspace ==> patternCmd=[/soa/config/ser],size=[15],tailBlankCount=[0]
+2018-05-07 17:56:31.997 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==> ------------------------------------------------------
+2018-05-07 17:56:31.997 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>value=[/soa/config/service]
+2018-05-07 17:56:31.997 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>reader.getCursorBuffer()=[request -metadata ]
+2018-05-07 17:56:31.997 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>autoFill=[/soa/config/service]
+2018-05-07 17:56:31.997 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>cmdKeys=[[request, -metadata, /soa/config/ser]]
+2018-05-07 17:56:31.997 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>patternCmd=[/soa/config/ser]
+2018-05-07 17:56:31.997 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [complete] ==> printCandidates(reader, candidates) 
+2018-05-07 17:56:35.528 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - ZkCompleter.complete ==>input = request -metadata /soa/config/services
+2018-05-07 17:56:35.535 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> remove before result:[[/soa/config/services/com.github.dapeng.hello.service.HelloService]]
+2018-05-07 17:56:35.535 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> filterKeys :[soa/runtime]----ignoreKeys:[]
+2018-05-07 17:56:35.535 [Thread-2] INFO  com.github.dapeng.plugins.commands.ZkController - [complete] ==> remove after result:[[/soa/config/services/com.github.dapeng.hello.service.HelloService]]
+2018-05-07 17:56:35.535 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - ConsoleReader.complete ==> buf.buffer =request -metadata /soa/config/services,candidates:[/soa/config/services/com.github.dapeng.hello.service.HelloService],candidates.size=1,position=39  
+2018-05-07 17:56:35.535 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - CandidateListCompletionHandler.setBuffer ==> cmdArgs=[request, -metadata, /soa/config/services]
+2018-05-07 17:56:35.535 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>value=[/soa/config/services/com.github.dapeng.hello.service.HelloService]
+2018-05-07 17:56:35.536 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>reader.getCursorBuffer()=[request -metadata /soa/config/services]
+2018-05-07 17:56:35.536 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>autoFill=[/soa/config/services/com.github.dapeng.hello.service.HelloService]
+2018-05-07 17:56:35.536 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>cmdKeys=[[request, -metadata, /soa/config/services]]
+2018-05-07 17:56:35.536 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>patternCmd=[/soa/config/services]
+2018-05-07 17:56:35.536 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - backspace ==> patternCmd=[/soa/config/services],size=[20],tailBlankCount=[0]
+2018-05-07 17:56:35.536 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==> ------------------------------------------------------
+2018-05-07 17:56:35.536 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>value=[/soa/config/services/com.github.dapeng.hello.service.HelloService]
+2018-05-07 17:56:35.536 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>reader.getCursorBuffer()=[request -metadata ]
+2018-05-07 17:56:35.536 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>autoFill=[/soa/config/services/com.github.dapeng.hello.service.HelloService]
+2018-05-07 17:56:35.536 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>cmdKeys=[[request, -metadata, /soa/config/services]]
+2018-05-07 17:56:35.536 [Thread-2] INFO  jline.console.completer.CandidateListCompletionHandler - [setBuffer] ==>patternCmd=[/soa/config/services]
+2018-05-07 17:56:45.325 [Thread-2] INFO  org.clamshellcli.impl.CmdController - [handle] ==>step into handle... cmdLine=[request -metadata /soa/config/services/com.github.dapeng.hello.service.HelloService 1.0.0],this.respondsTo=[(.*)\b(.*)]
+2018-05-07 17:56:45.326 [Thread-2] INFO  org.clamshellcli.impl.CmdController - [handle] ==>respondsTo.matcher(cmdLine).matches()=[true]
+2018-05-07 17:56:45.326 [Thread-2] INFO  org.clamshellcli.impl.CmdController - [handle] ==> commands=[{exit=com.github.dapeng.plugins.ExitCmd@4fac8735, help=com.github.dapeng.plugins.HelpCmd@1c8a3fa9, zk=com.github.dapeng.plugins.ZkCmd@2b25962, request=com.github.dapeng.plugins.RequestCmd@624e9c37, metadata=com.github.dapeng.plugins.MetadataCmd@49f02a64, set=com.github.dapeng.plugins.SetCmd@4ca2384, service=com.github.dapeng.plugins.ServiceCmd@14a31336, sysinfo=com.github.dapeng.plugins.SysInfoCmd@21a9ab1, json=com.github.dapeng.plugins.JsonCmd@4a71339c, unset=com.github.dapeng.plugins.UnSetCmd@1ff2ff55}],tokens = [[request, -metadata, /soa/config/services/com.github.dapeng.hello.service.HelloService, 1.0.0]]
+2018-05-07 17:56:45.326 [Thread-2] INFO  org.clamshellcli.impl.CmdController - [handle] ==>Command[com.github.dapeng.plugins.RequestCmd@624e9c37] execute
+2018-05-07 18:01:52.512 [Thread-2] INFO  org.clamshellcli.impl.CmdController - [handle] ==>step into handle... cmdLine=[request -metadata HelloService 1.0.0],this.respondsTo=[(.*)\b(.*)]
+2018-05-07 18:01:52.512 [Thread-2] INFO  org.clamshellcli.impl.CmdController - [handle] ==>respondsTo.matcher(cmdLine).matches()=[true]
+2018-05-07 18:01:52.512 [Thread-2] INFO  org.clamshellcli.impl.CmdController - [handle] ==> commands=[{exit=com.github.dapeng.plugins.ExitCmd@4fac8735, help=com.github.dapeng.plugins.HelpCmd@1c8a3fa9, zk=com.github.dapeng.plugins.ZkCmd@2b25962, request=com.github.dapeng.plugins.RequestCmd@624e9c37, metadata=com.github.dapeng.plugins.MetadataCmd@49f02a64, set=com.github.dapeng.plugins.SetCmd@4ca2384, service=com.github.dapeng.plugins.ServiceCmd@14a31336, sysinfo=com.github.dapeng.plugins.SysInfoCmd@21a9ab1, json=com.github.dapeng.plugins.JsonCmd@4a71339c, unset=com.github.dapeng.plugins.UnSetCmd@1ff2ff55}],tokens = [[request, -metadata, HelloService, 1.0.0]]
+2018-05-07 18:01:52.512 [Thread-2] INFO  org.clamshellcli.impl.CmdController - [handle] ==>Command[com.github.dapeng.plugins.RequestCmd@624e9c37] execute
+2018-05-07 20:53:32.522 [main] INFO  org.clamshellcli.impl.CliShell - [loadComponents] ==>console=org.clamshellcli.impl.CliConsole@69d9c55
+2018-05-07 20:53:32.651 [main] INFO  com.github.dapeng.plugins.commands.ZkController - [loadCommands] ==> Step into load commands....
+2018-05-07 20:53:32.651 [main] INFO  com.github.dapeng.plugins.commands.ZkController - loadCommands ==> ServiceLoader: java.util.ServiceLoader[org.clamshellcli.api.Command]
+2018-05-07 20:53:32.652 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[exit]com.github.dapeng.plugins.ExitCmd@80503
+2018-05-07 20:53:32.652 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[help]com.github.dapeng.plugins.HelpCmd@4b553d26
+2018-05-07 20:53:32.652 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[sysinfo]com.github.dapeng.plugins.SysInfoCmd@69a3d1d
+2018-05-07 20:53:32.652 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[metadata]com.github.dapeng.plugins.MetadataCmd@86be70a
+2018-05-07 20:53:32.652 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[json]com.github.dapeng.plugins.JsonCmd@480bdb19
+2018-05-07 20:53:32.652 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[zk]com.github.dapeng.plugins.ZkCmd@2a556333
+2018-05-07 20:53:32.652 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[service]com.github.dapeng.plugins.ServiceCmd@7d70d1b1
+2018-05-07 20:53:32.653 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[request]com.github.dapeng.plugins.RequestCmd@2a742aa2
+2018-05-07 20:53:32.653 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[set]com.github.dapeng.plugins.SetCmd@3cb1ffe6
+2018-05-07 20:53:32.653 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[unset]com.github.dapeng.plugins.UnSetCmd@3dfc5fb8
+2018-05-07 20:53:34.291 [Thread-2] INFO  org.clamshellcli.impl.CmdController - [handle] ==>step into handle... cmdLine=[help],this.respondsTo=[(.*)\b(.*)]
+2018-05-07 20:53:34.291 [Thread-2] INFO  org.clamshellcli.impl.CmdController - [handle] ==>respondsTo.matcher(cmdLine).matches()=[true]
+2018-05-07 20:53:34.291 [Thread-2] INFO  org.clamshellcli.impl.CmdController - [handle] ==> commands=[{exit=com.github.dapeng.plugins.ExitCmd@30f078dd, help=com.github.dapeng.plugins.HelpCmd@5a3dbeda, zk=com.github.dapeng.plugins.ZkCmd@4bdf5637, request=com.github.dapeng.plugins.RequestCmd@7bdf3a94, metadata=com.github.dapeng.plugins.MetadataCmd@485a83a2, set=com.github.dapeng.plugins.SetCmd@7fa62f1d, service=com.github.dapeng.plugins.ServiceCmd@4ef9a030, sysinfo=com.github.dapeng.plugins.SysInfoCmd@4cf038e1, json=com.github.dapeng.plugins.JsonCmd@502be54e, unset=com.github.dapeng.plugins.UnSetCmd@1ebbe691}],tokens = [[help]]
+2018-05-07 20:53:34.291 [Thread-2] INFO  org.clamshellcli.impl.CmdController - [handle] ==>Command[com.github.dapeng.plugins.HelpCmd@5a3dbeda] execute
+2018-05-07 20:53:34.292 [Thread-2] INFO  com.github.dapeng.plugins.HelpCmd - [execute] ==> help command execute....
+2018-05-07 20:53:34.292 [Thread-2] INFO  com.github.dapeng.plugins.HelpCmd - [execute] ==> args =null,ctx.getIoConsole()=org.clamshellcli.impl.CliConsole@69d9c55
+2018-05-07 20:56:33.439 [main] INFO  org.clamshellcli.impl.CliShell - [loadComponents] ==>console=org.clamshellcli.impl.CliConsole@69d9c55
+2018-05-07 20:56:33.566 [main] INFO  com.github.dapeng.plugins.commands.ZkController - [loadCommands] ==> Step into load commands....
+2018-05-07 20:56:33.567 [main] INFO  com.github.dapeng.plugins.commands.ZkController - loadCommands ==> ServiceLoader: java.util.ServiceLoader[org.clamshellcli.api.Command]
+2018-05-07 20:56:33.567 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[exit]com.github.dapeng.plugins.ExitCmd@80503
+2018-05-07 20:56:33.567 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[help]com.github.dapeng.plugins.HelpCmd@4b553d26
+2018-05-07 20:56:33.567 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[sysinfo]com.github.dapeng.plugins.SysInfoCmd@69a3d1d
+2018-05-07 20:56:33.568 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[metadata]com.github.dapeng.plugins.MetadataCmd@86be70a
+2018-05-07 20:56:33.568 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[json]com.github.dapeng.plugins.JsonCmd@480bdb19
+2018-05-07 20:56:33.568 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[zk]com.github.dapeng.plugins.ZkCmd@2a556333
+2018-05-07 20:56:33.568 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[service]com.github.dapeng.plugins.ServiceCmd@7d70d1b1
+2018-05-07 20:56:33.568 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[request]com.github.dapeng.plugins.RequestCmd@2a742aa2
+2018-05-07 20:56:33.568 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[set]com.github.dapeng.plugins.SetCmd@3cb1ffe6
+2018-05-07 20:56:33.568 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[unset]com.github.dapeng.plugins.UnSetCmd@3dfc5fb8
+2018-05-07 20:56:36.003 [Thread-2] INFO  org.clamshellcli.impl.CmdController - [handle] ==>step into handle... cmdLine=[help],this.respondsTo=[(.*)\b(.*)]
+2018-05-07 20:56:36.003 [Thread-2] INFO  org.clamshellcli.impl.CmdController - [handle] ==>respondsTo.matcher(cmdLine).matches()=[true]
+2018-05-07 20:56:36.003 [Thread-2] INFO  org.clamshellcli.impl.CmdController - [handle] ==> commands=[{exit=com.github.dapeng.plugins.ExitCmd@30f078dd, help=com.github.dapeng.plugins.HelpCmd@5a3dbeda, zk=com.github.dapeng.plugins.ZkCmd@4bdf5637, request=com.github.dapeng.plugins.RequestCmd@7bdf3a94, metadata=com.github.dapeng.plugins.MetadataCmd@485a83a2, set=com.github.dapeng.plugins.SetCmd@7fa62f1d, service=com.github.dapeng.plugins.ServiceCmd@4ef9a030, sysinfo=com.github.dapeng.plugins.SysInfoCmd@4cf038e1, json=com.github.dapeng.plugins.JsonCmd@502be54e, unset=com.github.dapeng.plugins.UnSetCmd@1ebbe691}],tokens = [[help]]
+2018-05-07 20:56:36.004 [Thread-2] INFO  org.clamshellcli.impl.CmdController - [handle] ==>Command[com.github.dapeng.plugins.HelpCmd@5a3dbeda] execute
+2018-05-07 20:56:36.004 [Thread-2] INFO  com.github.dapeng.plugins.HelpCmd - [execute] ==> help command execute....
+2018-05-07 20:56:36.004 [Thread-2] INFO  com.github.dapeng.plugins.HelpCmd - [execute] ==> args =null,ctx.getIoConsole()=org.clamshellcli.impl.CliConsole@69d9c55
+2018-05-07 21:10:25.741 [main] INFO  org.clamshellcli.impl.CliShell - [loadComponents] ==>console=org.clamshellcli.impl.CliConsole@3bfdc050
+2018-05-07 21:10:25.867 [main] INFO  com.github.dapeng.plugins.commands.ZkController - [loadCommands] ==> Step into load commands....
+2018-05-07 21:10:25.867 [main] INFO  com.github.dapeng.plugins.commands.ZkController - loadCommands ==> ServiceLoader: java.util.ServiceLoader[org.clamshellcli.api.Command]
+2018-05-07 21:10:25.867 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[exit]com.github.dapeng.plugins.ExitCmd@7a30d1e6
+2018-05-07 21:10:25.867 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[help]com.github.dapeng.plugins.HelpCmd@5891e32e
+2018-05-07 21:10:25.868 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[sysinfo]com.github.dapeng.plugins.SysInfoCmd@cb0ed20
+2018-05-07 21:10:25.868 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[metadata]com.github.dapeng.plugins.MetadataCmd@8e24743
+2018-05-07 21:10:25.868 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[json]com.github.dapeng.plugins.JsonCmd@74a10858
+2018-05-07 21:10:25.868 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[zk]com.github.dapeng.plugins.ZkCmd@23fe1d71
+2018-05-07 21:10:25.869 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[service]com.github.dapeng.plugins.ServiceCmd@28ac3dc3
+2018-05-07 21:10:25.869 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[request]com.github.dapeng.plugins.RequestCmd@32eebfca
+2018-05-07 21:10:25.869 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[set]com.github.dapeng.plugins.SetCmd@4e718207
+2018-05-07 21:10:25.869 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[unset]com.github.dapeng.plugins.UnSetCmd@1d371b2d
+2018-05-07 21:10:27.724 [Thread-2] INFO  org.clamshellcli.impl.CmdController - [handle] ==>step into handle... cmdLine=[help],this.respondsTo=[(.*)\b(.*)]
+2018-05-07 21:10:27.724 [Thread-2] INFO  org.clamshellcli.impl.CmdController - [handle] ==>respondsTo.matcher(cmdLine).matches()=[true]
+2018-05-07 21:10:27.725 [Thread-2] INFO  org.clamshellcli.impl.CmdController - [handle] ==> commands=[{exit=com.github.dapeng.plugins.ExitCmd@7b15583e, help=com.github.dapeng.plugins.HelpCmd@74a1f6ca, zk=com.github.dapeng.plugins.ZkCmd@545a8701, request=com.github.dapeng.plugins.RequestCmd@50183361, metadata=com.github.dapeng.plugins.MetadataCmd@19d55f4, set=com.github.dapeng.plugins.SetCmd@7a71f4ab, service=com.github.dapeng.plugins.ServiceCmd@7a93166b, sysinfo=com.github.dapeng.plugins.SysInfoCmd@6b01b163, json=com.github.dapeng.plugins.JsonCmd@586b02, unset=com.github.dapeng.plugins.UnSetCmd@7579030e}],tokens = [[help]]
+2018-05-07 21:10:27.726 [Thread-2] INFO  org.clamshellcli.impl.CmdController - [handle] ==>Command[com.github.dapeng.plugins.HelpCmd@74a1f6ca] execute
+2018-05-07 21:10:27.726 [Thread-2] INFO  com.github.dapeng.plugins.HelpCmd - [execute] ==> help command execute....
+2018-05-07 21:10:27.726 [Thread-2] INFO  com.github.dapeng.plugins.HelpCmd - [execute] ==> args =null,ctx.getIoConsole()=org.clamshellcli.impl.CliConsole@3bfdc050
+2018-05-07 21:18:28.849 [main] INFO  org.clamshellcli.impl.CliShell - [loadComponents] ==>console=org.clamshellcli.impl.CliConsole@3bfdc050
+2018-05-07 21:18:28.940 [main] INFO  com.github.dapeng.plugins.commands.ZkController - [loadCommands] ==> Step into load commands....
+2018-05-07 21:18:28.940 [main] INFO  com.github.dapeng.plugins.commands.ZkController - loadCommands ==> ServiceLoader: java.util.ServiceLoader[org.clamshellcli.api.Command]
+2018-05-07 21:18:28.941 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[exit]com.github.dapeng.plugins.ExitCmd@7a30d1e6
+2018-05-07 21:18:28.941 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[help]com.github.dapeng.plugins.HelpCmd@5891e32e
+2018-05-07 21:18:28.941 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[sysinfo]com.github.dapeng.plugins.SysInfoCmd@cb0ed20
+2018-05-07 21:18:28.941 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[metadata]com.github.dapeng.plugins.MetadataCmd@8e24743
+2018-05-07 21:18:28.941 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[json]com.github.dapeng.plugins.JsonCmd@74a10858
+2018-05-07 21:18:28.941 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[zk]com.github.dapeng.plugins.ZkCmd@23fe1d71
+2018-05-07 21:18:28.941 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[service]com.github.dapeng.plugins.ServiceCmd@28ac3dc3
+2018-05-07 21:18:28.941 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[request]com.github.dapeng.plugins.RequestCmd@32eebfca
+2018-05-07 21:18:28.941 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[set]com.github.dapeng.plugins.SetCmd@4e718207
+2018-05-07 21:18:28.942 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[unset]com.github.dapeng.plugins.UnSetCmd@1d371b2d
+2018-05-07 21:21:05.314 [main] INFO  org.clamshellcli.impl.CliShell - [loadComponents] ==>console=org.clamshellcli.impl.CliConsole@3bfdc050
+2018-05-07 21:21:05.398 [main] INFO  com.github.dapeng.plugins.commands.ZkController - [loadCommands] ==> Step into load commands....
+2018-05-07 21:21:05.398 [main] INFO  com.github.dapeng.plugins.commands.ZkController - loadCommands ==> ServiceLoader: java.util.ServiceLoader[org.clamshellcli.api.Command]
+2018-05-07 21:21:05.399 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[exit]com.github.dapeng.plugins.ExitCmd@7a30d1e6
+2018-05-07 21:21:05.399 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[help]com.github.dapeng.plugins.HelpCmd@5891e32e
+2018-05-07 21:21:05.399 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[sysinfo]com.github.dapeng.plugins.SysInfoCmd@cb0ed20
+2018-05-07 21:21:05.399 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[metadata]com.github.dapeng.plugins.MetadataCmd@8e24743
+2018-05-07 21:21:05.399 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[json]com.github.dapeng.plugins.JsonCmd@74a10858
+2018-05-07 21:21:05.399 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[zk]com.github.dapeng.plugins.ZkCmd@23fe1d71
+2018-05-07 21:21:05.399 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[service]com.github.dapeng.plugins.ServiceCmd@28ac3dc3
+2018-05-07 21:21:05.399 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[request]com.github.dapeng.plugins.RequestCmd@32eebfca
+2018-05-07 21:21:05.399 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[set]com.github.dapeng.plugins.SetCmd@4e718207
+2018-05-07 21:21:05.399 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[unset]com.github.dapeng.plugins.UnSetCmd@1d371b2d
+2018-05-07 21:22:49.665 [main] INFO  org.clamshellcli.impl.CliShell - [loadComponents] ==>console=org.clamshellcli.impl.CliConsole@3bfdc050
+2018-05-07 21:22:49.759 [main] INFO  com.github.dapeng.plugins.commands.ZkController - [loadCommands] ==> Step into load commands....
+2018-05-07 21:22:49.760 [main] INFO  com.github.dapeng.plugins.commands.ZkController - loadCommands ==> ServiceLoader: java.util.ServiceLoader[org.clamshellcli.api.Command]
+2018-05-07 21:22:49.761 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[exit]com.github.dapeng.plugins.ExitCmd@7a30d1e6
+2018-05-07 21:22:49.761 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[help]com.github.dapeng.plugins.HelpCmd@5891e32e
+2018-05-07 21:22:49.761 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[sysinfo]com.github.dapeng.plugins.SysInfoCmd@cb0ed20
+2018-05-07 21:22:49.761 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[metadata]com.github.dapeng.plugins.MetadataCmd@8e24743
+2018-05-07 21:22:49.761 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[json]com.github.dapeng.plugins.JsonCmd@74a10858
+2018-05-07 21:22:49.761 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[zk]com.github.dapeng.plugins.ZkCmd@23fe1d71
+2018-05-07 21:22:49.761 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[service]com.github.dapeng.plugins.ServiceCmd@28ac3dc3
+2018-05-07 21:22:49.761 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[request]com.github.dapeng.plugins.RequestCmd@32eebfca
+2018-05-07 21:22:49.761 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[set]com.github.dapeng.plugins.SetCmd@4e718207
+2018-05-07 21:22:49.761 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[unset]com.github.dapeng.plugins.UnSetCmd@1d371b2d
+2018-05-07 21:23:12.415 [main] INFO  org.clamshellcli.impl.CliShell - [loadComponents] ==>console=org.clamshellcli.impl.CliConsole@3bfdc050
+2018-05-07 21:23:12.578 [main] INFO  com.github.dapeng.plugins.commands.ZkController - [loadCommands] ==> Step into load commands....
+2018-05-07 21:23:12.578 [main] INFO  com.github.dapeng.plugins.commands.ZkController - loadCommands ==> ServiceLoader: java.util.ServiceLoader[org.clamshellcli.api.Command]
+2018-05-07 21:23:12.579 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[exit]com.github.dapeng.plugins.ExitCmd@7a30d1e6
+2018-05-07 21:23:12.579 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[help]com.github.dapeng.plugins.HelpCmd@5891e32e
+2018-05-07 21:23:12.579 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[sysinfo]com.github.dapeng.plugins.SysInfoCmd@cb0ed20
+2018-05-07 21:23:12.579 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[metadata]com.github.dapeng.plugins.MetadataCmd@8e24743
+2018-05-07 21:23:12.579 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[json]com.github.dapeng.plugins.JsonCmd@74a10858
+2018-05-07 21:23:12.579 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[zk]com.github.dapeng.plugins.ZkCmd@23fe1d71
+2018-05-07 21:23:12.579 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[service]com.github.dapeng.plugins.ServiceCmd@28ac3dc3
+2018-05-07 21:23:12.579 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[request]com.github.dapeng.plugins.RequestCmd@32eebfca
+2018-05-07 21:23:12.579 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[set]com.github.dapeng.plugins.SetCmd@4e718207
+2018-05-07 21:23:12.579 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[unset]com.github.dapeng.plugins.UnSetCmd@1d371b2d
+2018-05-07 21:23:32.615 [main] INFO  org.clamshellcli.impl.CliShell - [loadComponents] ==>console=org.clamshellcli.impl.CliConsole@3bfdc050
+2018-05-07 21:23:32.717 [main] INFO  com.github.dapeng.plugins.commands.ZkController - [loadCommands] ==> Step into load commands....
+2018-05-07 21:23:32.717 [main] INFO  com.github.dapeng.plugins.commands.ZkController - loadCommands ==> ServiceLoader: java.util.ServiceLoader[org.clamshellcli.api.Command]
+2018-05-07 21:23:32.718 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[exit]com.github.dapeng.plugins.ExitCmd@7a30d1e6
+2018-05-07 21:23:32.718 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[help]com.github.dapeng.plugins.HelpCmd@5891e32e
+2018-05-07 21:23:32.718 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[sysinfo]com.github.dapeng.plugins.SysInfoCmd@cb0ed20
+2018-05-07 21:23:32.718 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[metadata]com.github.dapeng.plugins.MetadataCmd@8e24743
+2018-05-07 21:23:32.718 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[json]com.github.dapeng.plugins.JsonCmd@74a10858
+2018-05-07 21:23:32.718 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[zk]com.github.dapeng.plugins.ZkCmd@23fe1d71
+2018-05-07 21:23:32.718 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[service]com.github.dapeng.plugins.ServiceCmd@28ac3dc3
+2018-05-07 21:23:32.718 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[request]com.github.dapeng.plugins.RequestCmd@32eebfca
+2018-05-07 21:23:32.718 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[set]com.github.dapeng.plugins.SetCmd@4e718207
+2018-05-07 21:23:32.718 [main] INFO  com.github.dapeng.plugins.commands.ZkController -  Dapeng load command:[unset]com.github.dapeng.plugins.UnSetCmd@1d371b2d
+2018-05-07 21:23:33.789 [Thread-2] INFO  org.clamshellcli.impl.CmdController - [handle] ==>step into handle... cmdLine=[help],this.respondsTo=[(.*)\b(.*)]
+2018-05-07 21:23:33.789 [Thread-2] INFO  org.clamshellcli.impl.CmdController - [handle] ==>respondsTo.matcher(cmdLine).matches()=[true]
+2018-05-07 21:23:33.790 [Thread-2] INFO  org.clamshellcli.impl.CmdController - [handle] ==> commands=[{exit=com.github.dapeng.plugins.ExitCmd@72a4f8ae, help=com.github.dapeng.plugins.HelpCmd@32300f88, zk=com.github.dapeng.plugins.ZkCmd@3c19a64a, request=com.github.dapeng.plugins.RequestCmd@25845bbd, metadata=com.github.dapeng.plugins.MetadataCmd@70b0b62b, set=com.github.dapeng.plugins.SetCmd@424ebbfa, service=com.github.dapeng.plugins.ServiceCmd@33147e0f, sysinfo=com.github.dapeng.plugins.SysInfoCmd@344a8263, json=com.github.dapeng.plugins.JsonCmd@41be7b2f, unset=com.github.dapeng.plugins.UnSetCmd@76988989}],tokens = [[help]]
+2018-05-07 21:23:33.790 [Thread-2] INFO  org.clamshellcli.impl.CmdController - [handle] ==>Command[com.github.dapeng.plugins.HelpCmd@32300f88] execute
+2018-05-07 21:23:33.791 [Thread-2] INFO  com.github.dapeng.plugins.HelpCmd - [execute] ==> help command execute....
+2018-05-07 21:23:33.791 [Thread-2] INFO  com.github.dapeng.plugins.HelpCmd - [execute] ==> args =null,ctx.getIoConsole()=org.clamshellcli.impl.CliConsole@3bfdc050
