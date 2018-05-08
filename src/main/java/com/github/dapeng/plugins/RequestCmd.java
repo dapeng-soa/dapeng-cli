@@ -63,7 +63,7 @@ public class RequestCmd implements Command {
                 args.put(CmdProperties.KEY_ARGS_VERSION, "type '-v serviceVersion' to specific serviceVersion.. ");
                 args.put(CmdProperties.KEY_ARGS_SERVICE_METHOD, "type '-m method' to specific service method.. ");
                 args.put(CmdProperties.KEY_ARGS_FILE, "type '-f file(path + fileName)' to get request json content for invoking..");
-                args.put(CmdProperties.KEY_ARGS_METADATA, "type '-metadata serviceName version' to get request json content for invoking..");
+                args.put(CmdProperties.KEY_ARGS_METADATA, "type '-metadata serviceName version' to get metadata json content; you can type -f file(path + fileName) to save the metadata.");
                 return args;
             }
         };
@@ -79,7 +79,7 @@ public class RequestCmd implements Command {
         String version = inputArgs.get(CmdProperties.KEY_ARGS_VERSION);
         String method = inputArgs.get(CmdProperties.KEY_ARGS_SERVICE_METHOD);
 
-        String metadataObj = inputArgs.get(CmdProperties.KEY_ARGS_SERVICE_METHOD);
+        String metadataObj = inputArgs.get(CmdProperties.KEY_ARGS_METADATA);
 
         if (serviceName != null && version != null && method != null && fileName != null) {
 
@@ -98,7 +98,14 @@ public class RequestCmd implements Command {
             String[] mdArr = metadataObj.split("#");
             logger.info("[execute] ==>mdArr={}",mdArr);
             try {
-                CmdUtils.writeMsg(context, new MetadataClient(mdArr[0], mdArr[1]).getServiceMetadata()) ;
+                String jsonResponse  = new MetadataClient(mdArr[0], mdArr[1]).getServiceMetadata();
+                if (!CmdUtils.isEmpty(fileName)) {
+                    ServiceUtils.writerFile(fileName, jsonResponse);
+                    CmdUtils.writeMsg(context, "The metadata has been saved "+fileName + "is generated . ");
+                } else {
+                    CmdUtils.writeMsg(context,jsonResponse) ;
+                }
+
             } catch (Exception e) {
                 //e.printStackTrace();
                 CmdUtils.writeMsg(context, "request -metadata error..[ex:"+e.getMessage()+"]");

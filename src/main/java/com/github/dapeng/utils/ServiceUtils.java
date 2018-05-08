@@ -76,15 +76,22 @@ public class ServiceUtils {
         FileWriter fw = null;
         try {
             File file = new File(fileName);
+            if (!file.exists()) {
+                // 先得到文件的上级目录，并创建上级目录，在创建文件
+                file.getParentFile().mkdirs();
+                file.createNewFile();
+            }
             fw = new FileWriter(file);
             fw.write(content);
             fw.flush();
         } catch (Exception e) {
-            System.out.println(" Failed to generate xml file");
+            //e.printStackTrace();
+            System.out.println(" Failed to written file["+fileName+"]");
         } finally {
             try {
                 fw.close();
             } catch (Exception e) {
+               // e.printStackTrace();
                 System.out.println(" Failed to close file....." + fileName);
             }
         }
@@ -97,7 +104,7 @@ public class ServiceUtils {
 
         Service service = getService(serviceName,version);
 
-        System.out.println(" ServiceCache: " + ServiceCache.getServices());
+       // System.out.println(" ServiceCache: " + ServiceCache.getServices());
         Struct struct = getMethod(service, methodName);
 
         if (struct == null) {
