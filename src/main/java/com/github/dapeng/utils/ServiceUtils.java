@@ -37,23 +37,23 @@ public class ServiceUtils {
     }
 
     public static void resetZk() {
-        logger.info("[resetZk] ==>System.getenv(soa.zookeeper.host)= {}",System.getenv("soa.zookeeper.host".replace('.', '_')));
+        logger.info("[resetZk] ==>System.getenv(soa.zookeeper.host)= {}", System.getenv("soa.zookeeper.host".replace('.', '_')));
         if (zkBootstrap != null) {
             zkBootstrap.init();
-        }else{
-            zkBootstrap= new ZkBootstrap();
+        } else {
+            zkBootstrap = new ZkBootstrap();
             zkBootstrap.init();
         }
     }
 
     public synchronized static void iniContext() {
         if (zkBootstrap == null) {
-            zkBootstrap= new ZkBootstrap();
+            zkBootstrap = new ZkBootstrap();
             zkBootstrap.init();
         }
 
         try {
-            Thread.sleep(5000);
+            Thread.sleep(1000 * 10);
         } catch (Exception e) {
             System.out.println(" Failed to wait for zookeeper init..");
         }
@@ -62,12 +62,12 @@ public class ServiceUtils {
     }
 
     public static String getMetadata(String serviceName, String version) {
-        MetadataClient client = new MetadataClient(serviceName,version);
+        MetadataClient client = new MetadataClient(serviceName, version);
         String data = "";
         try {
             data = client.getServiceMetadata();
         } catch (Exception e) {
-            data  = " Failed to get metadata........" + e.getMessage();
+            data = " Failed to get metadata........" + e.getMessage();
         }
         return data;
     }
@@ -86,12 +86,12 @@ public class ServiceUtils {
             fw.flush();
         } catch (Exception e) {
             //e.printStackTrace();
-            System.out.println(" Failed to written file["+fileName+"]");
+            System.out.println(" Failed to written file[" + fileName + "]");
         } finally {
             try {
                 fw.close();
             } catch (Exception e) {
-               // e.printStackTrace();
+                // e.printStackTrace();
                 System.out.println(" Failed to close file....." + fileName);
             }
         }
@@ -102,17 +102,17 @@ public class ServiceUtils {
             ServiceUtils.iniContext();
         }
 
-        Service service = getService(serviceName,version);
+        Service service = getService(serviceName, version);
 
-       // System.out.println(" ServiceCache: " + ServiceCache.getServices());
+        // System.out.println(" ServiceCache: " + ServiceCache.getServices());
         Struct struct = getMethod(service, methodName);
 
         if (struct == null) {
             return methodName + " of " + serviceName + ":" + version + " not found..........";
         } else {
             List<Field> parameters = struct.getFields();
-            Map<String, Object>  map = new HashMap<>();
-            map.put("body",getSample(service, parameters));
+            Map<String, Object> map = new HashMap<>();
+            map.put("body", getSample(service, parameters));
             return gson_format.toJson(map);
         }
     }
@@ -257,11 +257,11 @@ public class ServiceUtils {
     }
 
     public static String post(String service,
-                            String version,
-                            String method,
-                            String parameter) {
+                              String version,
+                              String method,
+                              String parameter) {
 
-        InvocationContextImpl invocationCtx = (InvocationContextImpl)InvocationContextImpl.Factory.currentInstance();
+        InvocationContextImpl invocationCtx = (InvocationContextImpl) InvocationContextImpl.Factory.currentInstance();
         invocationCtx.serviceName(service);
         invocationCtx.versionName(version);
         invocationCtx.methodName(method);
@@ -284,7 +284,7 @@ public class ServiceUtils {
 
         //fillInvocationCtx(invocationCtx, req);
 
-        JsonPost jsonPost = new JsonPost(service, version, method,true);
+        JsonPost jsonPost = new JsonPost(service, version, method, true);
 
         try {
             return jsonPost.callServiceMethod(parameter, bizService);
