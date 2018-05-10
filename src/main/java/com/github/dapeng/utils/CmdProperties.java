@@ -29,6 +29,8 @@ public class CmdProperties {
     //zookeeper properties
     public static final String CONFIG_PATH = "/soa/config/services";
     public static final String RUNTIME_PATH = "/soa/runtime/services";
+    public static final String ROUTE_PATH = "/soa/config/routes";
+
 
     public static final String OPEN_API_TIMEOUT = "soa.service.timeout";
 

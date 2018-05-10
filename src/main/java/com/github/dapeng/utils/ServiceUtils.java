@@ -8,7 +8,6 @@ import com.github.dapeng.core.enums.CodecProtocol;
 import com.github.dapeng.core.metadata.*;
 import com.github.dapeng.metadata.MetadataClient;
 import com.github.dapeng.openapi.cache.ServiceCache;
-import com.github.dapeng.openapi.cache.ZkBootstrap;
 import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
@@ -29,37 +28,6 @@ import static com.github.dapeng.utils.CmdProperties.OPEN_API_TIMEOUT;
 
 public class ServiceUtils {
     private static final Logger logger = LoggerFactory.getLogger(ServiceUtils.class);
-    private static boolean contextInitialized = false;
-    public static ZkBootstrap zkBootstrap = null;
-
-    public static boolean isContextInitialized() {
-        return contextInitialized;
-    }
-
-    public static void resetZk() {
-        logger.info("[resetZk] ==>System.getenv(soa.zookeeper.host)= {}", System.getenv("soa.zookeeper.host".replace('.', '_')));
-        if (zkBootstrap != null) {
-            zkBootstrap.init();
-        } else {
-            zkBootstrap = new ZkBootstrap();
-            zkBootstrap.init();
-        }
-    }
-
-    public synchronized static void iniContext() {
-        if (zkBootstrap == null) {
-            zkBootstrap = new ZkBootstrap();
-            zkBootstrap.init();
-        }
-
-        try {
-            Thread.sleep(1000 * 10);
-        } catch (Exception e) {
-            System.out.println(" Failed to wait for zookeeper init..");
-        }
-        contextInitialized = true;
-        System.out.println("已连接 zookeeper Server,Zookeeper host: " + ZookeeperUtils.getZkHost());
-    }
 
     public static String getMetadata(String serviceName, String version) {
         MetadataClient client = new MetadataClient(serviceName, version);
@@ -98,8 +66,8 @@ public class ServiceUtils {
     }
 
     public static String getJsonRequestSample(String serviceName, String version, String methodName) {
-        if (!ServiceUtils.isContextInitialized()) {
-            ServiceUtils.iniContext();
+        if (!ZookeeperUtils.isContextInitialized()) {
+            ZookeeperUtils.connect();
         }
 
         Service service = getService(serviceName, version);

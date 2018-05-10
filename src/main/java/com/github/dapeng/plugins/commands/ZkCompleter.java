@@ -11,6 +11,8 @@ import org.slf4j.LoggerFactory;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static com.github.dapeng.utils.CmdProperties.*;
+
 public class ZkCompleter implements Completer {
     private static final Logger logger = LoggerFactory.getLogger(ZkController.class);
     StringsCompleter cmdNamesCompleter;
@@ -114,6 +116,13 @@ public class ZkCompleter implements Completer {
                             }
                         }
                     }
+
+                    //过滤
+                    /***************** zk -route *******************************************/
+                    if(inputCandidates[1].equalsIgnoreCase(KEY_ARGS_ZK_ROUTE)){
+                        filterRouteCompleterResult(result);
+                        logger.info("[complete] ==> -route command result =[{}]",result);
+                    }
                 }
             }
         }
@@ -173,5 +182,13 @@ public class ZkCompleter implements Completer {
         return args;
     }
 
+
+    private static void filterRouteCompleterResult(List<CharSequence> charSequenceList) {
+        List<CharSequence> route_ignoreKeys = charSequenceList.stream().filter(res -> res.toString().contains(ROUTE_PATH+"/")).collect(Collectors.toList());
+        List<CharSequence> finalResult = route_ignoreKeys.stream().map(item -> item.toString().substring(item.toString().lastIndexOf("/") + 1)).collect(Collectors.toList());
+        //System.out.println(" finalResult: " + finalResult);
+        charSequenceList.clear();
+        charSequenceList.addAll(finalResult);
+    }
 
 }

@@ -19,8 +19,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.github.dapeng.utils.CmdProperties.KEY_SOA_ZOO_KEEPER_HOST;
-
 
 /**
  * 设置 setting 信息
@@ -158,11 +156,12 @@ public class SetCmd implements Command {
                     invocationContext.timeout(Integer.valueOf(cmdParams.get(k)));
                     break;
                 case SET_ZKHOST:
-                    if (cmdParams.get(k).equalsIgnoreCase(ZookeeperUtils.getZkHost())) {
+                    String zkHost = cmdParams.get(k);
+                    if (zkHost.equalsIgnoreCase(ZookeeperUtils.getZkHost())) {
                         CmdUtils.writeMsg(context, "the ZK have been connected on " + ZookeeperUtils.getZkHost());
                     } else {
+                        CmdUtils.writeMsg(context, "set zkHost and waiting for reset Zkconnection " + zkHost);
                         ZookeeperUtils.setZkHost(cmdParams.get(k));
-                        CmdUtils.writeMsg(context, "set zkHost and waiting for reset Zkconnection " + System.getProperty(KEY_SOA_ZOO_KEEPER_HOST));
                         /*ServiceUtils.destroyZk();*/
                        /* ServiceUtils.iniContext();*/
                     }

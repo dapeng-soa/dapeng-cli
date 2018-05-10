@@ -4,6 +4,7 @@ import com.github.dapeng.metadata.MetadataClient;
 import com.github.dapeng.utils.CmdProperties;
 import com.github.dapeng.utils.CmdUtils;
 import com.github.dapeng.utils.ServiceUtils;
+import com.github.dapeng.utils.ZookeeperUtils;
 import org.clamshellcli.api.Command;
 import org.clamshellcli.api.Configurator;
 import org.clamshellcli.api.Context;
@@ -83,8 +84,8 @@ public class RequestCmd implements Command {
 
         if (serviceName != null && version != null && method != null && fileName != null) {
 
-            if (!ServiceUtils.isContextInitialized()) {
-                ServiceUtils.iniContext();
+            if (!ZookeeperUtils.isContextInitialized()) {
+                ZookeeperUtils.connect();
             }
 
             String jsonParams = ServiceUtils.readFromeFile(fileName);

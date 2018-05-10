@@ -16,6 +16,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.github.dapeng.utils.CmdProperties.*;
+
 public class ZkCmd implements Command {
     private static final Logger logger = LoggerFactory.getLogger(ZkCmd.class);
     private static final String NAMESPACE = "dapeng";
@@ -131,13 +133,19 @@ public class ZkCmd implements Command {
             try {
                 routes = RoutesExecutor.parseAll(routeData);
             } catch (Exception e) {
-                logger.info("parse route failed ...route configuration format is incorrect. exception:{}",e.getMessage());
+                logger.info("parse route failed ...route configuration format is incorrect. exception:{}", e.getMessage());
                 //e.printStackTrace();
             }
             if (routes != null && !routes.isEmpty()) {
-                ZookeeperUtils.createData(routeArgs, routeData);
-                CmdUtils.writeMsg(context, " Zookeeper path: " + routeArgs + " route data : [" + routeData + "] Successfully.");
-                handled = true;
+                String routePath = ROUTE_PATH + "/" + routeArgs;
+                if (!ZookeeperUtils.exists(routePath)) {
+                    CmdUtils.writeMsg(context, " the zk node[" + routePath + "] is not exists ");
+                } else {
+                    logger.info("[execute] ==>set route data on [{}]",routePath);
+                    ZookeeperUtils.createData(routePath, routeData);
+                    CmdUtils.writeMsg(context, " Zookeeper path: " + routePath + " route data : [" + routeData + "] Successfully.");
+                    handled = true;
+                }
             } else {
                 CmdUtils.writeMsg(context, "set route data failed. please confirm  route configuration format is incorrect...");
                 return null;

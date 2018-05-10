@@ -1,6 +1,7 @@
 package com.github.dapeng.utils;
 
 import com.github.dapeng.openapi.cache.ServiceCache;
+import com.github.dapeng.openapi.cache.ZkBootstrap;
 import jline.internal.Log;
 import org.apache.zookeeper.*;
 import org.apache.zookeeper.data.Stat;
@@ -20,12 +21,26 @@ import static org.apache.zookeeper.ZooKeeper.States.CONNECTED;
 
 public class ZookeeperUtils {
     private static final Logger logger = LoggerFactory.getLogger(ZookeeperUtils.class);
-    private static ZooKeeper zk;
+
     private static String zkHost;
+    private static boolean contextInitialized = false;
+    private static ZkBootstrap zkBootstrap = null;
+    private static ZooKeeper zk;
 
     private static final Set<String> zkPaths = new HashSet<>();
     private static final List<String> runtimeServiceCashes = new ArrayList<String>();
     static CountDownLatch semaphore;
+
+    public static boolean isContextInitialized() {
+        return contextInitialized;
+    }
+
+
+  /*  public static void resetZk() {
+        logger.info("[resetZk] ==>System.getenv(soa.zookeeper.host)= {}", System.getenv("soa.zookeeper.host".replace('.', '_')));
+        zkBootstrap = new ZkBootstrap();
+        zkBootstrap.init();
+    }*/
 
     public static Set<String> getAllZkPaths() {
         return zkPaths;
@@ -73,18 +88,31 @@ public class ZookeeperUtils {
      */
     public static synchronized void connect() {
         try {
+            /*******先连接连接 zkBootstrap*************************************************/
+            if (zkBootstrap == null) {
+                zkBootstrap = new ZkBootstrap();
+                zkBootstrap.init();
+            }
+            try {
+                Thread.sleep(1000 * 10);
+            } catch (Exception e) {
+                System.out.println(" Failed to wait for zookeeper init..");
+            }
+            contextInitialized = true;
+
+
+            /****************连接zk**************************************************/
             if (zk != null && zk.getState() == CONNECTED) {
                 return;
             }
 
             semaphore = new CountDownLatch(1);
             zk = new ZooKeeper(getZkHost(), 15000, e -> {
-
                 switch (e.getState()) {
                     case Expired:
                         System.out.println("zookeeper Watcher 到zookeeper Server的session过期，重连");
 //                        destroy();
-                        reset();
+                        resetConnect();
                         break;
 
                     case SyncConnected:
@@ -107,32 +135,40 @@ public class ZookeeperUtils {
                     default:
                         break;
                 }
-
             });
             semaphore.await();
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+        System.out.println("已连接 zookeeper Server,Zookeeper host: " + ZookeeperUtils.getZkHost());
     }
 
-    public static synchronized void reset() {
+    public static synchronized void resetConnect() {
         destroy();
         connect();
     }
 
 
     public static synchronized void destroy() {
+        contextInitialized = false;
         try {
             if (zk != null) {
                 zk.close();
                 zk = null;
             }
+
+            if(zkBootstrap != null){
+                zkBootstrap = null;
+            }
         } catch (InterruptedException e) {
             System.out.println(e.getMessage());
         }
 
-        ServiceCache.getServices().clear();
+
+        //清空缓存的service信息
+        //ServiceCache.getServices().clear();
+        ServiceCache.resetCache();
         runtimeServiceCashes.clear();
         System.out.println("关闭连接，清空service info caches");
     }
@@ -226,13 +262,14 @@ public class ZookeeperUtils {
         //System.getenv("soa.zookeeper.host");
         System.setProperty(KEY_SOA_ZOO_KEEPER_HOST, host);
         //SoaSystemEnvProperties.SOA_ZOOKEEPER_HOST
-        reset();
-        ServiceUtils.resetZk();
+
+        logger.info("[getZkHost] ==>System.getenv(soa.zookeeper.host)=[{}]",System.getenv("soa.zookeeper.host".replace('.', '_')));
+        logger.info("[getZkHost] ==>System.getProperty(KEY_SOA_ZOO_KEEPER_HOST) =[{}]",System.getProperty(KEY_SOA_ZOO_KEEPER_HOST));
+        resetConnect();
     }
 
     public static String getZkHost() {
         String zkSysProperty = System.getProperty(KEY_SOA_ZOO_KEEPER_HOST);
-        logger.info("[getZkHost] ==>System.getProperty(KEY_SOA_ZOO_KEEPER_HOST) =[{}]",zkSysProperty);
         if(zkHost == null) {
             zkHost = zkSysProperty;
         }

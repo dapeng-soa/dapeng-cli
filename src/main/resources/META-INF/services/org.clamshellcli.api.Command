@@ -9,3 +9,4 @@ com.github.dapeng.plugins.ServiceCmd
 com.github.dapeng.plugins.RequestCmd
 com.github.dapeng.plugins.SetCmd
 com.github.dapeng.plugins.UnSetCmd
+com.github.dapeng.plugins.MethodCmd
