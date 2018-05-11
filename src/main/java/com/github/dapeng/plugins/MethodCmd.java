@@ -52,7 +52,7 @@ public class MethodCmd implements Command {
             public Map<String, String> getArguments() {
                 if (args != null) return args;
                 args = new LinkedHashMap();
-                args.put(CmdProperties.KEY_ARGS_SERVICE, "type '-s[serviceName:version]' to get the service method list.....");
+                args.put(CmdProperties.KEY_ARGS_SERVICE, "type '-s [serviceName:version]' to get the service method list.....");
                 return args;
             }
         };
