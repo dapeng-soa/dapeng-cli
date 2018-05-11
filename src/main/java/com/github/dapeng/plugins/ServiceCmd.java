@@ -10,6 +10,7 @@ import org.clamshellcli.api.Context;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -100,7 +101,9 @@ public class ServiceCmd implements Command {
             ZookeeperUtils.connect();
         }
 
-        return ServiceCache.getServices().entrySet().stream().map(i -> i.getValue().getNamespace() + "." + i.getKey()).collect(Collectors.toList());
+        List<String> services = ServiceCache.getServices().entrySet().stream().map(i -> i.getValue().getNamespace() + "." + i.getKey()).collect(Collectors.toList());
+        Collections.sort(services);
+        return services;
     }
 
 }
