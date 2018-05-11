@@ -1,11 +1,21 @@
-命令行使用说明:    
+命令行工具下载 http://pms.today36524.com.cn:8083/basic-services/dapeng-cli
+
+使用方式:
+>cd dist  
+>java -jar cli.jar
+
+支持脚本方式调用;eg:  java -jar cli.jar service -l  
+
+初始化zk启动 java -Dsoa.zookeeper.host=10.10.10.45:2181 -jar cli.jar service -l
+
+命令使用说明:    
     
-    1. zk 命令使用说明[zookeeper 节点相关的操作]  
-     1.1  zk -get [path]                           获得zk某个节点的数据
-     1.2  zk -set [path] -d [data]                 设置zk某个节点的数据
-     1.3  zk -nodes [path]                         获取zk节点下的子节点列表
-     1.4  zk -route [serviceName] -d [data]        设置zk服务的路由配置
-     1.5  zk -route [serviceName] -f [path+filename]   设置本zk服务的路由配置(路由配置从本地文件读取) 
+    1. zk 命令使用说明[zookeeper   节点相关的操作]  
+     1.1  zk -get [path]                             获得zk某个节点的数据
+     1.2  zk -set [path] -d [data]                   设置zk某个节点的数据
+     1.3  zk -nodes [path]                           获取zk节点下的子节点列表
+     1.4  zk -route [serviceName] -d [data]          设置zk服务的路由配置
+     1.5  zk -route [serviceName] -f [path+filename] 设置本zk服务的路由配置(路由配置从本地文件读取) 
      
     2. set 命令使用说明[设置系统参数 目前主要支持设置 invocationContext、 zookeeper的zkHost.注意:通过set 指令设置的值， 在当前命令行生命周期有效]  
      1.1  set                     查看设置的信息

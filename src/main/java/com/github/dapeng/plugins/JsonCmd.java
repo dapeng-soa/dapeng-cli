@@ -57,7 +57,7 @@ public class JsonCmd implements Command {
                 args.put(CmdProperties.KEY_ARGS_SERVICE , "[required] type '-s service' to specific service(package + serviceName).");
                 args.put(CmdProperties.KEY_ARGS_VERSION , "[required] type '-v serviceVersion' to specific serviceVersion.. ");
                 args.put(CmdProperties.KEY_ARGS_SERVICE_METHOD, "[required] type '-m mehtodName' to specific method");
-                args.put(CmdProperties.KEY_ARGS_FILE , "[optional] type '-f file(path + fileName)' to generate xml file, otherwise only return metadata string.. ");
+                args.put(CmdProperties.KEY_ARGS_FILE , "[optional] type '-f file(path + fileName)' the json will be save to the file, otherwise only return metadata string.. ");
                 return args;
             }
         };
