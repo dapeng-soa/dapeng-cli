@@ -11,10 +11,7 @@ import org.clamshellcli.api.Context;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -46,7 +43,7 @@ public class MethodCmd implements Command {
 
             public String getUsage() {
                 StringBuilder sb = new StringBuilder();
-                sb.append(Configurator.VALUE_LINE_SEP).append(" method   -s");
+                sb.append(Configurator.VALUE_LINE_SEP).append(" method -s");
                 return sb.toString();
             }
 
@@ -55,7 +52,7 @@ public class MethodCmd implements Command {
             public Map<String, String> getArguments() {
                 if (args != null) return args;
                 args = new LinkedHashMap();
-                args.put(CmdProperties.KEY_ARGS_SERVICE, "type '-s' to get the service method list.....");
+                args.put(CmdProperties.KEY_ARGS_SERVICE, "type '-s[serviceName:version]' to get the service method list.....");
                 return args;
             }
         };
@@ -81,7 +78,7 @@ public class MethodCmd implements Command {
                     CmdUtils.writeMsg(context, i);
                 });
             } else {
-                CmdUtils.writeMsg(context, " the service["+serviceName+"] not  found method ... ");
+                CmdUtils.writeMsg(context, " the service["+serviceName+"] not found method ... ");
             }
         }
         return null;
@@ -103,17 +100,19 @@ public class MethodCmd implements Command {
             ZookeeperUtils.connect();
         }
         logger.info("[getRuntimeServiceMethods] ==>ServiceCache.getServices()=[{}]", ServiceCache.getServices());
-        Service service = ServiceCache.getServices().entrySet().stream().filter(i -> (i.getValue().getNamespace() + "." + i.getKey()).equalsIgnoreCase(serviceName)).collect(Collectors.toList()).get(0).getValue();
-        if(service == null ){
-            CmdUtils.writeMsg(context, " the service["+serviceName+"] not  found... ");
-            return null;
-        }else {
+        List<Map.Entry<String, Service>> serviceMapLists = ServiceCache.getServices().entrySet().stream().filter(i -> (i.getValue().getNamespace() + "." + i.getKey()).equalsIgnoreCase(serviceName)).collect(Collectors.toList());
+        if(serviceMapLists  != null  && !serviceMapLists.isEmpty() ){
             List<String> methods = new ArrayList<>();
-            service.getMethods().stream().forEach(i->{
+            serviceMapLists.get(0).getValue().getMethods().stream().forEach(i->{
                 methods.add(i.getName());
             });
             logger.info("[getRuntimeServiceMethods] ==>methods=[{}]",methods);
+            //Collections.sort(methods);
+            methods.sort(String::compareToIgnoreCase);
             return methods;
+        }else {
+            CmdUtils.writeMsg(context, " the service["+serviceName+"] not found... ");
+            return null;
         }
     }
 

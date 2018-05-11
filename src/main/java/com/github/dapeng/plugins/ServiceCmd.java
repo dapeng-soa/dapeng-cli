@@ -10,7 +10,6 @@ import org.clamshellcli.api.Context;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -70,7 +69,6 @@ public class ServiceCmd implements Command {
         if (list != null) {
             List<String> services = getRuntimeService();
             logger.info("[execute] ==>services=[{}]", services);
-            //List<String> services = ZookeeperUtils.getRuntimeServices();
             if (services != null && !services.isEmpty()) {
                 services.forEach(i -> {
                     CmdUtils.writeMsg(context, i);
@@ -96,13 +94,16 @@ public class ServiceCmd implements Command {
 
 
     private List<String> getRuntimeService() {
-        logger.info("[getRuntimeService] ==>!ZookeeperUtils.isContextInitialized()=[{}]",!ZookeeperUtils.isContextInitialized());
+        logger.info("[getRuntimeService] ==>!ZookeeperUtils.isContextInitialized()=[{}]", !ZookeeperUtils.isContextInitialized());
         if (!ZookeeperUtils.isContextInitialized()) {
             ZookeeperUtils.connect();
         }
 
+        logger.info("[getRuntimeService] ==>ServiceCache.getServices()=[{}]", ServiceCache.getServices());
+        //List<String> services = ZookeeperUtils.getRuntimeServices();
         List<String> services = ServiceCache.getServices().entrySet().stream().map(i -> i.getValue().getNamespace() + "." + i.getKey()).collect(Collectors.toList());
-        Collections.sort(services);
+        //Collections.sort(services);
+        services.sort(String::compareToIgnoreCase);
         return services;
     }
 

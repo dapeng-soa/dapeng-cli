@@ -116,7 +116,7 @@ public class ZookeeperUtils {
                         break;
 
                     case SyncConnected:
-                        System.out.println("Zookeeper Watcher 已连接 zookeeper Server,Zookeeper host: " + getZkHost());
+                        //System.out.println("Zookeeper Watcher 已连接 zookeeper Server,Zookeeper host: " + getZkHost());
                         getAllNodes("/", zkPaths);
                         cacheRuntimeServiceList();
                         semaphore.countDown();

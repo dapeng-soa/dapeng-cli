@@ -150,6 +150,8 @@ public class ZkCompleter implements Completer {
         result.removeAll(ignoreKeys);
         logger.info("[complete] ==> remove after result:[{}]", result);
 
+
+        result.stream().sorted().collect(Collectors.toList());
         return result.isEmpty() ? -1 : cmd.length() + 1;
     }
 
