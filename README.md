@@ -37,8 +37,8 @@
      3.8  unset -callerfrom [value] 设置invocationContext callerfrom
      
     4. metadata 命令使用说明[获取服务接口的元数据]  
-      4.1 metadata -s [serviceName] -v [version]          获取服务接口的元数据信息(结果直接打印在控制台)
-      4.2 metadata -s serviceName -v version -f fileName  获取服务接口元数据信息并保存到指定路径
+      4.1 metadata -s [serviceName] -v [version]                     获取服务接口的元数据信息(结果直接打印在控制台)
+      4.2 metadata -s [serviceName] -v [version] -f [path+fileName]  获取服务接口元数据信息并保存到指定路径
       
     5. json 命令使用说明[获取服务调用的json格式样例]  
       5.1 json -s [serviceName] -v [version] -m [method]                    获取服务调用的json格式样例在控制台打印;eg:  json -s com.today.api.order.service.OrderService -m queryOrderList -v 1.0.0

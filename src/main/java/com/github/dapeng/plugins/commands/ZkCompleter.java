@@ -145,7 +145,7 @@ public class ZkCompleter implements Completer {
         //过滤自动补全 结果
         filterCompleterResultByCommand(secondCmd, result);
 
-        result.sort((_a,_b) -> _a.toString().compareToIgnoreCase(_b.toString()));
+        result.sort((_a, _b) -> _a.toString().compareToIgnoreCase(_b.toString()));
         return result.isEmpty() ? -1 : cmd.length() + 1;
     }
 
@@ -193,8 +193,13 @@ public class ZkCompleter implements Completer {
         List<CharSequence> filterKeys;
         List<CharSequence> finalResult;
         String optionKey;
-        if(command == null ) command = "default";
+        if (command == null) command = "default";
         switch (command) {
+            //不过滤 runtime 路径
+            case KEY_ARGS_ZK_NODE: //-nodes
+            case KEY_ARGS_ZK_GET://-get
+                break;
+
             case KEY_ARGS_ZK_ROUTE: //-route
                 optionKey = ROUTE_PATH + "/";
                 logger.info("[filterCompleterResultByCommand] ==>Retain optionKey=[{}]", optionKey);
