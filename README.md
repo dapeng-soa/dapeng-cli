@@ -1,8 +1,8 @@
 命令行工具下载 http://pms.today36524.com.cn:8083/basic-services/dapeng-cli
 
 使用方式:
->cd dist  
->java -jar cli.jar
+> cd dist  
+> java -jar cli.jar
 
 支持脚本方式调用;eg:  java -jar cli.jar service -l  
 
