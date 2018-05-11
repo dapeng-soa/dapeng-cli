@@ -1,6 +1,5 @@
 package com.github.dapeng.plugins.commands;
 
-import com.github.dapeng.utils.ZookeeperUtils;
 import jline.console.ConsoleReader;
 import jline.console.completer.FileNameCompleter;
 import jline.console.completer.NullCompleter;
@@ -63,7 +62,7 @@ public class ZkController implements InputController {
             console.addCompleter(NullCompleter.INSTANCE);
 
             //初始化zookeeper
-            ZookeeperUtils.connect();
+            //ZookeeperUtils.connect();
         } else {
             //plug.getIoConsole().printf("%nNo commands were found for input controller [%s].%n", new Object[]{this.getClass().getName()});
         }
