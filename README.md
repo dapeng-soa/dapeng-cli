@@ -13,8 +13,6 @@ V2命令使用说明:
      1.1  zk -get [path]                             获得zk某个节点的数据
      1.2  zk -set [path] -d [data]                   设置zk某个节点的数据
      1.3  zk -nodes [path]                           获取zk节点下的子节点列表
-     1.4  zk -route [serviceName] -d [data]          设置zk服务的路由配置
-     1.5  zk -route [serviceName] -f [path+filename] 设置本zk服务的路由配置(路由配置从本地文件读取) 
      
     2. set 命令使用说明[设置系统参数 目前主要支持设置 invocationContext、 zookeeper的zkHost.注意:通过set 指令设置的值， 在当前命令行生命周期有效]  
      1.1  set                     查看设置的信息
@@ -45,10 +43,18 @@ V2命令使用说明:
       
     6. service 命令使用说明[获取当前运行时实例的服务列表]  
       6.1 service -l    获取当前运行时实例的服务列表;eg: service -l
-      //2. 获取服务列表 service -runtime  -d -o -f
-              //3. 获取服务列表 service -route
-              //4. 获取服务列表 service -config
-              //5. 获取服务列表 service -method
+      6.2 service -runtime 获取服务实例列表 控制台显示
+          6.2.1 service -runtime -o /tmp/run_time.json   获取服务实例列表 输出到文件
+      6.3 service -route 获取服务实例路由配置 控制台显示
+          6.3.1 service -route -o /tmp/route.json   获取服务实例路由配置 输出到文件
+          6.3.1 service -route -f /tmp/route.json   从文件读取路由信息设置到某个service下
+          6.3.1 service -route -d "ip match ~127.0.0.1"   路由信息[ip match ~127.0.0.1]设置到某个service下
+      6.4 service -route 获取服务 config配置信息  控制台显示
+          6.4.1 service -config -o /tmp/config.json   获取服务config配置信息 输出到文件
+          6.4.1 service -config -f /tmp/config.json   从文件读取config配置信息设置到某个service下
+          6.4.1 service -config -d "timeout=1000ms;timeout=120"   config配置信息[timeout=1000ms;timeout=120]设置到某个service下
+     6.5 service -method 获取服务方法列表 控制台显示
+          6.5.1 service -runtime -o /tmp/service_method.json   获取服务方法列表 输出到文件       
       
     7. method 命令使用说明[获取服务接口的方法列表]  
       7.1 method -s [serviceName:version]    获取服务接口的方法;eg: method -s com.today.api.order.service.OrderService:1.0.0
