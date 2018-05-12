@@ -5,6 +5,7 @@ import com.github.dapeng.openapi.cache.ZkBootstrap;
 import jline.internal.Log;
 import org.apache.zookeeper.*;
 import org.apache.zookeeper.data.Stat;
+import org.clamshellcli.api.Context;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -158,7 +159,7 @@ public class ZookeeperUtils {
                 zk = null;
             }
 
-            if(zkBootstrap != null){
+            if (zkBootstrap != null) {
                 zkBootstrap = null;
             }
         } catch (InterruptedException e) {
@@ -211,6 +212,24 @@ public class ZookeeperUtils {
         }
     }
 
+
+    public static void setData(Context context, String path, String data) {
+        if (path.startsWith(CmdProperties.RUNTIME_PATH)) {
+            CmdUtils.writeMsg(context, CmdProperties.RUNTIME_PATH + " is protected.. it can not be setting.");
+        } else {
+            if (zk == null) {
+                connect();
+            }
+            if(exists(path)){
+                zk.setData(path, data.getBytes(), -1, null, data);
+                CmdUtils.writeMsg(context, "set the zk path [" + path + "]:[" + data + "] Successfully.");
+            }else{
+                CmdUtils.writeMsg(context, "the zk path [" + path + "] is not exists");
+            }
+        }
+    }
+
+
     public static String getData(String path) {
         String zkData = "";
         if (zk == null) {
@@ -239,7 +258,6 @@ public class ZookeeperUtils {
         }
 
         List<String> children = new ArrayList<>();
-
         if (exists(path)) {
             try {
                 children = zk.getChildren(path, watchedEvent -> {
@@ -263,14 +281,14 @@ public class ZookeeperUtils {
         System.setProperty(KEY_SOA_ZOO_KEEPER_HOST, host);
         //SoaSystemEnvProperties.SOA_ZOOKEEPER_HOST
 
-        logger.info("[getZkHost] ==>System.getenv(soa.zookeeper.host)=[{}]",System.getenv("soa.zookeeper.host".replace('.', '_')));
-        logger.info("[getZkHost] ==>System.getProperty(KEY_SOA_ZOO_KEEPER_HOST) =[{}]",System.getProperty(KEY_SOA_ZOO_KEEPER_HOST));
+        logger.info("[getZkHost] ==>System.getenv(soa.zookeeper.host)=[{}]", System.getenv("soa.zookeeper.host".replace('.', '_')));
+        logger.info("[getZkHost] ==>System.getProperty(KEY_SOA_ZOO_KEEPER_HOST) =[{}]", System.getProperty(KEY_SOA_ZOO_KEEPER_HOST));
         resetConnect();
     }
 
     public static String getZkHost() {
         String zkSysProperty = System.getProperty(KEY_SOA_ZOO_KEEPER_HOST);
-        if(zkHost == null) {
+        if (zkHost == null) {
             zkHost = zkSysProperty;
         }
         return zkHost == null ? "127.0.0.1:2181" : zkHost;

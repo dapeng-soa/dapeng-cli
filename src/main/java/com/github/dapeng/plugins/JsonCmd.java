@@ -22,6 +22,7 @@ public class JsonCmd implements Command {
             public String getNamespace() {
                 return NAMESPACE;
             }
+
             public String getName() {
                 return ACTION_NAME;
             }
@@ -35,29 +36,22 @@ public class JsonCmd implements Command {
                 sb.append(Configurator.VALUE_LINE_SEP)
                         .append(" json -s service -v version -m method")
                         .append(Configurator.VALUE_LINE_SEP)
-                        .append(" json -s service -v version -m method -f fileName")
-                        .append(Configurator.VALUE_LINE_SEP)
-                        .append(" json -s com.today.UserService -v 1.0.0 -m createUser ")
+                        .append(" json -s service -v version -m method -o fileName")
                         .append(Configurator.VALUE_LINE_SEP);
-//                        .append("json [options]").append(Configurator.VALUE_LINE_SEP);
-//
-//                for(Map.Entry<String,String> entry : getArguments().entrySet()){
-//
-//                    sb.append(String.format("%n%1$5s", entry.getKey()) + "        " + entry.getValue());
-//                }
-//
-//                sb.append(Configurator.VALUE_LINE_SEP);
+                // .append(" json -s com.today.UserService -v 1.0.0 -m createUser ")
+                // .append(Configurator.VALUE_LINE_SEP);
                 return sb.toString();
             }
 
-            Map<String,String> args = null;
+            Map<String, String> args = null;
+
             public Map<String, String> getArguments() {
-                if(args != null) return args;
-                args = new LinkedHashMap<String,String>();
-                args.put(CmdProperties.KEY_ARGS_SERVICE , "[required] type '-s service' to specific service(package + serviceName).");
-                args.put(CmdProperties.KEY_ARGS_VERSION , "[required] type '-v serviceVersion' to specific serviceVersion.. ");
-                args.put(CmdProperties.KEY_ARGS_SERVICE_METHOD, "[required] type '-m mehtodName' to specific method");
-                args.put(CmdProperties.KEY_ARGS_FILE , "[optional] type '-f file(path + fileName)' the json will be save to the file, otherwise only return metadata string.. ");
+                if (args != null) return args;
+                args = new LinkedHashMap<String, String>();
+                args.put(CmdProperties.KEY_ARGS_SERVICE, "[required] type '-s service' to specific service(package + serviceName).");
+                args.put(CmdProperties.KEY_ARGS_VERSION, "[required] type '-v serviceVersion' to specific serviceVersion.");
+                args.put(CmdProperties.KEY_ARGS_SERVICE_METHOD, "[required] type '-m mehtodName' to specific method.");
+                args.put(CmdProperties.KEY_ARGS_FILE_OUT, "[optional] type '-o file(path + fileName)' the json will be save to the file, otherwise only return metadata string.");
                 return args;
             }
         };
@@ -65,26 +59,22 @@ public class JsonCmd implements Command {
 
     @Override
     public Object execute(Context context) {
-
         Map<String, String> inputArgs = CmdUtils.getCmdArgs(context);
         String sName = inputArgs.get(CmdProperties.KEY_ARGS_SERVICE);
         String sVersion = inputArgs.get(CmdProperties.KEY_ARGS_VERSION);
         String sMethod = inputArgs.get(CmdProperties.KEY_ARGS_SERVICE_METHOD);
-        String fileName = inputArgs.get(CmdProperties.KEY_ARGS_FILE);
+        String file_out = inputArgs.get(CmdProperties.KEY_ARGS_FILE_OUT);
 
         //3. 获取Json格式
         if (CmdUtils.isEmpty(sName) || CmdUtils.isEmpty(sVersion) || CmdUtils.isEmpty(sMethod)) {
-
             CmdUtils.writeMsg(context, " request format is invalid.. please check your input.....");
             String usage = getDescriptor().getUsage();
             CmdUtils.writeMsg(context, usage);
-
         } else {
-            String jsonRequestSample = ServiceUtils.getJsonRequestSample(sName,sVersion,sMethod);
-
-            if (!CmdUtils.isEmpty(fileName)) {
-                ServiceUtils.writerFile(fileName, jsonRequestSample);
-                CmdUtils.writeMsg(context, fileName + "is generated . ");
+            String jsonRequestSample = ServiceUtils.getJsonRequestSample(sName, sVersion, sMethod);
+            if (!CmdUtils.isEmpty(file_out)) {
+                ServiceUtils.writerFile(context, file_out, jsonRequestSample);
+                //CmdUtils.writeMsg(context, file_out + "is generated . ");
             } else {
                 CmdUtils.writeMsg(context, jsonRequestSample);
             }

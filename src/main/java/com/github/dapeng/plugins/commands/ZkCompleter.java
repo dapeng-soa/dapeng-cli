@@ -199,8 +199,17 @@ public class ZkCompleter implements Completer {
             case KEY_ARGS_ZK_NODE: //-nodes
             case KEY_ARGS_ZK_GET://-get
                 break;
+            case KEY_ARGS_RUNTIME: //-runtime
+                optionKey = RUNTIME_PATH + "/";
+                logger.info("[filterCompleterResultByCommand] ==>Retain optionKey=[{}]", optionKey);
+                filterKeys = result.stream().filter(res -> res.toString().contains(optionKey)).collect(Collectors.toList());
+                finalResult = filterKeys.stream().map(item -> item.toString().substring(item.toString().lastIndexOf("/") + 1)).collect(Collectors.toList());
+                //System.out.println(" finalResult: " + finalResult);
+                result.clear();
+                result.addAll(finalResult);
+                break;
 
-            case KEY_ARGS_ZK_ROUTE: //-route
+            case KEY_ARGS_ROUTE: //-route
                 optionKey = ROUTE_PATH + "/";
                 logger.info("[filterCompleterResultByCommand] ==>Retain optionKey=[{}]", optionKey);
                 filterKeys = result.stream().filter(res -> res.toString().contains(optionKey)).collect(Collectors.toList());
@@ -211,6 +220,8 @@ public class ZkCompleter implements Completer {
                 break;
             case KEY_ARGS_METADATA: //-metadata
             case KEY_ARGS_SERVICE: //-s
+            case KEY_ARGS_CONFIG: //-config
+            case KEY_ARGS_METHOD: //-method
                 optionKey = CONFIG_PATH + "/";
                 logger.info("[filterCompleterResultByCommand] ==>Retain optionKey=[{}]", optionKey);
                 filterKeys = result.stream().filter(res -> res.toString().contains(CONFIG_PATH + "/")).collect(Collectors.toList());

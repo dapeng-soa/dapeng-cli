@@ -48,13 +48,14 @@ public class MetadataCmd implements Command {
                 return sb.toString();
             }
 
-            Map<String,String> args = null;
+            Map<String, String> args = null;
+
             public Map<String, String> getArguments() {
-                if(args != null) return args;
-                args = new LinkedHashMap<String,String>();
-                args.put(CmdProperties.KEY_ARGS_SERVICE , "type '-s service' to specific service(package + serviceName).");
-                args.put(CmdProperties.KEY_ARGS_VERSION , "type '-v serviceVersion' to specific serviceVersion.. ");
-                args.put(CmdProperties.KEY_ARGS_FILE , "optional: type '-f file(path + fileName)' to generate xml file, otherwise only return metadata string.. ");
+                if (args != null) return args;
+                args = new LinkedHashMap<String, String>();
+                args.put(CmdProperties.KEY_ARGS_SERVICE, "type '-s service' to specific service(package + serviceName).");
+                args.put(CmdProperties.KEY_ARGS_VERSION, "type '-v serviceVersion' to specific serviceVersion.. ");
+                args.put(CmdProperties.KEY_ARGS_FILE_OUT, "optional: type '-o file(path + fileName)' to generate xml file, otherwise only return metadata string.. ");
                 return args;
             }
         };
@@ -65,19 +66,17 @@ public class MetadataCmd implements Command {
         Map<String, String> inputArgs = CmdUtils.getCmdArgs(context);
 
         String serviceName = inputArgs.get(CmdProperties.KEY_ARGS_SERVICE);
-        String fileName = inputArgs.get(CmdProperties.KEY_ARGS_FILE);
+        String file_out = inputArgs.get(CmdProperties.KEY_ARGS_FILE_OUT);
         String version = inputArgs.get(CmdProperties.KEY_ARGS_VERSION);
 
-        CmdUtils.writeMsg(context, "inputParams: serviceName: " + serviceName + " version: " + version + " filePath: " + fileName);
+        CmdUtils.writeMsg(context, "inputParams: serviceName: " + serviceName + " version: " + version + " filePath: " + file_out);
 
         //2. 获取服务元数据
         if (serviceName != null && version != null) {
-
             String data = ServiceUtils.getMetadata(serviceName, version);
-
-            if (fileName != null) {
-                ServiceUtils.writerFile(fileName, data);
-                CmdUtils.writeMsg(context, fileName + " has generated successfully.....");
+            if (file_out != null) {
+                ServiceUtils.writerFile(context, file_out, data);
+                //CmdUtils.writeMsg(context, file_out + " has generated successfully.....");
             } else {
                 CmdUtils.writeMsg(context, data);
             }
@@ -85,8 +84,6 @@ public class MetadataCmd implements Command {
             String usage = getDescriptor().getUsage();
             CmdUtils.writeMsg(context, usage);
         }
-
-
         return null;
     }
 

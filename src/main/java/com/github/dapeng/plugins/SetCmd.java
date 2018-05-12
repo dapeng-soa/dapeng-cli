@@ -42,17 +42,17 @@ public class SetCmd implements Command {
 
         @Parameter(names = {"-calleeip"}, required = false, description = "set the invocationContext attribute CalleeIP. Usage -calleeip.")
         public boolean calleeip = false;
-        @Parameter(names = {"-calleeport"}, required = false, description = "set the invocationContext attribute CalleePort. Usage -calleeport")
+        @Parameter(names = {"-calleeport"}, required = false, description = "set the invocationContext attribute CalleePort. Usage -calleeport.")
         public boolean calleeport = false;
-        @Parameter(names = {"-callermid"}, required = false, description = "set the invocationContext attribute CallerMid. Usage -callermid")
+        @Parameter(names = {"-callermid"}, required = false, description = "set the invocationContext attribute CallerMid. Usage -callermid.")
         public boolean callermid = false;
-        @Parameter(names = {"-callerfrom"}, required = false, description = "set the invocationContext attribute CallerFrom. Usage -callerfrom")
+        @Parameter(names = {"-callerfrom"}, required = false, description = "set the invocationContext attribute CallerFrom. Usage -callerfrom.")
         public boolean callerfrom = false;
-        @Parameter(names = {"-callerip"}, required = false, description = "set the invocationContext attribute CallerIp. Usage -callerip")
+        @Parameter(names = {"-callerip"}, required = false, description = "set the invocationContext attribute CallerIp. Usage -callerip.")
         public boolean callerip = false;
-        @Parameter(names = {"-timeout"}, required = false, description = "set the invocationContext  TimeOut. Usage -timeout")
+        @Parameter(names = {"-timeout"}, required = false, description = "set the invocationContext  TimeOut. Usage -timeout.")
         public boolean timeout = false;
-        @Parameter(names = {"-zkhost"}, required = false, description = "set the ZkHost . Usage -zkhost")
+        @Parameter(names = {"-zkhost"}, required = false, description = "set the ZkHost . Usage -zkhost.")
         public boolean zkhost = false;
     }
 
@@ -87,12 +87,10 @@ public class SetCmd implements Command {
             result
                     .append(Configurator.VALUE_LINE_SEP)
                     .append(CMD_NAME + " [options]").append(Configurator.VALUE_LINE_SEP);
-
             for (Map.Entry<String, String> entry : getArguments().entrySet()) {
                 result.append(String.format("%n%1$15s %2$2s %3$s", entry.getKey(), " ", entry.getValue()));
             }
             return result.toString();
-            // return "set -to timeout -ceeip callee_ip -cp callee_port -on operator_name -cf caller_from -cn customer_name -cerip caller_ip -zkh zkHost .";
         }
 
         @Override

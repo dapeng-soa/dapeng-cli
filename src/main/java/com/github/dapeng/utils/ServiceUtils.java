@@ -12,6 +12,7 @@ import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import org.clamshellcli.api.Context;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,7 +41,7 @@ public class ServiceUtils {
         return data;
     }
 
-    public static void writerFile(String fileName, String content) {
+    public static void writerFile(Context context, String fileName, String content) {
         FileWriter fw = null;
         try {
             File file = new File(fileName);
@@ -53,16 +54,15 @@ public class ServiceUtils {
             fw.write(content);
             fw.flush();
         } catch (Exception e) {
-            //e.printStackTrace();
-            System.out.println(" Failed to written file[" + fileName + "]");
+            CmdUtils.writeMsg(context, " Failed to written file[" + fileName + "] cause:"+e.getMessage() );
         } finally {
             try {
                 fw.close();
             } catch (Exception e) {
-                // e.printStackTrace();
-                System.out.println(" Failed to close file....." + fileName);
+                CmdUtils.writeMsg(context, " Failed to close file[" + fileName + "] cause:"+e.getMessage() );
             }
         }
+        CmdUtils.writeMsg(context, "the data has been saved to file["+fileName+"] succeed");
     }
 
     public static String getJsonRequestSample(String serviceName, String version, String methodName) {

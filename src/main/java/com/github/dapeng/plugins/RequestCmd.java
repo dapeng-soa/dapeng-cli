@@ -61,10 +61,11 @@ public class RequestCmd implements Command {
                 if (args != null) return args;
                 args = new LinkedHashMap<String, String>();
                 args.put(CmdProperties.KEY_ARGS_SERVICE, "type '-s service' to specific service(package + serviceName).");
-                args.put(CmdProperties.KEY_ARGS_VERSION, "type '-v serviceVersion' to specific serviceVersion.. ");
-                args.put(CmdProperties.KEY_ARGS_SERVICE_METHOD, "type '-m method' to specific service method.. ");
-                args.put(CmdProperties.KEY_ARGS_FILE, "type '-f file(path + fileName)' to get request json content for invoking..");
-                args.put(CmdProperties.KEY_ARGS_METADATA, "type '-metadata serviceName version' to get metadata json content; you can type -f file(path + fileName) to save the metadata.");
+                args.put(CmdProperties.KEY_ARGS_VERSION, "type '-v serviceVersion' to specific serviceVersion.");
+                args.put(CmdProperties.KEY_ARGS_SERVICE_METHOD, "type '-m method' to specific service method.");
+                args.put(CmdProperties.KEY_ARGS_FILE_READ, "type '-f file(path + fileName)' to get request json content from file.");
+                args.put(CmdProperties.KEY_ARGS_FILE_OUT, "type '-o file(path + fileName)' to save data to file.");
+                args.put(CmdProperties.KEY_ARGS_METADATA, "type '-metadata serviceName' to get metadata json content.");
                 return args;
             }
         };
@@ -73,43 +74,43 @@ public class RequestCmd implements Command {
     @Override
     public Object execute(Context context) {
         Map<String, String> inputArgs = CmdUtils.getCmdArgs(context);
-        logger.info("[execute] ==>inputArgs={}",inputArgs);
+        logger.info("[execute] ==>inputArgs={}", inputArgs);
 
         String serviceName = inputArgs.get(CmdProperties.KEY_ARGS_SERVICE);
-        String fileName = inputArgs.get(CmdProperties.KEY_ARGS_FILE);
+        String file_read = inputArgs.get(CmdProperties.KEY_ARGS_FILE_READ);
+        String file_out = inputArgs.get(CmdProperties.KEY_ARGS_FILE_OUT);
         String version = inputArgs.get(CmdProperties.KEY_ARGS_VERSION);
         String method = inputArgs.get(CmdProperties.KEY_ARGS_SERVICE_METHOD);
-
         String metadataObj = inputArgs.get(CmdProperties.KEY_ARGS_METADATA);
 
-        if (serviceName != null && version != null && method != null && fileName != null) {
+        if (serviceName != null && version != null && method != null && file_read != null) {
 
             if (!ZookeeperUtils.isContextInitialized()) {
                 ZookeeperUtils.connect();
             }
 
-            String jsonParams = ServiceUtils.readFromeFile(fileName);
+            String jsonParams = ServiceUtils.readFromeFile(file_read);
 
             String result = ServiceUtils.post(serviceName, version, method, jsonParams);
             CmdUtils.writeMsg(context, result);
         }
 
-        if (metadataObj != null) {
+        if (!CmdUtils.isEmpty(metadataObj) && !CmdUtils.isEmpty(version)) {
 
             String[] mdArr = metadataObj.split("#");
-            logger.info("[execute] ==>mdArr={}",mdArr);
+            logger.info("[execute] ==>mdArr={}", mdArr);
             try {
-                String jsonResponse  = new MetadataClient(mdArr[0], mdArr[1]).getServiceMetadata();
-                if (!CmdUtils.isEmpty(fileName)) {
-                    ServiceUtils.writerFile(fileName, jsonResponse);
-                    CmdUtils.writeMsg(context, "The metadata has been saved "+fileName + "is generated . ");
+                String jsonResponse = new MetadataClient(mdArr[0], mdArr[1]).getServiceMetadata();
+                if (!CmdUtils.isEmpty(file_out)) {
+                    ServiceUtils.writerFile(context, file_out, jsonResponse);
+                    //CmdUtils.writeMsg(context, "The metadata has been saved "+file_out + "is generated . ");
                 } else {
-                    CmdUtils.writeMsg(context,jsonResponse) ;
+                    CmdUtils.writeMsg(context, jsonResponse);
                 }
 
             } catch (Exception e) {
                 //e.printStackTrace();
-                CmdUtils.writeMsg(context, "request -metadata error..[ex:"+e.getMessage()+"]");
+                CmdUtils.writeMsg(context, "request -metadata error..[ex:" + e.getMessage() + "]");
             }
         }
 

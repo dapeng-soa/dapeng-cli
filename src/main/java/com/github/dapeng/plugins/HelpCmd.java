@@ -140,8 +140,8 @@ public class HelpCmd implements Command{
         Descriptor desc = cmd.getDescriptor();
         if(desc == null || desc.getArguments() == null) return;
         IOConsole c = ctx.getIoConsole();
-        CmdUtils.writeFormatMsg(ctx,"%nOptions:");
-        CmdUtils.writeFormatMsg(ctx,"%n--------");
+        CmdUtils.writeFormatMsg(ctx,"Options:");
+       // CmdUtils.writeFormatMsg(ctx,"%n--------");
         for(Map.Entry<String,String> entry : desc.getArguments().entrySet()){
             CmdUtils.writeFormatMsg(ctx,"%n%1$10s\t%2$s", entry.getKey(), entry.getValue());
         }
