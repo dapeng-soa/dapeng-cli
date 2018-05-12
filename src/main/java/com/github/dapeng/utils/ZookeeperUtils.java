@@ -69,16 +69,16 @@ public class ZookeeperUtils {
     private static AsyncCallback.StringCallback persistNodeCreateCallback = (rc, path, ctx, name) -> {
         switch (KeeperException.Code.get(rc)) {
             case CONNECTIONLOSS:
-                System.out.println("创建节点:" + path + ",连接断开，重新创建");
+                logger.info("创建节点:" + path + ",连接断开，重新创建");
                 break;
             case OK:
-                System.out.println("创建节点:{},成功" + path);
+                logger.info("创建节点:{},成功" + path);
                 break;
             case NODEEXISTS:
-                System.out.println("创建节点:{},已存在" + path);
+                logger.info("创建节点:{},已存在" + path);
                 break;
             default:
-                System.out.println("创建节点:{},失败" + path);
+                logger.info("创建节点:{},失败" + path);
         }
     };
 
@@ -97,7 +97,7 @@ public class ZookeeperUtils {
             try {
                 Thread.sleep(1000 * 10);
             } catch (Exception e) {
-                System.out.println(" Failed to wait for zookeeper init..");
+                logger.info("[connect] ==>Failed to wait for zookeeper init.. cause:{}", e.getMessage());
             }
             contextInitialized = true;
 
@@ -111,25 +111,24 @@ public class ZookeeperUtils {
             zk = new ZooKeeper(getZkHost(), 15000, e -> {
                 switch (e.getState()) {
                     case Expired:
-                        System.out.println("zookeeper Watcher 到zookeeper Server的session过期，重连");
+                        logger.info("[connect] ==>zookeeper Watcher 到zookeeper Server的session过期，重连");
 //                        destroy();
                         resetConnect();
                         break;
 
                     case SyncConnected:
-                        //System.out.println("Zookeeper Watcher 已连接 zookeeper Server,Zookeeper host: " + getZkHost());
                         getAllNodes("/", zkPaths);
                         cacheRuntimeServiceList();
                         semaphore.countDown();
                         break;
 
                     case Disconnected:
-                        System.out.println("Zookeeper Watcher 连接不上了");
+                        logger.info("[connect] ==>Zookeeper Watcher 连接不上了");
                         //zk断了之后, 会自动重连
                         break;
 
                     case AuthFailed:
-                        System.out.println("Zookeeper connection auth failed ...");
+                        logger.info("[connect] ==>Zookeeper connection auth failed ...");
                         destroy();
                         break;
 
@@ -140,7 +139,7 @@ public class ZookeeperUtils {
             semaphore.await();
 
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            logger.info("[connect] ==>{}", e.getMessage());
         }
         System.out.println("已连接 zookeeper Server,Zookeeper host: " + ZookeeperUtils.getZkHost());
     }
@@ -163,7 +162,7 @@ public class ZookeeperUtils {
                 zkBootstrap = null;
             }
         } catch (InterruptedException e) {
-            System.out.println(e.getMessage());
+            logger.info("[connect] ==>{}", e.getMessage());
         }
 
 
@@ -184,12 +183,12 @@ public class ZookeeperUtils {
             String parentPath = path.substring(0, i);
             //判断父节点是否存在...
             if (!exists(parentPath)) {
-                System.out.println(" Create current path: " + parentPath);
+                logger.info("[connect] ==> Create current path:{} ", parentPath);
                 createPath(parentPath, false);
             }
         }
         if (ephemeral) {
-            System.out.println("Step into ephemeral...");
+            logger.info("[connect] ==>Step into ephemeral...");
             zk.create(path, "".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL_SEQUENTIAL, persistNodeCreateCallback, "");
 
             //添加 watch ，监听子节点变化
@@ -220,10 +219,10 @@ public class ZookeeperUtils {
             if (zk == null) {
                 connect();
             }
-            if(exists(path)){
+            if (exists(path)) {
                 zk.setData(path, data.getBytes(), -1, null, data);
                 CmdUtils.writeMsg(context, "set the zk path [" + path + "]:[" + data + "] Successfully.");
-            }else{
+            } else {
                 CmdUtils.writeMsg(context, "the zk path [" + path + "] is not exists");
             }
         }
@@ -268,7 +267,7 @@ public class ZookeeperUtils {
                     }
                 });
             } catch (Exception e) {
-                System.out.println(" Failed to get children....");
+                logger.info("[getChildren] ==> Failed to get children....{}",e.getMessage());
             }
         }
 

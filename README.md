@@ -4,9 +4,9 @@
 > cd dist  
 > java -jar cli.jar
 
-支持脚本方式调用;eg:  java -jar cli.jar service -l  
+支持脚本方式调用;eg:  java -jar cli.jar service -list  
 
-初始化zk启动 java -Dsoa.zookeeper.host=10.10.10.45:2181 -jar cli.jar service -l
+初始化zk启动 java -Dsoa.zookeeper.host=10.10.10.45:2181 -jar cli.jar service -list
 V2命令使用说明:    
     
     1. zk 命令使用说明[zookeeper   节点相关的操作]  
@@ -42,7 +42,7 @@ V2命令使用说明:
       5.2 json -s [serviceName] -v [version] -m [method] -f [path+filename] 获取服务调用的json格式样例,保存到指定文件
       
     6. service 命令使用说明[获取当前运行时实例的服务列表]  
-      6.1 service -l    获取当前运行时实例的服务列表;eg: service -l
+      6.1 service -list    获取当前运行时实例的服务列表;eg: service -list
       6.2 service -runtime 获取服务实例列表 控制台显示
           6.2.1 service -runtime -o /tmp/run_time.json   获取服务实例列表 输出到文件
       6.3 service -route 获取服务实例路由配置 控制台显示
@@ -57,7 +57,7 @@ V2命令使用说明:
           6.5.1 service -runtime -o /tmp/service_method.json   获取服务方法列表 输出到文件       
       
     7. method 命令使用说明[获取服务接口的方法列表]  
-      7.1 method -s [serviceName:version]    获取服务接口的方法;eg: method -s com.today.api.order.service.OrderService:1.0.0
+      7.1 method -s [serviceName]    获取服务接口的方法;eg: method -s com.today.api.order.service.OrderService
       
     8. request 命令使用说明[请求服务接口]  
       8.1 request -s [serviceName] -v [version] -m [method] -f [path+fileName]   请求服务接口
@@ -65,8 +65,8 @@ V2命令使用说明:
           -v version       版本号
           -m method        方法名
           -f fileName      请求的json格式文件    
-      8.2 request -metadata [serviceName version] 请求服务接口的元数据;eg: request -metadata com.today.api.order.service.OrderService 1.0.0
-      8.3 request -metadata [serviceName version] -f [path+fileName]请求服务接口的元数据,并保存到指定文件
+      8.2 request -metadata [serviceName] -v [version] 请求服务接口的元数据;eg: request -metadata com.today.api.order.service.OrderService -v 1.0.0
+      8.3 request -metadata [serviceName] -v [version]  -f [path+fileName]请求服务接口的元数据,并保存到指定文件
 
     9. help 命令使用说明[通过  help cmd 可以查看命令使用指南]  
       9.1 help     查看所有指令的用法

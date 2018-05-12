@@ -115,12 +115,11 @@ public class CmdUtils {
                         }
                         break;*/
 
-                    case CmdProperties.KEY_ARGS_METADATA:
+                   /* case CmdProperties.KEY_ARGS_METADATA:
                         if ((i + 2) <= inputArgs.length) {
                             args.put(CmdProperties.KEY_ARGS_METADATA, inputArgs[i + 1] + "#" + inputArgs[i + 2]);
                         }
-                        break;
-                    //default: break;
+                        break;*/
                     default:
                         if ((i + 1) < inputArgs.length && arg.contains("-")) {
                             args.put(arg, inputArgs[i + 1]);
