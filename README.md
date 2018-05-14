@@ -1,12 +1,25 @@
 命令行工具下载 http://pms.today36524.com.cn:8083/basic-services/dapeng-cli
 
-使用方式:
-> cd dist  
-> java -jar cli.jar
+1.普通使用方式:  
+    > cd dist  
+    > java -jar cli.jar
 
-支持脚本方式调用;eg:  java -jar cli.jar service -list  
+2.脚本调用方式:  
+    2.1 单指令脚本调用:  
+        > cd dist  
+        > java -jar cli.jar service -list  
+ 
+   2.2 指令集(指令用'|'隔开)脚本调用:  
+        > cd dist  
+        > java -jar cli.jar service -list | set -zkhost 10.10.10.45:2181
+        
+   2.3 文件指令集(文件中一条指令占一行，如文件 cmd_list.json)脚本调用:  
+        > cd dist  
+        > java -jar cli.jar cmd_list.json
+       
+   2.4 指定环境变量[soa.zookeeper.host]启动:   
+        > java -Dsoa.zookeeper.host=10.10.10.45:2181 -jar cli.jar service -list   
 
-初始化zk启动 java -Dsoa.zookeeper.host=10.10.10.45:2181 -jar cli.jar service -list
 V2命令使用说明:    
     
     1. zk 命令使用说明[zookeeper   节点相关的操作]  

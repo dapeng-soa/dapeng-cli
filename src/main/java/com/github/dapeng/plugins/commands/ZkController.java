@@ -1,5 +1,6 @@
 package com.github.dapeng.plugins.commands;
 
+import com.github.dapeng.utils.CmdUtils;
 import jline.console.ConsoleReader;
 import jline.console.completer.FileNameCompleter;
 import jline.console.completer.NullCompleter;
@@ -21,13 +22,13 @@ public class ZkController implements InputController {
     private static String CLASSES_DIR_NAME = "classes";
     private static Class COMMAND_TYPE = Command.class;
     private Map<String, Command> commands;
-    private String respondsToRegEx = "(zk)\\b(.*)";
     //private String respondsToRegEx = "\\b(.*)";
     private Pattern respondsTo;
-    private boolean enable = true;
+    private boolean enable = false;
 
     public ZkController() {
-        this.respondsTo = Pattern.compile(this.respondsToRegEx);
+        String respondsToRegEx = "(.*)\\b(.*)";
+        this.respondsTo = Pattern.compile(respondsToRegEx);
     }
 
     public Pattern respondsTo() {
@@ -36,7 +37,7 @@ public class ZkController implements InputController {
 
     @Override
     public void setInputPattern(Pattern pattern) {
-
+        this.respondsTo = pattern;
     }
 
     @Override
@@ -78,32 +79,37 @@ public class ZkController implements InputController {
     @Override
     public boolean handle(Context ctx) {
         boolean handled = false;
-        /*String cmdLine = (String) ctx.getValue("key.commandlineInput");
-           logger.info("[handle] ==>step into handle... cmdLine=[{}],this.respondsTo=[{}]",cmdLine, this.respondsTo);
+        String cmdLine = (String) ctx.getValue(Context.KEY_COMMAND_LINE_INPUT);
+        logger.info("[handle] ==>step into handle... cmdLine=[{}],this.respondsTo=[{}]", cmdLine, this.respondsTo);
         logger.info("[handle] ==>respondsTo.matcher(cmdLine).matches()=[{}]", respondsTo.matcher(cmdLine).matches());
+
+        // handle command line entry.  NOTE: value can be null
         if (cmdLine != null && !cmdLine.trim().isEmpty() && this.respondsTo.matcher(cmdLine).matches()) {
             String[] tokens = cmdLine.trim().split("\\s+");
-            logger.info("[handle] ==> commands=[{}],tokens = [{}]",commands,tokens);
+            logger.info("[handle] ==> commands=[{}],tokens = [{}]", commands, tokens);
             if (this.commands != null && !this.commands.isEmpty()) {
-                Command cmd = (Command) this.commands.get(tokens[0]);
+                Command cmd = this.commands.get(tokens[0]);
                 if (cmd != null) {
                     if (tokens.length > 1) {
-                        String[] args = (String[]) Arrays.copyOfRange(tokens, 1, tokens.length);
-                        ctx.putValue("key.commandParams", args);
+                        String[] args = Arrays.copyOfRange(tokens, 1, tokens.length);
+                        ctx.putValue(Context.KEY_COMMAND_LINE_ARGS, args);
                     }
 
                     try {
+                        logger.info("[handle] ==>Command[{}] execute", cmd);
                         cmd.execute(ctx);
                     } catch (Exception var7) {
-                        ctx.getIoConsole().printf("WARNING: unable to execute command: [%s]%n%s%n", new Object[]{cmdLine, var7.getMessage()});
+                        //ctx.getIoConsole().printf("WARNING: unable to execute command: [%s]%n%s%n", cmdLine, var7.getMessage());
+                        CmdUtils.writeFormatMsg(ctx,"WARNING: unable to execute command: [%s]%n%s%n", cmdLine, var7.getMessage());
                     }
                 } else {
-                    ctx.getIoConsole().printf("%nCommand [%s] is unknown. Type help for a list of installed commands.", new Object[]{tokens[0]});
+                    logger.info("%nCommand [%s] is unknown. Type help for a list of installed commands.", tokens[0]);
+                    //ctx.getIoConsole().printf("%nCommand [%s] is unknown. Type help for a list of installed commands.", tokens[0]);
+                    CmdUtils.writeFormatMsg(ctx,"%nCommand [%s] is unknown. Type help for a list of installed commands.", tokens[0]);
                 }
-
                 handled = true;
             }
-        }*/
+        }
 
         return handled;
     }
@@ -118,7 +124,7 @@ public class ZkController implements InputController {
         while (commands.hasNext()) {
             Command command = commands.next();
             result.add(command);
-            logger.info(" Dapeng load command:[{}]{}", command.getDescriptor().getName(),command);
+            logger.info(" Dapeng load command:[{}]{}", command.getDescriptor().getName(), command);
         }
         return result;
     }

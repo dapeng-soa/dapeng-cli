@@ -76,7 +76,7 @@ public class JsonCmd implements Command {
                 ServiceUtils.writerFile(context, file_out, jsonRequestSample);
                 //CmdUtils.writeMsg(context, file_out + "is generated . ");
             } else {
-                CmdUtils.writeMsg(context, jsonRequestSample);
+                CmdUtils.writeMsg(context, CmdUtils.getResult(jsonRequestSample));
             }
 
         }
