@@ -113,7 +113,8 @@ public class ZkCmd implements Command {
             if (!CmdUtils.isEmpty(file_out)) {
                 ServiceUtils.writerFile(context, file_out, CmdUtils.getResult(nodeList));
             } else {
-                CmdUtils.writeMsg(context, "the path " + args_nodes + " child nodes is :" + CmdUtils.getResult(nodeList));
+                //CmdUtils.writeMsg(context, "the path " + args_nodes + " child nodes is :" + CmdUtils.getResult(nodeList));
+                CmdUtils.writeMsg(context, "the path " + args_nodes + " child nodes is :" + Configurator.VALUE_LINE_SEP  + CmdUtils.getResult(nodeList));
                 handled = true;
             }
 

@@ -118,7 +118,7 @@ public class ServiceCmd implements Command {
                 ServiceUtils.writerFile(context, file_out, CmdUtils.getResult(instances));
                 handled = true;
             } else {  //print console
-                CmdUtils.writeMsg(context, " get the instances: " + Configurator.VALUE_LINE_SEP + CmdUtils.getResult(instances));
+                CmdUtils.writeMsg(context, "get the instances: " + Configurator.VALUE_LINE_SEP + CmdUtils.getResult(instances));
                 handled = true;
             }
 
