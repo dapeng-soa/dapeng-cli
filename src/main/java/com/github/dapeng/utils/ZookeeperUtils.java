@@ -286,9 +286,10 @@ public class ZookeeperUtils {
     }
 
     public static String getZkHost() {
-        String zkSysProperty = System.getProperty(KEY_SOA_ZOO_KEEPER_HOST);
+        String zkHost = System.getenv(KEY_SOA_ZOO_KEEPER_HOST.replace('.', '_'));
+
         if (zkHost == null) {
-            zkHost = zkSysProperty;
+            zkHost = System.getProperty(KEY_SOA_ZOO_KEEPER_HOST);
         }
         return zkHost == null ? "127.0.0.1:2181" : zkHost;
     }
