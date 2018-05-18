@@ -25,7 +25,9 @@
      1.2  zk -set [path] -d [data]                   设置zk某个节点的数据
      1.3  zk -nodes [path]                           获取zk节点下的子节点列表
      
-###    2. set 命令使用说明[设置系统参数 目前主要支持设置 invocationContext、 zookeeper的zkHost.注意:通过set 指令设置的值， 在当前命令行生命周期有效]  
+###    2. set 命令使用说明[设置系统参数]
+目前主要支持设置 invocationContext以及zookeeper的zkHost.
+注意:通过set 指令设置的值， 在当前命令行生命周期有效]    
      2.1  set                     查看设置的信息
      2.2  set -timeout [value]    设置invocationContext 超时时间
      2.3  set -callermid [value]  设置invocationContext Callermid
