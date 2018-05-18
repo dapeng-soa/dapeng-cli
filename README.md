@@ -13,9 +13,9 @@
         > cd dist  
         > java -jar cli.jar  set -zkhost 10.10.10.45:2181=_=service -list 
         
-   2.3 文件指令集(文件中一条指令占一行，如文件 cmd_list.json)脚本调用:  
+   2.3 文件指令集(文件中一条指令占一行，如文件 cmd_list.txt)脚本调用:  
         > cd dist  
-        > java -jar cli.jar cmd_list.json
+        > java -jar cli.jar cmd_list.txt
        
    2.4 指定环境变量[soa.zookeeper.host]启动:   
         > java -Dsoa.zookeeper.host=10.10.10.45:2181 -jar cli.jar service -list   
