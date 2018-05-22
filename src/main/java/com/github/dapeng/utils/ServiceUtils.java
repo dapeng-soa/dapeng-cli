@@ -224,6 +224,16 @@ public class ServiceUtils {
         return sb.toString();
     }
 
+    public static List<String> readFromeFile2List(String jsonFile) {
+        List<String> lines = null;
+        try {
+            lines = Files.readAllLines(Paths.get(jsonFile), StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return lines;
+    }
+
     public static String post(String service,
                               String version,
                               String method,

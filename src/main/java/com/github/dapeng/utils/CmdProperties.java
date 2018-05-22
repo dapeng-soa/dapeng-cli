@@ -31,6 +31,7 @@ public class CmdProperties {
     public static final String KEY_ARGS_ROUTE = "-route";
     public static final String KEY_ARGS_RUNTIME = "-runtime";
     public static final String KEY_ARGS_CONFIG = "-config";
+    public static final String KEY_ARGS_WHITELIST = "-whitelist";
     public static final String KEY_ARGS_METHOD = "-method";
 
 
@@ -38,6 +39,7 @@ public class CmdProperties {
 
     //zookeeper properties
     public static final String CONFIG_PATH = "/soa/config/services";
+    public static final String WHITELIST_PATH = "/soa/whitelist/services";
     public static final String RUNTIME_PATH = "/soa/runtime/services";
     public static final String ROUTE_PATH = "/soa/config/routes";
 
