@@ -3,7 +3,7 @@
     > java -jar cli.jar
 
 ## 2.脚本调用方式:  
-###    2.1 单指令脚本调用:  
+######    2.1 单指令脚本调用:  
         > cd dist  
         > java -jar cli.jar service -list  
  
@@ -26,8 +26,7 @@
      1.3  zk -nodes [path]                           获取zk节点下的子节点列表
      
 ###    2. set 命令使用说明[设置系统参数]
-目前主要支持设置 invocationContext以及zookeeper的zkHost.
-注意:通过set 指令设置的值， 在当前命令行生命周期有效]    
+####目前主要支持设置 invocationContext以及zookeeper的zkHost.注意:通过set 指令设置的值， 在当前命令行生命周期有效]    
      2.1  set                     查看设置的信息
      2.2  set -timeout [value]    设置invocationContext 超时时间
      2.3  set -callermid [value]  设置invocationContext Callermid
@@ -62,12 +61,17 @@
           6.3.1 service -route -o /tmp/route.json   获取服务实例路由配置 输出到文件
           6.3.1 service -route -f /tmp/route.json   从文件读取路由信息设置到某个service下
           6.3.1 service -route -d "ip match ~127.0.0.1"   路由信息[ip match ~127.0.0.1]设置到某个service下
-      6.4 service -route 获取服务 config配置信息  控制台显示
+      6.4 service -config 获取服务 config配置信息  控制台显示
           6.4.1 service -config -o /tmp/config.json   获取服务config配置信息 输出到文件
           6.4.1 service -config -f /tmp/config.json   从文件读取config配置信息设置到某个service下
           6.4.1 service -config -d "timeout=1000ms;timeout=120"   config配置信息[timeout=1000ms;timeout=120]设置到某个service下
      6.5 service -method 获取服务方法列表 控制台显示
-          6.5.1 service -runtime -o /tmp/service_method.json   获取服务方法列表 输出到文件       
+          6.5.1 service -method -o /tmp/service_method.json   获取服务方法列表 输出到文件       
+          6.5.2 service -method                               获取服务方法列表 输出到控制台
+     6.6 增加服务白名单设置
+           6.6.1 service -whitelist                                          获取白名单服务信息 输出到控制台
+           6.6.3 service -whitelist -f /tmp/whitelist.json                   获取白名单服务信息 输出到文件
+           6.6.2 service -whitelist -d com.today.api.idgen.service.IDservice 设置白名单服务信息
       
 ###    7. method 命令使用说明[获取服务接口的方法列表]  
       7.1 method -s [serviceName]    获取服务接口的方法;eg: method -s com.today.api.order.service.OrderService
