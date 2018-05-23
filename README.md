@@ -56,7 +56,7 @@
       
 ###    6. service 命令使用说明[获取当前运行时实例的服务列表]  
       6.1 service -list    获取当前运行时实例的服务列表;eg: service -list
-          6.1.1 service -list                             获取当前运行时实例的服务列表 控制台显示;eg: service -list
+          6.1.1 service -list                            获取当前运行时实例的服务列表 控制台显示;eg: service -list
           6.1.2 service -list -o /tmp/service_list.txt   获取当前运行时实例的服务列表,输出到文件;eg: service -list  -o /tmp/service_list.txt 
       6.2 service -runtime 获取服务实例列表 控制台显示
           6.2.1 service -runtime -o /tmp/run_time.json   获取服务实例列表 输出到文件
@@ -85,8 +85,8 @@
           -v version       版本号
           -m method        方法名
           -f fileName      请求的json格式文件    
-      8.2 request -metadata [serviceName] -v [version] 请求服务接口的元数据;eg: request -metadata com.today.api.order.service.OrderService -v 1.0.0
-      8.3 request -metadata [serviceName] -v [version]  -f [path+fileName]请求服务接口的元数据,并保存到指定文件
+      8.2 request -metadata [serviceName] -v [version]                     请求服务接口的元数据;eg: request -metadata com.today.api.order.service.OrderService -v 1.0.0
+      8.3 request -metadata [serviceName] -v [version]  -f [path+fileName] 请求服务接口的元数据,并保存到指定文件
 
 ###    9. help 命令使用说明[通过  help cmd 可以查看命令使用指南]  
       9.1 help     查看所有指令的用法
