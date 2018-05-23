@@ -37,12 +37,12 @@
      2.8  set -callerfrom [value] 设置invocationContext callerfrom
      
 ###    3. unset 命令使用说明[撤销 set 指令的赋值]  
-     3.2  unset -timeout [value]    设置invocationContext 超时时间
-     3.3  unset -callermid [value]  设置invocationContext Callermid
-     3.4  unset -calleeip [value]   设置invocationContext calleeip
-     3.5  unset -calleeport [value] 设置invocationContext calleeport
-     3.6  unset -callerip [value]   设置invocationContext callerip
-     3.7  unset -zkhost [value]     设置 zkhost
+     3.2  unset -timeout [value]    撤销invocationContext 超时时间
+     3.3  unset -callermid [value]  撤销invocationContext Callermid
+     3.4  unset -calleeip [value]   撤销invocationContext calleeip
+     3.5  unset -calleeport [value] 撤销invocationContext calleeport
+     3.6  unset -callerip [value]   撤销invocationContext callerip
+     3.7  unset -zkhost [value]     撤销 zkhost
      3.8  unset -callerfrom [value] 设置invocationContext callerfrom
      
 ###    4. metadata 命令使用说明[获取服务接口的元数据]  
