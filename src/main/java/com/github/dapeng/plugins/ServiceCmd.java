@@ -135,14 +135,14 @@ public class ServiceCmd implements Command {
         //************************【获取服务白名单列表 service -whitelist】****************
         if (!CmdUtils.isEmpty(args_whitelist)) {
             String opt_path = WHITELIST_PATH;
-            List<String> instances = ZookeeperUtils.getChildren(opt_path);
+            List<String> whitelist = ZookeeperUtils.getChildren(opt_path);
 
             //-o
             if (!CmdUtils.isEmpty(file_out)) {
-                ServiceUtils.writerFile(context, file_out, CmdUtils.getResult(instances));
+                ServiceUtils.writerFile(context, file_out, CmdUtils.getResult(whitelist));
                 handled = true;
             } else {  //print console
-                CmdUtils.writeMsg(context, "get the instances: " + Configurator.VALUE_LINE_SEP + CmdUtils.getResult(instances));
+                CmdUtils.writeMsg(context, "get the whitelist: " + Configurator.VALUE_LINE_SEP + CmdUtils.getResult(whitelist));
                 handled = true;
             }
 

@@ -231,6 +231,11 @@ public class ZkCompleter implements Completer {
                 result.addAll(finalResult);
                 break;
 
+
+            case KEY_ARGS_WHITELIST:// -whitelist 后面不要属性值
+                result.clear();
+                break;
+
             //其他情况  要过滤runtime 路径，不能随便修改
             default:
                 List<String> optionKeys = new ArrayList<String>();
