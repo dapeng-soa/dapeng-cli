@@ -42,8 +42,6 @@ public class ZkCmd implements Command {
                         .append(" zk -nodes path ")
                         .append(Configurator.VALUE_LINE_SEP)
                         .append(" zk -set path -d data ")
-                        .append(Configurator.VALUE_LINE_SEP)
-                        .append(" zk -route path -d data ")
                         .append(Configurator.VALUE_LINE_SEP);
                 return sb.toString();
             }
