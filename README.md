@@ -3,7 +3,7 @@
     > java -jar cli.jar
 
 ## 2.脚本调用方式:  
-######    2.1 单指令脚本调用:  
+###    2.1 单指令脚本调用:  
         > cd dist  
         > java -jar cli.jar service -list  
  
