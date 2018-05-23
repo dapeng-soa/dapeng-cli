@@ -56,20 +56,22 @@
       
 ###    6. service 命令使用说明[获取当前运行时实例的服务列表]  
       6.1 service -list    获取当前运行时实例的服务列表;eg: service -list
+          6.1.1 service -list                             获取当前运行时实例的服务列表 控制台显示;eg: service -list
+          6.1.2 service -list -o /tmp/service_list.txt   获取当前运行时实例的服务列表,输出到文件;eg: service -list  -o /tmp/service_list.txt 
       6.2 service -runtime 获取服务实例列表 控制台显示
           6.2.1 service -runtime -o /tmp/run_time.json   获取服务实例列表 输出到文件
       6.3 service -route 获取服务实例路由配置 控制台显示
-          6.3.1 service -route -o /tmp/route.json   获取服务实例路由配置 输出到文件
-          6.3.2 service -route -f /tmp/route.json   从文件读取路由信息设置到某个service下
+          6.3.1 service -route -o /tmp/route.json         获取服务实例路由配置 输出到文件
+          6.3.2 service -route -f /tmp/route.json         从文件读取路由信息设置到某个service下
           6.3.3 service -route -d "ip match ~127.0.0.1"   路由信息[ip match ~127.0.0.1]设置到某个service下
       6.4 service -config 获取服务 config配置信息  控制台显示
-          6.4.1 service -config -o /tmp/config.json   获取服务config配置信息 输出到文件
-          6.4.2 service -config -f /tmp/config.json   从文件读取config配置信息设置到某个service下
+          6.4.1 service -config -o /tmp/config.json               获取服务config配置信息 输出到文件
+          6.4.2 service -config -f /tmp/config.json               从文件读取config配置信息设置到某个service下
           6.4.3 service -config -d "timeout=1000ms;timeout=120"   config配置信息[timeout=1000ms;timeout=120]设置到某个service下
      6.5 service -method 获取服务方法列表 控制台显示
           6.5.1 service -method -o /tmp/service_method.json   获取服务方法列表 输出到文件       
           6.5.2 service -method                               获取服务方法列表 输出到控制台
-     6.6 service -whitelist 增加服务白名单设置
+     6.6 service -whitelist 增加服务白名单设置 控制台显示
           6.6.1 service -whitelist                                          获取白名单服务信息 输出到控制台
           6.6.2 service -whitelist -f /tmp/whitelist.json                   获取白名单服务信息 输出到文件
           6.6.3 service -whitelist -d com.today.api.idgen.service.IDservice 设置白名单服务信息
