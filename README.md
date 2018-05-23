@@ -68,7 +68,7 @@
      6.5 service -method 获取服务方法列表 控制台显示
           6.5.1 service -method -o /tmp/service_method.json   获取服务方法列表 输出到文件       
           6.5.2 service -method                               获取服务方法列表 输出到控制台
-     6.6 增加服务白名单设置
+     6.6 service -whitelist 增加服务白名单设置
            6.6.1 service -whitelist                                          获取白名单服务信息 输出到控制台
            6.6.3 service -whitelist -f /tmp/whitelist.json                   获取白名单服务信息 输出到文件
            6.6.2 service -whitelist -d com.today.api.idgen.service.IDservice 设置白名单服务信息
