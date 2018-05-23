@@ -46,6 +46,7 @@ public class ServiceCmd implements Command {
                 sb.append(Configurator.VALUE_LINE_SEP).append(" service   -runtime  ");
                 sb.append(Configurator.VALUE_LINE_SEP).append(" service   -route  ");
                 sb.append(Configurator.VALUE_LINE_SEP).append(" service   -config  ");
+                sb.append(Configurator.VALUE_LINE_SEP).append(" service   -whitelist  ");
                 sb.append(Configurator.VALUE_LINE_SEP).append(" service   -method  ");
                 return sb.toString();
             }
@@ -59,6 +60,7 @@ public class ServiceCmd implements Command {
                 args.put(CmdProperties.KEY_ARGS_RUNTIME, "type '-runtime ' to get runtime instances.");
                 args.put(CmdProperties.KEY_ARGS_ROUTE, "type '-route ' to get runtime service route info.");
                 args.put(CmdProperties.KEY_ARGS_CONFIG, "type '-config ' to get runtime service config info.");
+                args.put(CmdProperties.KEY_ARGS_WHITELIST, "type '-whitelist ' to get gateway service whitelist list.");
                 args.put(CmdProperties.KEY_ARGS_METHOD, "type '-method ' to get runtime service mthods.");
 
                 args.put(CmdProperties.KEY_ARGS_FILE_READ, "type '-f ' to read data from file.");
@@ -85,6 +87,7 @@ public class ServiceCmd implements Command {
         String args_runtime = inputArgs.get(CmdProperties.KEY_ARGS_RUNTIME);
         String args_route = inputArgs.get(CmdProperties.KEY_ARGS_ROUTE);
         String args_config = inputArgs.get(CmdProperties.KEY_ARGS_CONFIG);
+        String args_whitelist = inputArgs.get(CmdProperties.KEY_ARGS_WHITELIST);
         String args_method = inputArgs.get(CmdProperties.KEY_ARGS_METHOD);
 
         String args_data = inputArgs.get(CmdProperties.KEY_ARGS_DATA);
@@ -127,6 +130,43 @@ public class ServiceCmd implements Command {
                 handled = true;
             }
         }
+
+
+        //************************【获取服务白名单列表 service -whitelist】****************
+        if (!CmdUtils.isEmpty(args_whitelist)) {
+            String opt_path = WHITELIST_PATH;
+            List<String> instances = ZookeeperUtils.getChildren(opt_path);
+
+            //-o
+            if (!CmdUtils.isEmpty(file_out)) {
+                ServiceUtils.writerFile(context, file_out, CmdUtils.getResult(instances));
+                handled = true;
+            } else {  //print console
+                CmdUtils.writeMsg(context, "get the instances: " + Configurator.VALUE_LINE_SEP + CmdUtils.getResult(instances));
+                handled = true;
+            }
+
+            if (!CmdUtils.isEmpty(args_data) || !CmdUtils.isEmpty(file_read)) {
+                CmdUtils.writeMsg(context, "Setting up service whitelist on [" + opt_path + "]");
+                String setNode = null;
+                List<String> setNodes = null;
+                if (!CmdUtils.isEmpty(file_read)) setNodes = ServiceUtils.readFromeFile2List(file_read);
+                if (!CmdUtils.isEmpty(args_data)) setNode = args_data;
+
+                if (null != setNodes){
+                    setNodes.forEach(node -> {
+                        ZookeeperUtils.createPath(WHITELIST_PATH + "/" + node, false);
+                    });
+                }else if (null != setNode){
+                    ZookeeperUtils.createPath(WHITELIST_PATH + "/" + setNode,false);
+                }
+
+                CmdUtils.writeMsg(context, "Setting service whitelist successful");
+
+                handled = true;
+            }
+        }
+
 
         //************************【获取服务列表 service -route | -config】****************
         if (!CmdUtils.isEmpty(args_route) || !CmdUtils.isEmpty(args_config)) {
