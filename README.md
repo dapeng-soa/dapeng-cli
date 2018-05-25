@@ -87,6 +87,8 @@
           -f fileName      请求的json格式文件    
       8.2 request -metadata [serviceName] -v [version]                     请求服务接口的元数据;eg: request -metadata com.today.api.order.service.OrderService -v 1.0.0
       8.3 request -metadata [serviceName] -v [version]  -f [path+fileName] 请求服务接口的元数据,并保存到指定文件
+      8.4 request -echo [serviceName] -v [version]                         请求服务接口echo检查;eg: request -echo com.today.api.order.service.OrderService -v 1.0.0
+      8.5 request -echo [serviceName] -v [version]  -f [path+fileName]     请求服务接口echo检查,并保存到指定文件
 
 ###    9. help 命令使用说明[通过  help cmd 可以查看命令使用指南]  
       9.1 help     查看所有指令的用法
