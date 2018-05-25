@@ -16,7 +16,7 @@
         <scala.version>2.12.2</scala.version>
         <clamshellcli.groupId>org.clamshellcli</clamshellcli.groupId>
         <clamshellcli.version>0.5.2</clamshellcli.version>
-        <dapeng.version>2.0.2-SNAPSHOT</dapeng.version>
+        <dapeng.version>2.0.3-SNAPSHOT</dapeng.version>
         <jcommander.version>1.17</jcommander.version>
     </properties>
 

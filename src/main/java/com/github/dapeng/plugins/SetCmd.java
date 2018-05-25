@@ -6,6 +6,7 @@ import com.beust.jcommander.ParameterDescription;
 import com.beust.jcommander.internal.Lists;
 import com.github.dapeng.core.InvocationContext;
 import com.github.dapeng.core.InvocationContextImpl;
+import com.github.dapeng.core.helper.IPUtils;
 import com.github.dapeng.utils.CmdEnumUtils;
 import com.github.dapeng.utils.CmdUtils;
 import com.github.dapeng.utils.ZookeeperUtils;
@@ -135,7 +136,8 @@ public class SetCmd implements Command {
             }
             switch (CmdEnumUtils.ArgsKey.getArgEnum(k)) {
                 case SET_CALLEE_IP:
-                    invocationContext.calleeIp(cmdParams.get(k));
+                    //nvocationContext.calleeIp(cmdParams.get(k));
+                    invocationContext.calleeIp(IPUtils.transferIp(cmdParams.get(k)));
                     break;
                 case SET_CALLEE_PORT:
                     invocationContext.calleePort(Integer.parseInt(cmdParams.get(k)));
@@ -161,7 +163,7 @@ public class SetCmd implements Command {
                         CmdUtils.writeMsg(context, "set zkHost and waiting for reset Zkconnection " + zkHost);
                         ZookeeperUtils.setZkHost(cmdParams.get(k));
                         /*ServiceUtils.destroyZk();*/
-                       /* ServiceUtils.iniContext();*/
+                        /* ServiceUtils.iniContext();*/
                     }
                     break;
             }

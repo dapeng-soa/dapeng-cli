@@ -4,6 +4,7 @@ public class CmdProperties {
 
     //cmd properties
     public static final String KEY_ARGS_METADATA = "-metadata";
+    public static final String KEY_ARGS_ECHO = "-echo";
     //public static final String KEY_ARGS_CONFIG = "-c";
 
     //public static final String KEY_ARGS_PATH = "-dir";

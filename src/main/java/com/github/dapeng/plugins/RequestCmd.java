@@ -1,5 +1,6 @@
 package com.github.dapeng.plugins;
 
+import com.github.dapeng.echo.EchoClient;
 import com.github.dapeng.metadata.MetadataClient;
 import com.github.dapeng.utils.CmdProperties;
 import com.github.dapeng.utils.CmdUtils;
@@ -43,6 +44,8 @@ public class RequestCmd implements Command {
                         .append(" request -s com.today.AdminService -v 1.0.0 -m method -f /tmp/com.today.AdminService.xml ")
                         .append(Configurator.VALUE_LINE_SEP)
                         .append(" request -metadata serviceName -v 1.0.0")
+                        .append(Configurator.VALUE_LINE_SEP)
+                        .append(" request -echo serviceName -v 1.0.0")
                         .append(Configurator.VALUE_LINE_SEP);
                 return sb.toString();
             }
@@ -58,6 +61,7 @@ public class RequestCmd implements Command {
                 args.put(CmdProperties.KEY_ARGS_FILE_READ, "type '-f file(path + fileName)' to get request json content from file.");
                 args.put(CmdProperties.KEY_ARGS_FILE_OUT, "type '-o file(path + fileName)' to save data to file.");
                 args.put(CmdProperties.KEY_ARGS_METADATA, "type '-metadata serviceName' to get metadata json content.");
+                args.put(CmdProperties.KEY_ARGS_ECHO, "type '-echo serviceName' to get echo content.");
                 return args;
             }
         };
@@ -75,6 +79,7 @@ public class RequestCmd implements Command {
         String version = inputArgs.get(CmdProperties.KEY_ARGS_VERSION);
         String method = inputArgs.get(CmdProperties.KEY_ARGS_SERVICE_METHOD);
         String metadataData = inputArgs.get(CmdProperties.KEY_ARGS_METADATA);
+        String echo = inputArgs.get(CmdProperties.KEY_ARGS_ECHO);
 
         if (serviceName != null && version != null && method != null && file_read != null) {
 
@@ -86,7 +91,7 @@ public class RequestCmd implements Command {
 
             String result = ServiceUtils.post(serviceName, version, method, jsonParams);
             CmdUtils.writeMsg(context, result);
-            handled =  true;
+            handled = true;
         }
 
         if (!CmdUtils.isEmpty(metadataData) && !CmdUtils.isEmpty(version)) {
@@ -107,7 +112,25 @@ public class RequestCmd implements Command {
             handled = true;
         }
 
-        CmdUtils.handledStatus(context,handled,this.getDescriptor().getUsage());
+        if (!CmdUtils.isEmpty(echo) && !CmdUtils.isEmpty(version)) {
+            logger.info("[execute] ==>echo={},version=[{}]", echo, version);
+            try {
+                String jsonResponse = new EchoClient(echo, version).echo();
+                if (!CmdUtils.isEmpty(file_out)) {
+                    ServiceUtils.writerFile(context, file_out, jsonResponse);
+                    //CmdUtils.writeMsg(context, "The metadata has been saved "+file_out + "is generated . ");
+                } else {
+                    CmdUtils.writeMsg(context, jsonResponse);
+                }
+
+            } catch (Exception e) {
+                //e.printStackTrace();
+                CmdUtils.writeMsg(context, "request -echo error..[ex:" + e.getMessage() + "]");
+            }
+            handled = true;
+        }
+
+        CmdUtils.handledStatus(context, handled, this.getDescriptor().getUsage());
         return null;
     }
 

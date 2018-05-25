@@ -44,7 +44,7 @@
      3.5  unset -calleeport [value] 撤销invocationContext calleeport
      3.6  unset -callerip [value]   撤销invocationContext callerip
      3.7  unset -zkhost [value]     撤销 zkhost
-     3.8  unset -callerfrom [value] 设置invocationContext callerfrom
+     3.8  unset -callerfrom [value] 撤销invocationContext callerfrom
      
 ###    4. metadata 命令使用说明[获取服务接口的元数据]  
       4.1 metadata -s [serviceName] -v [version]                     获取服务接口的元数据信息(结果直接打印在控制台)
