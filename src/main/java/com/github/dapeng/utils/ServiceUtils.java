@@ -216,7 +216,7 @@ public class ServiceUtils {
         try {
             List<String> lines = Files.readAllLines(Paths.get(jsonFile), StandardCharsets.UTF_8);
             for (String line : lines) {
-                sb.append(line);
+                sb.append(line).append(System.getProperty("line.separator"));
             }
         } catch (IOException e) {
             e.printStackTrace();
