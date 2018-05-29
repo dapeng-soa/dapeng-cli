@@ -35,7 +35,7 @@ public class MetadataCmd implements Command {
                 sb.append(Configurator.VALUE_LINE_SEP)
                         .append(" metadata -s com.today.AdminService -v 1.0.0  ")
                         .append(Configurator.VALUE_LINE_SEP)
-                        .append(" metadata -s com.today.AdminService -v 1.0.0 -f /tmp/com.today.AdminService.xml ")
+                        .append(" metadata -s com.today.AdminService -v 1.0.0 -o /tmp/com.today.AdminService.xml ")
                         .append(Configurator.VALUE_LINE_SEP);
 //                        .append("metadata [options]").append(Configurator.VALUE_LINE_SEP);
 //
