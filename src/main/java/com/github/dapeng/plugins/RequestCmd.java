@@ -90,7 +90,14 @@ public class RequestCmd implements Command {
             String jsonParams = ServiceUtils.readFromeFile(file_read);
 
             String result = ServiceUtils.post(serviceName, version, method, jsonParams);
-            CmdUtils.writeMsg(context, result);
+            if (!CmdUtils.isEmpty(file_out)) {
+                ServiceUtils.writerFile(context, file_out, result);
+                //CmdUtils.writeMsg(context, "The metadata has been saved "+file_out + "is generated . ");
+            } else {
+                CmdUtils.writeMsg(context, result);
+            }
+
+            //CmdUtils.writeMsg(context, result);
             handled = true;
         }
 
