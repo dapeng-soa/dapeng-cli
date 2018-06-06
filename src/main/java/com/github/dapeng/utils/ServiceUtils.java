@@ -284,6 +284,8 @@ public class ServiceUtils {
 
         //fillInvocationCtx(invocationCtx, req);
 
+        InvocationContextImpl.Factory.currentInstance(invocationCtx);
+
         JsonPost jsonPost = new JsonPost(service, version, method, true);
 
         try {
