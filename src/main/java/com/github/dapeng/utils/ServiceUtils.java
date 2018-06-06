@@ -8,6 +8,7 @@ import com.github.dapeng.core.enums.CodecProtocol;
 import com.github.dapeng.core.metadata.*;
 import com.github.dapeng.metadata.MetadataClient;
 import com.github.dapeng.openapi.cache.ServiceCache;
+import com.github.dapeng.plugins.SetCmd;
 import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
@@ -54,15 +55,15 @@ public class ServiceUtils {
             fw.write(content);
             fw.flush();
         } catch (Exception e) {
-            CmdUtils.writeMsg(context, " Failed to written file[" + fileName + "] cause:"+e.getMessage() );
+            CmdUtils.writeMsg(context, " Failed to written file[" + fileName + "] cause:" + e.getMessage());
         } finally {
             try {
                 fw.close();
             } catch (Exception e) {
-                CmdUtils.writeMsg(context, " Failed to close file[" + fileName + "] cause:"+e.getMessage() );
+                CmdUtils.writeMsg(context, " Failed to close file[" + fileName + "] cause:" + e.getMessage());
             }
         }
-        CmdUtils.writeMsg(context, "the data has been saved to file["+fileName+"] succeed");
+        CmdUtils.writeMsg(context, "the data has been saved to file[" + fileName + "] succeed");
     }
 
     public static String getJsonRequestSample(String serviceName, String version, String methodName) {
@@ -239,19 +240,34 @@ public class ServiceUtils {
                               String method,
                               String parameter) {
 
-        InvocationContextImpl invocationCtx = (InvocationContextImpl) InvocationContextImpl.Factory.currentInstance();
+        InvocationContextImpl invocationCtx = (InvocationContextImpl) SetCmd.invocationContext;
         invocationCtx.serviceName(service);
         invocationCtx.versionName(version);
         invocationCtx.methodName(method);
         invocationCtx.callerMid("CmdCaller");
 
-        logger.info("inCtx info: {}",invocationCtx.toString());
+        logger.info("inCtx info: {}", invocationCtx.toString());
         if (!invocationCtx.timeout().isPresent()) {
             //设置请求超时时间,从环境变量获取，默认 10s ,即 10000
             Integer timeOut = Integer.valueOf(getEnvTimeOut());
             invocationCtx.timeout(timeOut);
         }
 
+        logger.info("invocationCtx::" + invocationCtx);
+        StringBuilder info = new StringBuilder(128);
+        info.append("the setting info is:").append("\n");
+        info.append("-- the Timeout: ").append(invocationCtx.timeout().orElse(null)).append("\n");
+        info.append("-- the CalleeIp: ").append(invocationCtx.calleeIp().orElse(null)).append("\n");
+        info.append("-- the CalleePort: ").append(invocationCtx.calleePort().orElse(null)).append("\n");
+        info.append("-- the CallerMid: ").append(invocationCtx.callerMid().orElse(null)).append("\n");
+           /*  info.append("-- the CallerFrom: ").append(invocationContext.callerFrom().orElse(null)).append("\n");
+            info.append("-- the CallerIp: ").append(invocationContext.callerIp().orElse(null)).append("\n");*/
+        info.append("-- the zkHost: ").append(ZookeeperUtils.getZkHost()).append("\n");
+        info.append("-- the cookie: ").append(invocationCtx.cookies()).append("\n");
+
+        logger.info("[post] ==>----------------------------------------");
+        logger.info(info.toString());
+        logger.info("[post] ==>----------------------------------------");
 
         invocationCtx.codecProtocol(CodecProtocol.CompressedBinary);
 

@@ -15,6 +15,7 @@ import static com.github.dapeng.utils.CmdProperties.*;
 
 public class ZkCompleter implements Completer {
     private static final Logger logger = LoggerFactory.getLogger(ZkController.class);
+
     StringsCompleter cmdNamesCompleter;
     Map<String, List<String>> cmdHints;
 
@@ -27,7 +28,7 @@ public class ZkCompleter implements Completer {
         String cmd = input != null ? input.substring(0, cursor) : "";
         String secondCmd = null;
 
-
+        logger.debug("**************************");
         logger.info("ZkCompleter.complete ==>input = [{}],cmd=[{}]", input, cmd);
         // display all avail cmds
         if (cmd.isEmpty() && cmdHints != null) {

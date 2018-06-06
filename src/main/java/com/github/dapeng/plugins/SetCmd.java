@@ -33,7 +33,7 @@ public class SetCmd implements Command {
     private static final String NAMESPACE = "dapeng";
     private static final String CMD_NAME = "set";
     private CmdDescriptor cmdDescriptor;
-    private static final InvocationContext invocationContext = InvocationContextImpl.Factory.currentInstance();
+    public static final InvocationContext invocationContext = InvocationContextImpl.Factory.currentInstance();
 
 
     //参数设置

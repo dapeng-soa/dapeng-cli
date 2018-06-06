@@ -79,7 +79,7 @@
     <appender name="INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!-- 过滤器，只记录INFO级别的日志 -->
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
-            <level>INFO</level>
+            <level>DEBUG</level>
             <onMatch>ACCEPT</onMatch>
             <onMismatch>DENY</onMismatch>
         </filter>
@@ -136,20 +136,22 @@
     </appender>
 
 
-     <!--<logger name="log4j.logger.com.springframework" value="DEBUG"/>
-     <logger name="java.sql.PreparedStatement" value="DEBUG"/>-->
+    <!--<logger name="log4j.logger.com.springframework" value="DEBUG"/>
+    <logger name="java.sql.PreparedStatement" value="DEBUG"/>-->
 
 
     <!-- root级别   DEBUG -->
     <root level="DEBUG">
         <!-- 控制台输出 -->
-      <!--  <appender-ref ref="STDOUT"/>-->
+        <appender-ref ref="STDOUT"/>
         <!-- 文件输出 -->
         <appender-ref ref="ERROR"/>
         <appender-ref ref="INFO"/>
-<!--        <appender-ref ref="WARN"/>
         <appender-ref ref="DEBUG"/>
-        <appender-ref ref="TRACE"/>-->
+        <appender-ref ref="WARN"/>
+        <!--        <appender-ref ref="WARN"/>
+                <appender-ref ref="DEBUG"/>
+                <appender-ref ref="TRACE"/>-->
     </root>
 
 
