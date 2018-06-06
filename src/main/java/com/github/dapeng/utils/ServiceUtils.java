@@ -244,6 +244,8 @@ public class ServiceUtils {
         invocationCtx.versionName(version);
         invocationCtx.methodName(method);
         invocationCtx.callerMid("CmdCaller");
+
+        logger.info("inCtx info: {}",invocationCtx.toString());
         if (!invocationCtx.timeout().isPresent()) {
             //设置请求超时时间,从环境变量获取，默认 10s ,即 10000
             Integer timeOut = Integer.valueOf(getEnvTimeOut());
