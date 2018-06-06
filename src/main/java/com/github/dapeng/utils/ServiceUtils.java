@@ -54,15 +54,15 @@ public class ServiceUtils {
             fw.write(content);
             fw.flush();
         } catch (Exception e) {
-            CmdUtils.writeMsg(context, " Failed to written file[" + fileName + "] cause:"+e.getMessage() );
+            CmdUtils.writeMsg(context, " Failed to written file[" + fileName + "] cause:" + e.getMessage());
         } finally {
             try {
                 fw.close();
             } catch (Exception e) {
-                CmdUtils.writeMsg(context, " Failed to close file[" + fileName + "] cause:"+e.getMessage() );
+                CmdUtils.writeMsg(context, " Failed to close file[" + fileName + "] cause:" + e.getMessage());
             }
         }
-        CmdUtils.writeMsg(context, "the data has been saved to file["+fileName+"] succeed");
+        CmdUtils.writeMsg(context, "the data has been saved to file[" + fileName + "] succeed");
     }
 
     public static String getJsonRequestSample(String serviceName, String version, String methodName) {
@@ -237,15 +237,18 @@ public class ServiceUtils {
     public static String post(String service,
                               String version,
                               String method,
-                              String parameter) {
+                              String parameter,
+                              String cookie) {
 
         InvocationContextImpl invocationCtx = (InvocationContextImpl) InvocationContextImpl.Factory.currentInstance();
         invocationCtx.serviceName(service);
         invocationCtx.versionName(version);
         invocationCtx.methodName(method);
         invocationCtx.callerMid("CmdCaller");
+        String[] args = cookie.split(":");
+        invocationCtx.setCookie(args[0], args[1]);
 
-        logger.info("inCtx info: {}",invocationCtx.toString());
+        logger.info("inCtx info: {}", invocationCtx.toString());
         if (!invocationCtx.timeout().isPresent()) {
             //设置请求超时时间,从环境变量获取，默认 10s ,即 10000
             Integer timeOut = Integer.valueOf(getEnvTimeOut());
