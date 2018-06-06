@@ -238,16 +238,13 @@ public class ServiceUtils {
     public static String post(String service,
                               String version,
                               String method,
-                              String parameter,
-                              String cookie) {
+                              String parameter) {
 
         InvocationContextImpl invocationCtx = (InvocationContextImpl) SetCmd.invocationContext;
         invocationCtx.serviceName(service);
         invocationCtx.versionName(version);
         invocationCtx.methodName(method);
         invocationCtx.callerMid("CmdCaller");
-        String[] args = cookie.split(":");
-        invocationCtx.setCookie(args[0], args[1]);
 
         logger.info("inCtx info: {}", invocationCtx.toString());
         if (!invocationCtx.timeout().isPresent()) {

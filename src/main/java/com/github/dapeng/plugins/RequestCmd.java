@@ -81,8 +81,6 @@ public class RequestCmd implements Command {
         String metadataData = inputArgs.get(CmdProperties.KEY_ARGS_METADATA);
         String echo = inputArgs.get(CmdProperties.KEY_ARGS_ECHO);
 
-        String cookie = inputArgs.get("-cookie");
-
         if (serviceName != null && version != null && method != null && file_read != null) {
 
             if (!ZookeeperUtils.isContextInitialized()) {
@@ -91,7 +89,7 @@ public class RequestCmd implements Command {
 
             String jsonParams = ServiceUtils.readFromeFile(file_read);
 
-            String result = ServiceUtils.post(serviceName, version, method, jsonParams,cookie);
+            String result = ServiceUtils.post(serviceName, version, method, jsonParams);
             if (!CmdUtils.isEmpty(file_out)) {
                 ServiceUtils.writerFile(context, file_out, result);
                 //CmdUtils.writeMsg(context, "The metadata has been saved "+file_out + "is generated . ");
