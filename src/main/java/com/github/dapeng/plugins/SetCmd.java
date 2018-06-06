@@ -128,7 +128,7 @@ public class SetCmd implements Command {
            /*  info.append("-- the CallerFrom: ").append(invocationContext.callerFrom().orElse(null)).append("\n");
             info.append("-- the CallerIp: ").append(invocationContext.callerIp().orElse(null)).append("\n");*/
             info.append("-- the zkHost: ").append(ZookeeperUtils.getZkHost()).append("\n");
-            //info.append("-- the cookie: ").append(invocationContext.cookie()).append("\n");
+            info.append("-- the cookie: ").append(invocationContext.cookies()).append("\n");
             CmdUtils.writeMsg(context, info.toString());
             return null;
         }
@@ -159,7 +159,8 @@ public class SetCmd implements Command {
                     invocationContext.timeout(Integer.valueOf(cmdParams.get(k)));
                     break;
                 case SET_COOKIE:
-                    invocationContext.cookie(cmdParams.get(k));
+                    String args[] = cmdParams.get(k).split(":");
+                    invocationContext.setCookie(args[0], args[1]);
                     break;
                 case SET_ZKHOST:
                     String zkHost = cmdParams.get(k);
