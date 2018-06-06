@@ -9,7 +9,7 @@ public class ServiceInvokeTest {
     public static void main(String[] args) throws Exception {
 
 
-        MetadataClient client = new MetadataClient("com.isuwang.soa.user.service.UserService","1.0.0");
+        MetadataClient client = new MetadataClient("com.isuwang.soa.user.service.UserService", "1.0.0");
         String data = client.getServiceMetadata();
 
 //        FileWriter fw = null;
@@ -33,8 +33,8 @@ public class ServiceInvokeTest {
         System.out.println(" param: ");
         System.out.println(params);
 
-        ServiceUtils.post("com.isuwang.soa.user.service.UserService", "1.0.0", "createUser", params);
+        //ServiceUtils.post("com.isuwang.soa.user.service.UserService", "1.0.0", "createUser", params);
 
-       // System.out.println(data);
+        // System.out.println(data);
     }
 }
