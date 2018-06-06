@@ -25,7 +25,8 @@ public class CmdEnumUtils {
         SET_CALLER_IP("-callerip", "CallerIp"),
         SET_CALLER_FROM("-callerfrom", "CallerFrom"),
         SET_TIMEOUT("-timeout", "TimeOut"),
-        SET_ZKHOST("-zkhost", "ZkHost");
+        SET_ZKHOST("-zkhost", "ZkHost"),
+        SET_COOKIE("-cookie", "cookie");
 
 
 

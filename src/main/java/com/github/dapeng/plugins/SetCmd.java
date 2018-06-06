@@ -55,6 +55,8 @@ public class SetCmd implements Command {
         public boolean timeout = false;
         @Parameter(names = {"-zkhost"}, required = false, description = "set the ZkHost . Usage -zkhost.")
         public boolean zkhost = false;
+        @Parameter(names = {"-cookie"}, required = false, description = "set the cookie . Usage -cookie.")
+        public boolean cookie = false;
     }
 
 
@@ -126,6 +128,7 @@ public class SetCmd implements Command {
            /*  info.append("-- the CallerFrom: ").append(invocationContext.callerFrom().orElse(null)).append("\n");
             info.append("-- the CallerIp: ").append(invocationContext.callerIp().orElse(null)).append("\n");*/
             info.append("-- the zkHost: ").append(ZookeeperUtils.getZkHost()).append("\n");
+            //info.append("-- the cookie: ").append(invocationContext.cookie()).append("\n");
             CmdUtils.writeMsg(context, info.toString());
             return null;
         }
@@ -154,6 +157,9 @@ public class SetCmd implements Command {
 
                 case SET_TIMEOUT:
                     invocationContext.timeout(Integer.valueOf(cmdParams.get(k)));
+                    break;
+                case SET_COOKIE:
+                    invocationContext.cookie(cmdParams.get(k));
                     break;
                 case SET_ZKHOST:
                     String zkHost = cmdParams.get(k);
