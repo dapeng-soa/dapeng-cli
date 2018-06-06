@@ -160,6 +160,7 @@ public class SetCmd implements Command {
                     break;
                 case SET_COOKIE:
                     String args[] = cmdParams.get(k).split(":");
+                    logger.info("args[]: {}", args.toString());
                     invocationContext.setCookie(args[0], args[1]);
                     break;
                 case SET_ZKHOST:
