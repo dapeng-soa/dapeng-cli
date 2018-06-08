@@ -252,39 +252,20 @@ public class ServiceUtils {
             Integer timeOut = Integer.valueOf(getEnvTimeOut());
             invocationCtx.timeout(timeOut);
         }
-
-        logger.info("invocationCtx::" + invocationCtx);
-        StringBuilder info = new StringBuilder(128);
-        info.append("the setting info is:").append("\n");
-        info.append("-- the Timeout: ").append(invocationCtx.timeout().orElse(null)).append("\n");
-        info.append("-- the CalleeIp: ").append(invocationCtx.calleeIp().orElse(null)).append("\n");
-        info.append("-- the CalleePort: ").append(invocationCtx.calleePort().orElse(null)).append("\n");
-        info.append("-- the CallerMid: ").append(invocationCtx.callerMid().orElse(null)).append("\n");
-           /*  info.append("-- the CallerFrom: ").append(invocationContext.callerFrom().orElse(null)).append("\n");
-            info.append("-- the CallerIp: ").append(invocationContext.callerIp().orElse(null)).append("\n");*/
-        info.append("-- the zkHost: ").append(ZookeeperUtils.getZkHost()).append("\n");
-        info.append("-- the cookie: ").append(invocationCtx.cookies()).append("\n");
-
-        logger.info("[post] ==>----------------------------------------");
-        logger.info(info.toString());
-        logger.info("[post] ==>----------------------------------------");
-
         invocationCtx.codecProtocol(CodecProtocol.CompressedBinary);
-
         Service bizService = ServiceCache.getService(service, version);
-
         if (bizService == null) {
             System.out.println("bizService not found[service:" + service + ", version:" + version + "]");
             return String.format("{\"" +
                     "\":\"%s\", \"responseMsg\":\"%s\", \"success\":\"%s\", \"status\":0}", SoaCode.NotMatchedService.getCode(), SoaCode.NotMatchedService.getMsg(), "{}");
         }
 
+        logger.info("the current invocationContext Info : {}", invocationCtx.toString());
+
         //fillInvocationCtx(invocationCtx, req);
-
+        //set invocationCtx to threadLocal
         InvocationContextImpl.Factory.currentInstance(invocationCtx);
-
         JsonPost jsonPost = new JsonPost(service, version, method, true);
-
         try {
             return jsonPost.callServiceMethod(parameter, bizService);
         } catch (SoaException e) {

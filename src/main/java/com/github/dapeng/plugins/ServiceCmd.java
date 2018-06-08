@@ -89,7 +89,6 @@ public class ServiceCmd implements Command {
         String args_config = inputArgs.get(CmdProperties.KEY_ARGS_CONFIG);
         String args_whitelist = inputArgs.get(CmdProperties.KEY_ARGS_WHITELIST);
         String args_method = inputArgs.get(CmdProperties.KEY_ARGS_METHOD);
-
         String args_data = inputArgs.get(CmdProperties.KEY_ARGS_DATA);
         String file_out = inputArgs.get(CmdProperties.KEY_ARGS_FILE_OUT);
         String file_read = inputArgs.get(CmdProperties.KEY_ARGS_FILE_READ);
@@ -153,12 +152,12 @@ public class ServiceCmd implements Command {
                 if (!CmdUtils.isEmpty(file_read)) setNodes = ServiceUtils.readFromeFile2List(file_read);
                 if (!CmdUtils.isEmpty(args_data)) setNode = args_data;
 
-                if (null != setNodes){
+                if (null != setNodes) {
                     setNodes.forEach(node -> {
                         ZookeeperUtils.createPath(WHITELIST_PATH + "/" + node, false);
                     });
-                }else if (null != setNode){
-                    ZookeeperUtils.createPath(WHITELIST_PATH + "/" + setNode,false);
+                } else if (null != setNode) {
+                    ZookeeperUtils.createPath(WHITELIST_PATH + "/" + setNode, false);
                 }
 
                 CmdUtils.writeMsg(context, "Setting service whitelist successful");
@@ -187,7 +186,12 @@ public class ServiceCmd implements Command {
                 if (!CmdUtils.isEmpty(file_read)) setData = ServiceUtils.readFromeFile(file_read);
                 if (!CmdUtils.isEmpty(args_data)) setData = args_data;
 
-                if (!CmdUtils.isEmpty(args_route)) {
+                //排除 "" 或者 -d
+                if (!CmdUtils.isEmpty(setData)) {
+                    setData = setData.equalsIgnoreCase(KEY_ARGS_DATA) || setData.equalsIgnoreCase("\"\"") ? "" : setData;
+                }
+
+                if (!CmdUtils.isEmpty(setData)) {
                     //检查路由语法格式
                     logger.info("[execute] ==>routeData=[{}]", setData);
                     List<Route> routes = null;

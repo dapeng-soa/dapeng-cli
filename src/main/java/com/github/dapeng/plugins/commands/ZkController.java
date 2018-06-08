@@ -100,12 +100,13 @@ public class ZkController implements InputController {
                         cmd.execute(ctx);
                     } catch (Exception var7) {
                         //ctx.getIoConsole().printf("WARNING: unable to execute command: [%s]%n%s%n", cmdLine, var7.getMessage());
-                        CmdUtils.writeFormatMsg(ctx,"WARNING: unable to execute command: [%s]%n%s%n", cmdLine, var7.getMessage());
+                        var7.printStackTrace();
+                        CmdUtils.writeFormatMsg(ctx, "WARNING: unable to execute command: [%s]%n%s%n", cmdLine, var7.getMessage());
                     }
                 } else {
                     logger.info("%nCommand [%s] is unknown. Type help for a list of installed commands.", tokens[0]);
                     //ctx.getIoConsole().printf("%nCommand [%s] is unknown. Type help for a list of installed commands.", tokens[0]);
-                    CmdUtils.writeFormatMsg(ctx,"%nCommand [%s] is unknown. Type help for a list of installed commands.", tokens[0]);
+                    CmdUtils.writeFormatMsg(ctx, "%nCommand [%s] is unknown. Type help for a list of installed commands.", tokens[0]);
                 }
                 handled = true;
             }

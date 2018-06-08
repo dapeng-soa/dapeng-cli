@@ -6,6 +6,8 @@ import com.beust.jcommander.ParameterDescription;
 import com.beust.jcommander.internal.Lists;
 import com.github.dapeng.core.InvocationContext;
 import com.github.dapeng.core.InvocationContextImpl;
+import com.github.dapeng.core.enums.CodecProtocol;
+import com.github.dapeng.core.enums.LoadBalanceStrategy;
 import com.github.dapeng.core.helper.IPUtils;
 import com.github.dapeng.utils.CmdEnumUtils;
 import com.github.dapeng.utils.CmdUtils;
@@ -57,6 +59,27 @@ public class SetCmd implements Command {
         public boolean zkhost = false;
         @Parameter(names = {"-cookie"}, required = false, description = "set the cookie . Usage -cookie.")
         public boolean cookie = false;
+
+        @Parameter(names = {"-sessiontid"}, required = false, description = "set the sessionTid . Usage -sessiontid.")
+        public boolean sessiontid = false;
+        @Parameter(names = {"-userid"}, required = false, description = "set the userId . Usage -userid.")
+        public boolean userid = false;
+        @Parameter(names = {"-userip"}, required = false, description = "set the userIp . Usage -userip.")
+        public boolean userip = false;
+        @Parameter(names = {"-transactionid"}, required = false, description = "set the transactionId . Usage -transactionid.")
+        public boolean transactionid = false;
+        @Parameter(names = {"-transactionsequence"}, required = false, description = "set the transactionSequence . Usage -transactionsequence.")
+        public boolean transactionsequence = false;
+        @Parameter(names = {"-callertid"}, required = false, description = "set the callerTid . Usage -callertid.")
+        public boolean callertid = false;
+        @Parameter(names = {"-operatorid"}, required = false, description = "set the operatorId . Usage -operatorid.")
+        public boolean operatorid = false;
+        @Parameter(names = {"-loadbalancestrategy"}, required = false, description = "set the loadBalanceStrategy . Usage -loadbalancestrategy.")
+        public boolean loadbalancestrategy = false;
+        @Parameter(names = {"-codecprotocol"}, required = false, description = "set the codeCprotocol . Usage -codecprotocol.")
+        public boolean codecprotocol = false;
+       /* @Parameter(names = {"-seqid"}, required = false, description = "set the seqId . Usage -seqid.")
+        public boolean seqid = false;*/
     }
 
 
@@ -118,6 +141,8 @@ public class SetCmd implements Command {
     public Object execute(Context context) {
         logger.info("[execute] ==> set command execute....");
         Map<String, String> cmdParams = CmdUtils.getCmdArgs(context);
+
+        logger.info("[execute] ==> cmdParams=[{}]", cmdParams);
         if (cmdParams.isEmpty()) {
             StringBuilder info = new StringBuilder(128);
             info.append("the setting info is:").append("\n");
@@ -125,10 +150,21 @@ public class SetCmd implements Command {
             info.append("-- the CalleeIp: ").append(invocationContext.calleeIp().orElse(null)).append("\n");
             info.append("-- the CalleePort: ").append(invocationContext.calleePort().orElse(null)).append("\n");
             info.append("-- the CallerMid: ").append(invocationContext.callerMid().orElse(null)).append("\n");
-           /*  info.append("-- the CallerFrom: ").append(invocationContext.callerFrom().orElse(null)).append("\n");
-            info.append("-- the CallerIp: ").append(invocationContext.callerIp().orElse(null)).append("\n");*/
+            /*info.append("-- the CallerFrom: ").append(invocationContext.callerFrom().orElse(null)).append("\n");
+            info.append("-- the CallerIp: ").append(invocationContext.call().orElse(null)).append("\n");*/
             info.append("-- the zkHost: ").append(ZookeeperUtils.getZkHost()).append("\n");
             info.append("-- the cookie: ").append(invocationContext.cookies()).append("\n");
+
+            info.append("-- the sessionTid: ").append(invocationContext.sessionTid().orElse(null)).append("\n");
+            info.append("-- the userId: ").append(invocationContext.userId().orElse(null)).append("\n");
+            info.append("-- the userIp: ").append(invocationContext.userIp().orElse(null)).append("\n");
+            //info.append("transactionId: ").append(invocationContext.transactionId.orElse(null)).append("\n");
+            //info.append("transactionSequence: ").append(invocationContext.transactionSequence.orElse(null)).append("\n");
+            info.append("-- the callerTid: ").append(invocationContext.callerTid()).append("\n");
+            info.append("-- the operatorId: ").append(invocationContext.operatorId().orElse(null)).append("\n");
+            info.append("-- the loadBalanceStrategy: ").append(invocationContext.loadBalanceStrategy().orElse(null)).append("\n");
+            //info.append("-- the seqId").append(Objects.isNull(invocationContext.seqId()) ? null : invocationContext.seqId()).append("\n");
+
             CmdUtils.writeMsg(context, info.toString());
             return null;
         }
@@ -174,6 +210,32 @@ public class SetCmd implements Command {
                         /* ServiceUtils.iniContext();*/
                     }
                     break;
+
+                case SET_SESSIONTID:
+                    invocationContext.sessionTid((cmdParams.get(k)));
+                    break;
+
+                case SET_USERID:
+                    invocationContext.userId((Long.parseLong(cmdParams.get(k))));
+                    break;
+                case SET_USERIP:
+                    invocationContext.userIp(IPUtils.transferIp(cmdParams.get(k)));
+                    break;
+                case SET_CALLERTID:
+                    invocationContext.callerTid(cmdParams.get(k));
+                    break;
+                case SET_OPERATORID:
+                    invocationContext.operatorId(Long.parseLong(cmdParams.get(k)));
+                    break;
+                case SET_LOADBALANCESTRATEGY:
+                    invocationContext.loadBalanceStrategy(LoadBalanceStrategy.findByValue(cmdParams.get(k)));
+                    break;
+                case SET_CODECPROTOCOL:
+                    invocationContext.codecProtocol(CodecProtocol.toCodecProtocol((byte) Integer.parseInt(cmdParams.get(k))));
+                    break;
+               /* case SET_SEQID:
+                    ((InvocationContextImpl) invocationContext).seqId(Integer.parseInt(cmdParams.get(k)));
+                    break;*/
             }
             CmdUtils.writeMsg(context, "setting of  " + CmdEnumUtils.ArgsKey.getArgEnum(k).getValue() + " set Succeed .");
         });
