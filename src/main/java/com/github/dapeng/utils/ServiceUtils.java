@@ -229,19 +229,19 @@ public class ServiceUtils {
                               String method,
                               String parameter) {
 
-        InvocationContextImpl invocationCtx = (InvocationContextImpl) InvocationContextImpl.Factory.currentInstance();
-        invocationCtx.serviceName(service);
-        invocationCtx.versionName(version);
-        invocationCtx.methodName(method);
-        invocationCtx.callerMid("CmdCaller");
-        if (!invocationCtx.timeout().isPresent()) {
+        InvocationContextImpl invocationCtx = (InvocationContextImpl) InvocationContextImpl.Factory.getCurrentInstance();
+        invocationCtx.setServiceName(service);
+        invocationCtx.setVersionName(version);
+        invocationCtx.setMethodName(method);
+        invocationCtx.setCallerFrom(Optional.of("CmdCaller"));
+        if (!invocationCtx.getTimeout().isPresent()) {
             //设置请求超时时间,从环境变量获取，默认 10s ,即 10000
-            Integer timeOut = Integer.valueOf(getEnvTimeOut());
-            invocationCtx.timeout(timeOut);
+            Long timeOut = Long.valueOf(getEnvTimeOut());
+            invocationCtx.setTimeout(Optional.ofNullable(timeOut));
         }
 
 
-        invocationCtx.codecProtocol(CodecProtocol.CompressedBinary);
+        invocationCtx.setCodecProtocol(CodecProtocol.CompressedBinary);
 
         Service bizService = ServiceCache.getService(service, version);
 
@@ -252,18 +252,18 @@ public class ServiceUtils {
 
         //fillInvocationCtx(invocationCtx, req);
 
-        JsonPost jsonPost = new JsonPost(service, version, method, true);
+        JsonPost jsonPost = new JsonPost(service, version, true);
 
         try {
-            return jsonPost.callServiceMethod(parameter, bizService);
+            return jsonPost.callServiceMethod(invocationCtx, parameter, bizService);
         } catch (SoaException e) {
 
-            System.out.println(e.getMsg());
+            logger.error(e.getMsg(), e);
             return String.format("{\"responseCode\":\"%s\", \"responseMsg\":\"%s\", \"success\":\"%s\", \"status\":0}", e.getCode(), e.getMsg(), "{}");
 
         } catch (Exception e) {
 
-            System.out.println(e.getMessage());
+            logger.error(e.getMessage(), e);
             return String.format("{\"responseCode\":\"%s\", \"responseMsg\":\"%s\", \"success\":\"%s\", \"status\":0}", "9999", "系统繁忙，请稍后再试[9999]！", "{}");
         } finally {
             InvocationContextImpl.Factory.removeCurrentInstance();

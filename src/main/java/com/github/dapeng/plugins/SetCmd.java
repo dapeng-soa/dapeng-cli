@@ -18,6 +18,7 @@ import org.slf4j.LoggerFactory;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 
 /**
@@ -32,7 +33,7 @@ public class SetCmd implements Command {
     private static final String NAMESPACE = "dapeng";
     private static final String CMD_NAME = "set";
     private CmdDescriptor cmdDescriptor;
-    private static final InvocationContext invocationContext = InvocationContextImpl.Factory.currentInstance();
+    private static final InvocationContext invocationContext = InvocationContextImpl.Factory.getCurrentInstance();
 
 
     //参数设置
@@ -120,12 +121,10 @@ public class SetCmd implements Command {
         if (cmdParams.isEmpty()) {
             StringBuilder info = new StringBuilder(128);
             info.append("the setting info is:").append("\n");
-            info.append("-- the Timeout: ").append(invocationContext.timeout().orElse(null)).append("\n");
-            info.append("-- the CalleeIp: ").append(invocationContext.calleeIp().orElse(null)).append("\n");
-            info.append("-- the CalleePort: ").append(invocationContext.calleePort().orElse(null)).append("\n");
-            info.append("-- the CallerMid: ").append(invocationContext.callerMid().orElse(null)).append("\n");
-           /*  info.append("-- the CallerFrom: ").append(invocationContext.callerFrom().orElse(null)).append("\n");
-            info.append("-- the CallerIp: ").append(invocationContext.callerIp().orElse(null)).append("\n");*/
+            info.append("-- the Timeout: ").append(invocationContext.getTimeout().orElse(null)).append("\n");
+            info.append("-- the CalleeIp: ").append(invocationContext.getCalleeIp().orElse(null)).append("\n");
+            info.append("-- the CalleePort: ").append(invocationContext.getCalleePort().orElse(null)).append("\n");
+            info.append("-- the CallerMid: ").append(invocationContext.getCallerFrom().orElse(null)).append("\n");
             info.append("-- the zkHost: ").append(ZookeeperUtils.getZkHost()).append("\n");
             CmdUtils.writeMsg(context, info.toString());
             return null;
@@ -137,13 +136,13 @@ public class SetCmd implements Command {
             }
             switch (CmdEnumUtils.ArgsKey.getArgEnum(k)) {
                 case SET_CALLEE_IP:
-                    invocationContext.calleeIp(cmdParams.get(k));
+                    invocationContext.setCalleeIp(Optional.ofNullable(cmdParams.get(k)));
                     break;
                 case SET_CALLEE_PORT:
-                    invocationContext.calleePort(Integer.parseInt(cmdParams.get(k)));
+                    invocationContext.setCalleePort(Optional.ofNullable(Integer.parseInt(cmdParams.get(k))));
                     break;
                 case SET_CALLER_MID:
-                    invocationContext.callerMid(cmdParams.get(k));
+                    invocationContext.setCallerFrom(Optional.ofNullable(cmdParams.get(k)));
                     break;
                 //todo
                /* case SET_CALLER_IP:
@@ -153,7 +152,7 @@ public class SetCmd implements Command {
                     break;*/
 
                 case SET_TIMEOUT:
-                    invocationContext.timeout(Integer.valueOf(cmdParams.get(k)));
+                    invocationContext.setTimeout(Optional.ofNullable(Long.valueOf(cmdParams.get(k))));
                     break;
                 case SET_ZKHOST:
                     String zkHost = cmdParams.get(k);

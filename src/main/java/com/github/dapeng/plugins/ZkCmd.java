@@ -1,7 +1,5 @@
 package com.github.dapeng.plugins;
 
-import com.github.dapeng.router.Route;
-import com.github.dapeng.router.RoutesExecutor;
 import com.github.dapeng.utils.CmdProperties;
 import com.github.dapeng.utils.CmdUtils;
 import com.github.dapeng.utils.ServiceUtils;
@@ -47,8 +45,6 @@ public class ZkCmd implements Command {
                         .append(Configurator.VALUE_LINE_SEP)
                         .append(" zk -set path -d data ")
                         .append(Configurator.VALUE_LINE_SEP)
-                        .append(" zk -route path -d data ")
-                        .append(Configurator.VALUE_LINE_SEP)
                         .append("zk [options]").append(Configurator.VALUE_LINE_SEP);
 //
 //                for(Map.Entry<String,String> entry : getArguments().entrySet()){
@@ -69,7 +65,6 @@ public class ZkCmd implements Command {
                 args.put(CmdProperties.KEY_ARGS_ZK_SET, "[optional] type '-set path -d data' to set zk node data by path. Note: '/soa/runtime/services' subPath can not be setting! ");
                 args.put(CmdProperties.KEY_ARGS_ZK_NODE, "[optional] type '-nodes path' to specific method");
                 args.put(CmdProperties.KEY_ARGS_DATA, "[optional] 'you should specific '-set path' option before you set data, like: '-set path -d data'");
-                args.put(CmdProperties.KEY_ARGS_ZK_ROUTE, "[optional] 'you should specific '-route path' option before you set data, like: '-route path -d data'. Note:set data before will check must conform to the routing rules ");
                 args.put(CmdProperties.KEY_ARGS_FILE, "type '-f file(path + fileName)' to get zkData content for invoking..");
 
                 return args;
@@ -87,7 +82,6 @@ public class ZkCmd implements Command {
         String setArgs = inputArgs.get(CmdProperties.KEY_ARGS_ZK_SET);
         String dataArgs = inputArgs.get(CmdProperties.KEY_ARGS_DATA);
         String nodesArgs = inputArgs.get(CmdProperties.KEY_ARGS_ZK_NODE);
-        String routeArgs = inputArgs.get(CmdProperties.KEY_ARGS_ZK_ROUTE);
         String fileName = inputArgs.get(CmdProperties.KEY_ARGS_FILE);
 
         boolean handled = false;
@@ -109,46 +103,6 @@ public class ZkCmd implements Command {
                 ZookeeperUtils.createData(setArgs, dataArgs);
                 CmdUtils.writeMsg(context, " Zookeeper path: " + setArgs + " setting data :[" + dataArgs + "] Successfully.");
                 handled = true;
-            }
-        }
-
-        //处理  zk -route path -d data (or -f  filePath)
-        if (!CmdUtils.isEmpty(routeArgs)) {
-            if (routeArgs.startsWith(CmdProperties.RUNTIME_PATH)) {
-                CmdUtils.writeMsg(context, CmdProperties.RUNTIME_PATH + " is protected.. it can not be setting.");
-                return null;
-            }
-
-            String routeData = null;
-            if (!CmdUtils.isEmpty(dataArgs)) {
-                routeData = dataArgs;
-            } else if (!CmdUtils.isEmpty(fileName)) {
-                routeData = ServiceUtils.readFromeFile(fileName);
-            }
-
-            //检查路由语法格式
-            logger.info("[execute] ==>routeData=[{}]", routeData);
-
-            List<Route> routes = null;
-            try {
-                routes = RoutesExecutor.parseAll(routeData);
-            } catch (Exception e) {
-                logger.info("parse route failed ...route configuration format is incorrect. exception:{}", e.getMessage());
-                //e.printStackTrace();
-            }
-            if (routes != null && !routes.isEmpty()) {
-                String routePath = ROUTE_PATH + "/" + routeArgs;
-                if (!ZookeeperUtils.exists(routePath)) {
-                    CmdUtils.writeMsg(context, " the zk node[" + routePath + "] is not exists ");
-                } else {
-                    logger.info("[execute] ==>set route data on [{}]",routePath);
-                    ZookeeperUtils.createData(routePath, routeData);
-                    CmdUtils.writeMsg(context, " Zookeeper path: " + routePath + " route data : [" + routeData + "] Successfully.");
-                    handled = true;
-                }
-            } else {
-                CmdUtils.writeMsg(context, "set route data failed. please confirm  route configuration format is incorrect...");
-                return null;
             }
         }
 

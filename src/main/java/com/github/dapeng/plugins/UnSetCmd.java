@@ -15,10 +15,7 @@ import org.clamshellcli.api.IOConsole;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 去除 setting 的设置
@@ -32,7 +29,7 @@ public class UnSetCmd implements Command {
     private static final String NAMESPACE = "dapeng";
     private static final String CMD_NAME = "unset";
     private Descriptor cmdDescriptor;
-    private static final InvocationContext invocationContext = InvocationContextImpl.Factory.currentInstance();
+    private static final InvocationContext invocationContext = InvocationContextImpl.Factory.getCurrentInstance();
 
 
     //参数设置
@@ -83,8 +80,7 @@ public class UnSetCmd implements Command {
         @Override
         public String getUsage() {
             StringBuilder result = new StringBuilder();
-            result
-                    .append(Configurator.VALUE_LINE_SEP)
+            result.append(Configurator.VALUE_LINE_SEP)
                     .append(CMD_NAME + " [options]").append(Configurator.VALUE_LINE_SEP);
 
             for (Map.Entry<String, String> entry : getArguments().entrySet()) {
@@ -97,7 +93,7 @@ public class UnSetCmd implements Command {
         @Override
         public Map<String, String> getArguments() {
             if (commander == null) commander = new JCommander(new UnSetCmd.CmdParams());
-            Map<String, String> result = new HashMap<String, String>();
+            Map<String, String> result = new HashMap<>(16);
             List<ParameterDescription> params = commander.getParameters();
             for (ParameterDescription param : params) {
                 result.put(param.getNames(), param.getDescription());
@@ -127,13 +123,13 @@ public class UnSetCmd implements Command {
                 }
                 switch (CmdEnumUtils.ArgsKey.getArgEnum(item)) {
                     case SET_CALLEE_IP:
-                        invocationContext.calleeIp(null);
+                        invocationContext.setCalleeIp(Optional.empty());
                         break;
                     case SET_CALLEE_PORT:
-                        invocationContext.calleePort(null);
+                        invocationContext.setCalleePort(Optional.empty());
                         break;
                     case SET_CALLER_MID:
-                        invocationContext.callerMid(null);
+                        invocationContext.setCallerFrom(Optional.empty());
                         break;
                     //todo
                    /* case SET_CALLER_IP:
@@ -143,7 +139,7 @@ public class UnSetCmd implements Command {
                         break;*/
 
                     case SET_TIMEOUT:
-                        invocationContext.timeout(null);
+                        invocationContext.setTimeout(Optional.empty());
                         break;
                 }
                 CmdUtils.writeMsg(context, "the Setting of " + CmdEnumUtils.ArgsKey.getArgEnum(item).getValue() + " unset Succeed .");
