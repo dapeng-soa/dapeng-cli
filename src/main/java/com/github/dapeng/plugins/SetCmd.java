@@ -6,6 +6,9 @@ import com.beust.jcommander.ParameterDescription;
 import com.beust.jcommander.internal.Lists;
 import com.github.dapeng.core.InvocationContext;
 import com.github.dapeng.core.InvocationContextImpl;
+import com.github.dapeng.core.enums.CodecProtocol;
+import com.github.dapeng.core.enums.LoadBalanceStrategy;
+import com.github.dapeng.core.helper.IPUtils;
 import com.github.dapeng.utils.CmdEnumUtils;
 import com.github.dapeng.utils.CmdUtils;
 import com.github.dapeng.utils.ZookeeperUtils;
@@ -32,7 +35,7 @@ public class SetCmd implements Command {
     private static final String NAMESPACE = "dapeng";
     private static final String CMD_NAME = "set";
     private CmdDescriptor cmdDescriptor;
-    private static final InvocationContext invocationContext = InvocationContextImpl.Factory.currentInstance();
+    public static final InvocationContext invocationContext = InvocationContextImpl.Factory.currentInstance();
 
 
     //参数设置
@@ -42,18 +45,41 @@ public class SetCmd implements Command {
 
         @Parameter(names = {"-calleeip"}, required = false, description = "set the invocationContext attribute CalleeIP. Usage -calleeip.")
         public boolean calleeip = false;
-        @Parameter(names = {"-calleeport"}, required = false, description = "set the invocationContext attribute CalleePort. Usage -calleeport")
+        @Parameter(names = {"-calleeport"}, required = false, description = "set the invocationContext attribute CalleePort. Usage -calleeport.")
         public boolean calleeport = false;
-        @Parameter(names = {"-callermid"}, required = false, description = "set the invocationContext attribute CallerMid. Usage -callermid")
+        @Parameter(names = {"-callermid"}, required = false, description = "set the invocationContext attribute CallerMid. Usage -callermid.")
         public boolean callermid = false;
-        @Parameter(names = {"-callerfrom"}, required = false, description = "set the invocationContext attribute CallerFrom. Usage -callerfrom")
+        @Parameter(names = {"-callerfrom"}, required = false, description = "set the invocationContext attribute CallerFrom. Usage -callerfrom.")
         public boolean callerfrom = false;
-        @Parameter(names = {"-callerip"}, required = false, description = "set the invocationContext attribute CallerIp. Usage -callerip")
+        @Parameter(names = {"-callerip"}, required = false, description = "set the invocationContext attribute CallerIp. Usage -callerip.")
         public boolean callerip = false;
-        @Parameter(names = {"-timeout"}, required = false, description = "set the invocationContext  TimeOut. Usage -timeout")
+        @Parameter(names = {"-timeout"}, required = false, description = "set the invocationContext  TimeOut. Usage -timeout.")
         public boolean timeout = false;
-        @Parameter(names = {"-zkhost"}, required = false, description = "set the ZkHost . Usage -zkhost")
+        @Parameter(names = {"-zkhost"}, required = false, description = "set the ZkHost . Usage -zkhost.")
         public boolean zkhost = false;
+        @Parameter(names = {"-cookie"}, required = false, description = "set the cookie . Usage -cookie.")
+        public boolean cookie = false;
+
+        @Parameter(names = {"-sessiontid"}, required = false, description = "set the sessionTid . Usage -sessiontid.")
+        public boolean sessiontid = false;
+        @Parameter(names = {"-userid"}, required = false, description = "set the userId . Usage -userid.")
+        public boolean userid = false;
+        @Parameter(names = {"-userip"}, required = false, description = "set the userIp . Usage -userip.")
+        public boolean userip = false;
+        @Parameter(names = {"-transactionid"}, required = false, description = "set the transactionId . Usage -transactionid.")
+        public boolean transactionid = false;
+        @Parameter(names = {"-transactionsequence"}, required = false, description = "set the transactionSequence . Usage -transactionsequence.")
+        public boolean transactionsequence = false;
+        @Parameter(names = {"-callertid"}, required = false, description = "set the callerTid . Usage -callertid.")
+        public boolean callertid = false;
+        @Parameter(names = {"-operatorid"}, required = false, description = "set the operatorId . Usage -operatorid.")
+        public boolean operatorid = false;
+        @Parameter(names = {"-loadbalancestrategy"}, required = false, description = "set the loadBalanceStrategy . Usage -loadbalancestrategy.")
+        public boolean loadbalancestrategy = false;
+        @Parameter(names = {"-codecprotocol"}, required = false, description = "set the codeCprotocol . Usage -codecprotocol.")
+        public boolean codecprotocol = false;
+       /* @Parameter(names = {"-seqid"}, required = false, description = "set the seqId . Usage -seqid.")
+        public boolean seqid = false;*/
     }
 
 
@@ -87,12 +113,10 @@ public class SetCmd implements Command {
             result
                     .append(Configurator.VALUE_LINE_SEP)
                     .append(CMD_NAME + " [options]").append(Configurator.VALUE_LINE_SEP);
-
             for (Map.Entry<String, String> entry : getArguments().entrySet()) {
                 result.append(String.format("%n%1$15s %2$2s %3$s", entry.getKey(), " ", entry.getValue()));
             }
             return result.toString();
-            // return "set -to timeout -ceeip callee_ip -cp callee_port -on operator_name -cf caller_from -cn customer_name -cerip caller_ip -zkh zkHost .";
         }
 
         @Override
@@ -117,6 +141,8 @@ public class SetCmd implements Command {
     public Object execute(Context context) {
         logger.info("[execute] ==> set command execute....");
         Map<String, String> cmdParams = CmdUtils.getCmdArgs(context);
+
+        logger.info("[execute] ==> cmdParams=[{}]", cmdParams);
         if (cmdParams.isEmpty()) {
             StringBuilder info = new StringBuilder(128);
             info.append("the setting info is:").append("\n");
@@ -124,9 +150,21 @@ public class SetCmd implements Command {
             info.append("-- the CalleeIp: ").append(invocationContext.calleeIp().orElse(null)).append("\n");
             info.append("-- the CalleePort: ").append(invocationContext.calleePort().orElse(null)).append("\n");
             info.append("-- the CallerMid: ").append(invocationContext.callerMid().orElse(null)).append("\n");
-           /*  info.append("-- the CallerFrom: ").append(invocationContext.callerFrom().orElse(null)).append("\n");
-            info.append("-- the CallerIp: ").append(invocationContext.callerIp().orElse(null)).append("\n");*/
+            /*info.append("-- the CallerFrom: ").append(invocationContext.callerFrom().orElse(null)).append("\n");
+            info.append("-- the CallerIp: ").append(invocationContext.call().orElse(null)).append("\n");*/
             info.append("-- the zkHost: ").append(ZookeeperUtils.getZkHost()).append("\n");
+            info.append("-- the cookie: ").append(invocationContext.cookies()).append("\n");
+
+            info.append("-- the sessionTid: ").append(invocationContext.sessionTid().orElse(null)).append("\n");
+            info.append("-- the userId: ").append(invocationContext.userId().orElse(null)).append("\n");
+            info.append("-- the userIp: ").append(invocationContext.userIp().orElse(null)).append("\n");
+            //info.append("transactionId: ").append(invocationContext.transactionId.orElse(null)).append("\n");
+            //info.append("transactionSequence: ").append(invocationContext.transactionSequence.orElse(null)).append("\n");
+            info.append("-- the callerTid: ").append(invocationContext.callerTid()).append("\n");
+            info.append("-- the operatorId: ").append(invocationContext.operatorId().orElse(null)).append("\n");
+            info.append("-- the loadBalanceStrategy: ").append(invocationContext.loadBalanceStrategy().orElse(null)).append("\n");
+            //info.append("-- the seqId").append(Objects.isNull(invocationContext.seqId()) ? null : invocationContext.seqId()).append("\n");
+
             CmdUtils.writeMsg(context, info.toString());
             return null;
         }
@@ -137,7 +175,8 @@ public class SetCmd implements Command {
             }
             switch (CmdEnumUtils.ArgsKey.getArgEnum(k)) {
                 case SET_CALLEE_IP:
-                    invocationContext.calleeIp(cmdParams.get(k));
+                    //nvocationContext.calleeIp(cmdParams.get(k));
+                    invocationContext.calleeIp(IPUtils.transferIp(cmdParams.get(k)));
                     break;
                 case SET_CALLEE_PORT:
                     invocationContext.calleePort(Integer.parseInt(cmdParams.get(k)));
@@ -155,6 +194,11 @@ public class SetCmd implements Command {
                 case SET_TIMEOUT:
                     invocationContext.timeout(Integer.valueOf(cmdParams.get(k)));
                     break;
+                case SET_COOKIE:
+                    String args[] = cmdParams.get(k).split(":");
+                    logger.info("args[]: {}", args.toString());
+                    invocationContext.setCookie(args[0], args[1]);
+                    break;
                 case SET_ZKHOST:
                     String zkHost = cmdParams.get(k);
                     if (zkHost.equalsIgnoreCase(ZookeeperUtils.getZkHost())) {
@@ -163,9 +207,36 @@ public class SetCmd implements Command {
                         CmdUtils.writeMsg(context, "set zkHost and waiting for reset Zkconnection " + zkHost);
                         ZookeeperUtils.setZkHost(cmdParams.get(k));
                         /*ServiceUtils.destroyZk();*/
-                       /* ServiceUtils.iniContext();*/
+                        /* ServiceUtils.iniContext();*/
                     }
                     break;
+
+                case SET_SESSIONTID:
+                    //invocationContext.sessionTid((cmdParams.get(k)));
+                    invocationContext.sessionTid(Long.parseLong(cmdParams.get(k)));
+                    break;
+
+                case SET_USERID:
+                    invocationContext.userId((Long.parseLong(cmdParams.get(k))));
+                    break;
+                case SET_USERIP:
+                    invocationContext.userIp(IPUtils.transferIp(cmdParams.get(k)));
+                    break;
+                case SET_CALLERTID:
+                    invocationContext.callerTid(Long.parseLong(cmdParams.get(k)));
+                    break;
+                case SET_OPERATORID:
+                    invocationContext.operatorId(Long.parseLong(cmdParams.get(k)));
+                    break;
+                case SET_LOADBALANCESTRATEGY:
+                    invocationContext.loadBalanceStrategy(LoadBalanceStrategy.findByValue(cmdParams.get(k)));
+                    break;
+                case SET_CODECPROTOCOL:
+                    invocationContext.codecProtocol(CodecProtocol.toCodecProtocol((byte) Integer.parseInt(cmdParams.get(k))));
+                    break;
+               /* case SET_SEQID:
+                    ((InvocationContextImpl) invocationContext).seqId(Integer.parseInt(cmdParams.get(k)));
+                    break;*/
             }
             CmdUtils.writeMsg(context, "setting of  " + CmdEnumUtils.ArgsKey.getArgEnum(k).getValue() + " set Succeed .");
         });

@@ -8,10 +8,12 @@ import com.github.dapeng.core.enums.CodecProtocol;
 import com.github.dapeng.core.metadata.*;
 import com.github.dapeng.metadata.MetadataClient;
 import com.github.dapeng.openapi.cache.ServiceCache;
+import com.github.dapeng.plugins.SetCmd;
 import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import org.clamshellcli.api.Context;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,7 +42,7 @@ public class ServiceUtils {
         return data;
     }
 
-    public static void writerFile(String fileName, String content) {
+    public static void writerFile(Context context, String fileName, String content) {
         FileWriter fw = null;
         try {
             File file = new File(fileName);
@@ -53,16 +55,15 @@ public class ServiceUtils {
             fw.write(content);
             fw.flush();
         } catch (Exception e) {
-            //e.printStackTrace();
-            System.out.println(" Failed to written file[" + fileName + "]");
+            CmdUtils.writeMsg(context, " Failed to written file[" + fileName + "] cause:" + e.getMessage());
         } finally {
             try {
                 fw.close();
             } catch (Exception e) {
-                // e.printStackTrace();
-                System.out.println(" Failed to close file....." + fileName);
+                CmdUtils.writeMsg(context, " Failed to close file[" + fileName + "] cause:" + e.getMessage());
             }
         }
+        CmdUtils.writeMsg(context, "the data has been saved to file[" + fileName + "] succeed");
     }
 
     public static String getJsonRequestSample(String serviceName, String version, String methodName) {
@@ -216,7 +217,7 @@ public class ServiceUtils {
         try {
             List<String> lines = Files.readAllLines(Paths.get(jsonFile), StandardCharsets.UTF_8);
             for (String line : lines) {
-                sb.append(line);
+                sb.append(line).append(System.getProperty("line.separator"));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -224,36 +225,47 @@ public class ServiceUtils {
         return sb.toString();
     }
 
+    public static List<String> readFromeFile2List(String jsonFile) {
+        List<String> lines = null;
+        try {
+            lines = Files.readAllLines(Paths.get(jsonFile), StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return lines;
+    }
+
     public static String post(String service,
                               String version,
                               String method,
                               String parameter) {
 
-        InvocationContextImpl invocationCtx = (InvocationContextImpl) InvocationContextImpl.Factory.currentInstance();
+        InvocationContextImpl invocationCtx = (InvocationContextImpl) SetCmd.invocationContext;
         invocationCtx.serviceName(service);
         invocationCtx.versionName(version);
         invocationCtx.methodName(method);
         invocationCtx.callerMid("CmdCaller");
+
+        logger.info("inCtx info: {}", invocationCtx.toString());
         if (!invocationCtx.timeout().isPresent()) {
             //设置请求超时时间,从环境变量获取，默认 10s ,即 10000
             Integer timeOut = Integer.valueOf(getEnvTimeOut());
             invocationCtx.timeout(timeOut);
         }
-
-
         invocationCtx.codecProtocol(CodecProtocol.CompressedBinary);
-
         Service bizService = ServiceCache.getService(service, version);
-
         if (bizService == null) {
             System.out.println("bizService not found[service:" + service + ", version:" + version + "]");
-            return String.format("{\"responseCode\":\"%s\", \"responseMsg\":\"%s\", \"success\":\"%s\", \"status\":0}", SoaCode.NotMatchedService.getCode(), SoaCode.NotMatchedService.getMsg(), "{}");
+            return String.format("{\"" +
+                    "\":\"%s\", \"responseMsg\":\"%s\", \"success\":\"%s\", \"status\":0}", SoaCode.NoMatchedService.getCode(), SoaCode.NoMatchedService.getMsg(), "{}");
         }
 
+        logger.info("the current invocationContext Info : {}", invocationCtx.toString());
+
         //fillInvocationCtx(invocationCtx, req);
-
+        //set invocationCtx to threadLocal
+        InvocationContextImpl.Factory.currentInstance(invocationCtx);
         JsonPost jsonPost = new JsonPost(service, version, method, true);
-
         try {
             return jsonPost.callServiceMethod(parameter, bizService);
         } catch (SoaException e) {

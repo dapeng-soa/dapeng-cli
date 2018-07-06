@@ -1,7 +1,5 @@
 package com.github.dapeng.plugins;
 
-import com.github.dapeng.router.Route;
-import com.github.dapeng.router.RoutesExecutor;
 import com.github.dapeng.utils.CmdProperties;
 import com.github.dapeng.utils.CmdUtils;
 import com.github.dapeng.utils.ServiceUtils;
@@ -15,8 +13,6 @@ import org.slf4j.LoggerFactory;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
-import static com.github.dapeng.utils.CmdProperties.*;
 
 public class ZkCmd implements Command {
     private static final Logger logger = LoggerFactory.getLogger(ZkCmd.class);
@@ -46,17 +42,7 @@ public class ZkCmd implements Command {
                         .append(" zk -nodes path ")
                         .append(Configurator.VALUE_LINE_SEP)
                         .append(" zk -set path -d data ")
-                        .append(Configurator.VALUE_LINE_SEP)
-                        .append(" zk -route path -d data ")
-                        .append(Configurator.VALUE_LINE_SEP)
-                        .append("zk [options]").append(Configurator.VALUE_LINE_SEP);
-//
-//                for(Map.Entry<String,String> entry : getArguments().entrySet()){
-//
-//                    sb.append(String.format("%n%1$5s", entry.getKey()) + "        " + entry.getValue());
-//                }
-//
-//                sb.append(Configurator.VALUE_LINE_SEP);
+                        .append(Configurator.VALUE_LINE_SEP);
                 return sb.toString();
             }
 
@@ -65,12 +51,12 @@ public class ZkCmd implements Command {
             public Map<String, String> getArguments() {
                 if (args != null) return args;
                 args = new LinkedHashMap<String, String>();
-                args.put(CmdProperties.KEY_ARGS_ZK_GET, "[optional] type '-get path' to get zk node data by path.");
-                args.put(CmdProperties.KEY_ARGS_ZK_SET, "[optional] type '-set path -d data' to set zk node data by path. Note: '/soa/runtime/services' subPath can not be setting! ");
-                args.put(CmdProperties.KEY_ARGS_ZK_NODE, "[optional] type '-nodes path' to specific method");
-                args.put(CmdProperties.KEY_ARGS_DATA, "[optional] 'you should specific '-set path' option before you set data, like: '-set path -d data'");
-                args.put(CmdProperties.KEY_ARGS_ZK_ROUTE, "[optional] 'you should specific '-route path' option before you set data, like: '-route path -d data'. Note:set data before will check must conform to the routing rules ");
-                args.put(CmdProperties.KEY_ARGS_FILE, "type '-f file(path + fileName)' to get zkData content for invoking..");
+                args.put(CmdProperties.KEY_ARGS_ZK_GET, "type '-get' to get zk node data by path.");
+                args.put(CmdProperties.KEY_ARGS_ZK_SET, "type '-set' to set zk node data by path. Note: '/soa/runtime/services' subPath can not be setting! ");
+                args.put(CmdProperties.KEY_ARGS_ZK_NODE, "type '-nodes' to get path child nodes.");
+                args.put(CmdProperties.KEY_ARGS_DATA, "type ' -d ' the data will be set, like: '-set path -d data.'");
+                args.put(CmdProperties.KEY_ARGS_FILE_READ, "type '-f' to get zkData content for file.");
+                args.put(CmdProperties.KEY_ARGS_FILE_OUT, "type '-o' to save the data to file.");
 
                 return args;
             }
@@ -83,85 +69,56 @@ public class ZkCmd implements Command {
         //Map<String, String> inputArgs = CmdUtils.getCmdArgs(context);
         Map<String, String> inputArgs = CmdUtils._getCmdArgs(context);
         logger.info("[execute] ==>inputArgs =[{}]", inputArgs);
-        String getArgs = inputArgs.get(CmdProperties.KEY_ARGS_ZK_GET);
-        String setArgs = inputArgs.get(CmdProperties.KEY_ARGS_ZK_SET);
-        String dataArgs = inputArgs.get(CmdProperties.KEY_ARGS_DATA);
-        String nodesArgs = inputArgs.get(CmdProperties.KEY_ARGS_ZK_NODE);
-        String routeArgs = inputArgs.get(CmdProperties.KEY_ARGS_ZK_ROUTE);
-        String fileName = inputArgs.get(CmdProperties.KEY_ARGS_FILE);
+        String args_get = inputArgs.get(CmdProperties.KEY_ARGS_ZK_GET);
+        String args_set = inputArgs.get(CmdProperties.KEY_ARGS_ZK_SET);
+        String args_data = inputArgs.get(CmdProperties.KEY_ARGS_DATA);
+        String args_nodes = inputArgs.get(CmdProperties.KEY_ARGS_ZK_NODE);
+        String file_read = inputArgs.get(CmdProperties.KEY_ARGS_FILE_READ);
+        String file_out = inputArgs.get(CmdProperties.KEY_ARGS_FILE_OUT);
 
         boolean handled = false;
         //处理  zk -get path
-        if (!CmdUtils.isEmpty(getArgs)) {
+        if (!CmdUtils.isEmpty(args_get)) {
             logger.info("[execute] ==> handle  zk -get path ...");
-            String data = ZookeeperUtils.getData(getArgs);
-            CmdUtils.writeMsg(context, "zookeeperData: " + data);
+            String data = ZookeeperUtils.getData(args_get);
+
+            //-o
+            if (!CmdUtils.isEmpty(file_out)) {
+                ServiceUtils.writerFile(context, file_out, data);
+            } else {
+                CmdUtils.writeMsg(context, "the zk path[" + args_get + "] data is :" + data);
+            }
             handled = true;
         }
 
-        //处理  zk -set path -d data
-        if (!CmdUtils.isEmpty(setArgs) && !CmdUtils.isEmpty(dataArgs)) {
+        //处理  zk -set path -d | -f
+        if (!CmdUtils.isEmpty(args_set)) {
             logger.info("[execute] ==> handle  zk -set path -d data ...");
-            if (setArgs.startsWith(CmdProperties.RUNTIME_PATH)) {
-                CmdUtils.writeMsg(context, CmdProperties.RUNTIME_PATH + " is protected.. it can not be setting.");
-                return null;
-            } else {
-                ZookeeperUtils.createData(setArgs, dataArgs);
-                CmdUtils.writeMsg(context, " Zookeeper path: " + setArgs + " setting data :[" + dataArgs + "] Successfully.");
-                handled = true;
-            }
+            String setData = null;
+            if (!CmdUtils.isEmpty(file_read)) setData = ServiceUtils.readFromeFile(file_read);
+            if (!CmdUtils.isEmpty(args_data)) setData = args_data;
+
+            ZookeeperUtils.setData(context, args_set, setData);
+            handled = true;
         }
-
-        //处理  zk -route path -d data (or -f  filePath)
-        if (!CmdUtils.isEmpty(routeArgs)) {
-            if (routeArgs.startsWith(CmdProperties.RUNTIME_PATH)) {
-                CmdUtils.writeMsg(context, CmdProperties.RUNTIME_PATH + " is protected.. it can not be setting.");
-                return null;
-            }
-
-            String routeData = null;
-            if (!CmdUtils.isEmpty(dataArgs)) {
-                routeData = dataArgs;
-            } else if (!CmdUtils.isEmpty(fileName)) {
-                routeData = ServiceUtils.readFromeFile(fileName);
-            }
-
-            //检查路由语法格式
-            logger.info("[execute] ==>routeData=[{}]", routeData);
-
-            List<Route> routes = null;
-            try {
-                routes = RoutesExecutor.parseAll(routeData);
-            } catch (Exception e) {
-                logger.info("parse route failed ...route configuration format is incorrect. exception:{}", e.getMessage());
-                //e.printStackTrace();
-            }
-            if (routes != null && !routes.isEmpty()) {
-                String routePath = ROUTE_PATH + "/" + routeArgs;
-                if (!ZookeeperUtils.exists(routePath)) {
-                    CmdUtils.writeMsg(context, " the zk node[" + routePath + "] is not exists ");
-                } else {
-                    logger.info("[execute] ==>set route data on [{}]",routePath);
-                    ZookeeperUtils.createData(routePath, routeData);
-                    CmdUtils.writeMsg(context, " Zookeeper path: " + routePath + " route data : [" + routeData + "] Successfully.");
-                    handled = true;
-                }
-            } else {
-                CmdUtils.writeMsg(context, "set route data failed. please confirm  route configuration format is incorrect...");
-                return null;
-            }
-        }
-
 
         //处理  zk -nodes path
-        if (!CmdUtils.isEmpty(nodesArgs)) {
+        if (!CmdUtils.isEmpty(args_nodes)) {
             logger.info("[execute] ==> zk -nodes path ...");
-            List<String> nodeList = ZookeeperUtils.getChildren(nodesArgs);
-            CmdUtils.writeMsg(context, nodesArgs + " list: " + nodeList.toString());
-            handled = true;
+            List<String> nodeList = ZookeeperUtils.getChildren(args_nodes);
+
+            //-o
+            if (!CmdUtils.isEmpty(file_out)) {
+                ServiceUtils.writerFile(context, file_out, CmdUtils.getResult(nodeList));
+            } else {
+                //CmdUtils.writeMsg(context, "the path " + args_nodes + " child nodes is :" + CmdUtils.getResult(nodeList));
+                CmdUtils.writeMsg(context, "the path " + args_nodes + " child nodes is :" + Configurator.VALUE_LINE_SEP  + CmdUtils.getResult(nodeList));
+                handled = true;
+            }
+
         }
 
-        handledStatus(context, handled);
+        CmdUtils.handledStatus(context, handled, this.getDescriptor().getUsage());
         return null;
     }
 
@@ -173,13 +130,5 @@ public class ZkCmd implements Command {
     @Override
     public void unplug(Context context) {
 
-    }
-
-
-    private void handledStatus(Context context, boolean handled) {
-        //没有处理  打印help info
-        if (!handled) {
-            CmdUtils.writeMsg(context, this.getDescriptor().getUsage());
-        }
     }
 }

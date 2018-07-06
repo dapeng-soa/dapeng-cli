@@ -1,0 +1,9 @@
+help
+help service
+service -list
+set -zkhost 10.10.10.45:2181
+service -list
+json -s com.today.soa.idgen.service.IDService -v 1.0.0 -m genId
+request -metadata com.today.soa.idgen.service.IDService -v 1.0.0
+method -s com.today.api.order.service.OrderService
+service -method com.today.api.order.service.OrderService

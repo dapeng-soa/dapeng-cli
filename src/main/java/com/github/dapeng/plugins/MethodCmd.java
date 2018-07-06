@@ -1,18 +1,16 @@
 package com.github.dapeng.plugins;
 
-import com.github.dapeng.core.metadata.Service;
-import com.github.dapeng.openapi.cache.ServiceCache;
 import com.github.dapeng.utils.CmdProperties;
 import com.github.dapeng.utils.CmdUtils;
-import com.github.dapeng.utils.ZookeeperUtils;
 import org.clamshellcli.api.Command;
 import org.clamshellcli.api.Configurator;
 import org.clamshellcli.api.Context;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 获得service 方法列表
@@ -52,7 +50,7 @@ public class MethodCmd implements Command {
             public Map<String, String> getArguments() {
                 if (args != null) return args;
                 args = new LinkedHashMap();
-                args.put(CmdProperties.KEY_ARGS_SERVICE, "type '-s [serviceName:version]' to get the service method list.....");
+                args.put(CmdProperties.KEY_ARGS_SERVICE, "type '-s [serviceName]' to get the service method list.....");
                 return args;
             }
         };
@@ -72,13 +70,13 @@ public class MethodCmd implements Command {
 
         //1. 获取服务列表
         if (serviceName != null) {
-            List<String> mothods = getRuntimeServiceMethods(context, serviceName);
+            List<String> mothods = CmdUtils.getRuntimeServiceMethods(context, serviceName);
             if (mothods != null && !mothods.isEmpty()) {
                 mothods.forEach(i -> {
                     CmdUtils.writeMsg(context, i);
                 });
             } else {
-                CmdUtils.writeMsg(context, " the service["+serviceName+"] not found method ... ");
+                CmdUtils.writeMsg(context, " the service[" + serviceName + "] not found method ... ");
             }
         }
         return null;
@@ -93,27 +91,4 @@ public class MethodCmd implements Command {
     public void unplug(Context context) {
 
     }
-
-
-    private List<String> getRuntimeServiceMethods(Context context,String serviceName) {
-        if (!ZookeeperUtils.isContextInitialized()) {
-            ZookeeperUtils.connect();
-        }
-        logger.info("[getRuntimeServiceMethods] ==>ServiceCache.getServices()=[{}]", ServiceCache.getServices());
-        List<Map.Entry<String, Service>> serviceMapLists = ServiceCache.getServices().entrySet().stream().filter(i -> (i.getValue().getNamespace() + "." + i.getKey()).equalsIgnoreCase(serviceName)).collect(Collectors.toList());
-        if(serviceMapLists  != null  && !serviceMapLists.isEmpty() ){
-            List<String> methods = new ArrayList<>();
-            serviceMapLists.get(0).getValue().getMethods().stream().forEach(i->{
-                methods.add(i.getName());
-            });
-            logger.info("[getRuntimeServiceMethods] ==>methods=[{}]",methods);
-            //Collections.sort(methods);
-            methods.sort(String::compareToIgnoreCase);
-            return methods;
-        }else {
-            CmdUtils.writeMsg(context, " the service["+serviceName+"] not found... ");
-            return null;
-        }
-    }
-
 }

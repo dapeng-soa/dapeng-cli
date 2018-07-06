@@ -15,6 +15,7 @@ import static com.github.dapeng.utils.CmdProperties.*;
 
 public class ZkCompleter implements Completer {
     private static final Logger logger = LoggerFactory.getLogger(ZkController.class);
+
     StringsCompleter cmdNamesCompleter;
     Map<String, List<String>> cmdHints;
 
@@ -27,7 +28,7 @@ public class ZkCompleter implements Completer {
         String cmd = input != null ? input.substring(0, cursor) : "";
         String secondCmd = null;
 
-
+        logger.debug("**************************");
         logger.info("ZkCompleter.complete ==>input = [{}],cmd=[{}]", input, cmd);
         // display all avail cmds
         if (cmd.isEmpty() && cmdHints != null) {
@@ -145,7 +146,7 @@ public class ZkCompleter implements Completer {
         //过滤自动补全 结果
         filterCompleterResultByCommand(secondCmd, result);
 
-        result.sort((_a,_b) -> _a.toString().compareToIgnoreCase(_b.toString()));
+        result.sort((_a, _b) -> _a.toString().compareToIgnoreCase(_b.toString()));
         return result.isEmpty() ? -1 : cmd.length() + 1;
     }
 
@@ -193,9 +194,23 @@ public class ZkCompleter implements Completer {
         List<CharSequence> filterKeys;
         List<CharSequence> finalResult;
         String optionKey;
-        if(command == null ) command = "default";
+        if (command == null) command = "default";
         switch (command) {
-            case KEY_ARGS_ZK_ROUTE: //-route
+            //不过滤 runtime 路径
+            case KEY_ARGS_ZK_NODE: //-nodes
+            case KEY_ARGS_ZK_GET://-get
+                break;
+            case KEY_ARGS_RUNTIME: //-runtime
+                optionKey = RUNTIME_PATH + "/";
+                logger.info("[filterCompleterResultByCommand] ==>Retain optionKey=[{}]", optionKey);
+                filterKeys = result.stream().filter(res -> res.toString().contains(optionKey)).collect(Collectors.toList());
+                finalResult = filterKeys.stream().map(item -> item.toString().substring(item.toString().lastIndexOf("/") + 1)).collect(Collectors.toList());
+                //System.out.println(" finalResult: " + finalResult);
+                result.clear();
+                result.addAll(finalResult);
+                break;
+
+            case KEY_ARGS_ROUTE: //-route
                 optionKey = ROUTE_PATH + "/";
                 logger.info("[filterCompleterResultByCommand] ==>Retain optionKey=[{}]", optionKey);
                 filterKeys = result.stream().filter(res -> res.toString().contains(optionKey)).collect(Collectors.toList());
@@ -206,6 +221,9 @@ public class ZkCompleter implements Completer {
                 break;
             case KEY_ARGS_METADATA: //-metadata
             case KEY_ARGS_SERVICE: //-s
+            case KEY_ARGS_CONFIG: //-config
+            case KEY_ARGS_METHOD: //-method
+            case KEY_ARGS_ECHO: //-echo
                 optionKey = CONFIG_PATH + "/";
                 logger.info("[filterCompleterResultByCommand] ==>Retain optionKey=[{}]", optionKey);
                 filterKeys = result.stream().filter(res -> res.toString().contains(CONFIG_PATH + "/")).collect(Collectors.toList());
@@ -213,6 +231,11 @@ public class ZkCompleter implements Completer {
                 //System.out.println(" finalResult: " + finalResult);
                 result.clear();
                 result.addAll(finalResult);
+                break;
+
+
+            case KEY_ARGS_WHITELIST:// -whitelist 后面不要属性值
+                result.clear();
                 break;
 
             //其他情况  要过滤runtime 路径，不能随便修改
