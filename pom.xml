@@ -16,7 +16,7 @@
         <scala.version>2.12.2</scala.version>
         <clamshellcli.groupId>org.clamshellcli</clamshellcli.groupId>
         <clamshellcli.version>0.5.2</clamshellcli.version>
-        <dapeng.version>2.0.3-SNAPSHOT</dapeng.version>
+        <dapeng.version>2.0.4</dapeng.version>
         <jcommander.version>1.17</jcommander.version>
     </properties>
 
@@ -96,6 +96,26 @@
             </exclusions>
         </dependency>
 
+        <!--httpclient-->
+        <!-- commons-codec base64 编码包 -->
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.10</version>
+        </dependency>
+
+        <!-- commons-httpclient 网络工具包 -->
+        <dependency>
+            <groupId>commons-httpclient</groupId>
+            <artifactId>commons-httpclient</artifactId>
+            <version>3.1</version>
+        </dependency>
+       <!-- <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.2</version>
+        </dependency>-->
+
 
         <!--logback-->
         <dependency>
@@ -115,6 +135,14 @@
             <artifactId>slf4j-api</artifactId>
             <version>${slf4j-version}</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/commons-lang/commons-lang -->
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.6</version>
+        </dependency>
+
 
     </dependencies>
 

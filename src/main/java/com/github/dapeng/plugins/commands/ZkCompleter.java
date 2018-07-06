@@ -223,6 +223,7 @@ public class ZkCompleter implements Completer {
             case KEY_ARGS_SERVICE: //-s
             case KEY_ARGS_CONFIG: //-config
             case KEY_ARGS_METHOD: //-method
+            case KEY_ARGS_ECHO: //-echo
                 optionKey = CONFIG_PATH + "/";
                 logger.info("[filterCompleterResultByCommand] ==>Retain optionKey=[{}]", optionKey);
                 filterKeys = result.stream().filter(res -> res.toString().contains(CONFIG_PATH + "/")).collect(Collectors.toList());

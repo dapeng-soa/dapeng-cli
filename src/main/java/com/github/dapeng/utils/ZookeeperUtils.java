@@ -94,11 +94,6 @@ public class ZookeeperUtils {
                 zkBootstrap = new ZkBootstrap();
                 zkBootstrap.init();
             }
-            try {
-                Thread.sleep(1000 * 10);
-            } catch (Exception e) {
-                logger.info("[connect] ==>Failed to wait for zookeeper init.. cause:{}", e.getMessage());
-            }
             contextInitialized = true;
 
 

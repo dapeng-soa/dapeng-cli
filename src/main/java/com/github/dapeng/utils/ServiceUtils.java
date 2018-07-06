@@ -257,7 +257,7 @@ public class ServiceUtils {
         if (bizService == null) {
             System.out.println("bizService not found[service:" + service + ", version:" + version + "]");
             return String.format("{\"" +
-                    "\":\"%s\", \"responseMsg\":\"%s\", \"success\":\"%s\", \"status\":0}", SoaCode.NotMatchedService.getCode(), SoaCode.NotMatchedService.getMsg(), "{}");
+                    "\":\"%s\", \"responseMsg\":\"%s\", \"success\":\"%s\", \"status\":0}", SoaCode.NoMatchedService.getCode(), SoaCode.NoMatchedService.getMsg(), "{}");
         }
 
         logger.info("the current invocationContext Info : {}", invocationCtx.toString());

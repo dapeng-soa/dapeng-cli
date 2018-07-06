@@ -212,7 +212,8 @@ public class SetCmd implements Command {
                     break;
 
                 case SET_SESSIONTID:
-                    invocationContext.sessionTid((cmdParams.get(k)));
+                    //invocationContext.sessionTid((cmdParams.get(k)));
+                    invocationContext.sessionTid(Long.parseLong(cmdParams.get(k)));
                     break;
 
                 case SET_USERID:
@@ -222,7 +223,7 @@ public class SetCmd implements Command {
                     invocationContext.userIp(IPUtils.transferIp(cmdParams.get(k)));
                     break;
                 case SET_CALLERTID:
-                    invocationContext.callerTid(cmdParams.get(k));
+                    invocationContext.callerTid(Long.parseLong(cmdParams.get(k)));
                     break;
                 case SET_OPERATORID:
                     invocationContext.operatorId(Long.parseLong(cmdParams.get(k)));

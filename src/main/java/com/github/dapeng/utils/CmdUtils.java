@@ -145,17 +145,17 @@ public class CmdUtils {
         int charIndex = 0;
 
         while (charIndex < cmdLine.length()) {
-            int startIndex = cmdLine.indexOf('-', charIndex);
+            int startIndex = cmdLine.indexOf(" -", charIndex)+1;
             int endIndex = cmdLine.indexOf(' ', startIndex);
             String key = cmdLine.substring(startIndex, endIndex);
 
             startIndex = cmdLine.indexOf(' ', endIndex);
-            endIndex = cmdLine.indexOf('-', startIndex) > 0 ? cmdLine.indexOf('-', startIndex) : cmdLine.length();
+            endIndex = cmdLine.indexOf(" -", startIndex) > 0 ? cmdLine.indexOf(" -", startIndex) : cmdLine.length();
             String value = cmdLine.substring(startIndex, endIndex);
             charIndex = endIndex;
-            if(value.trim().isEmpty()){
+            if (value.trim().isEmpty()) {
                 args.put(key.trim(), key.trim());
-            }else{
+            } else {
                 args.put(key.trim(), value.trim());
             }
         }

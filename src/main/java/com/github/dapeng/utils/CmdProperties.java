@@ -34,9 +34,19 @@ public class CmdProperties {
     public static final String KEY_ARGS_CONFIG = "-config";
     public static final String KEY_ARGS_WHITELIST = "-whitelist";
     public static final String KEY_ARGS_METHOD = "-method";
-
+    public static final String KEY_ARGS_DATE = "-date";
 
     public static final String KEY_SOA_ZOO_KEEPER_HOST = "soa.zookeeper.host";
+
+    //log
+    public static final String KEY_ARGS_HOSTNAME = "-hostname";
+    public static final String KEY_ARGS_SESSIONTID = "-sessiontid";
+    public static final String KEY_ARGS_TAG = "-tag";
+    public static final String KEY_ARGS_THREADPOOL = "-threadpool";
+    public static final String KEY_ARGS_SLOGTIME = "-slogtime";
+    public static final String KEY_ARGS_ELOGTIME = "-elogtime";
+
+
 
     //zookeeper properties
     public static final String CONFIG_PATH = "/soa/config/services";

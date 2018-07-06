@@ -52,6 +52,13 @@ public class ZkController implements InputController {
 
     @Override
     public void plug(Context plug) {
+
+        logger.info("**************log-info.. ");
+        logger.debug("**************log-warn.. ");
+        logger.warn("**************log-info.. ");
+        logger.error("**************log-error.. ");
+        logger.trace("**************log-trace.. ");
+
         List<Command> allCmds = this.loadCommands(plug);
         if (allCmds.size() > 0) {
             plug.putValue("key.commands", allCmds);
