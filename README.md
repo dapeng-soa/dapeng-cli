@@ -38,10 +38,10 @@
      2.8  set -callerfrom [value] 设置invocationContext callerfrom
 
 ###    3. unset 命令使用说明[撤销 set 指令的赋值]  
-     3.2  unset -timeout    撤销invocationContext 超时时间
+     3.2  unset -timeout     撤销invocationContext 超时时间
      3.3  unset -callermid   撤销invocationContext Callermid
      3.4  unset -calleeip    撤销invocationContext calleeip
-     3.5  unset -calleeport 撤销invocationContext calleeport
+     3.5  unset -calleeport  撤销invocationContext calleeport
      3.6  unset -callerip    撤销invocationContext callerip
      3.7  unset -zkhost      撤销 zkhost
      3.8  unset -callerfrom  撤销invocationContext callerfrom
@@ -52,7 +52,7 @@
       
 ###    5. json 命令使用说明[获取服务调用的json格式样例]  
       5.1 json -s [serviceName] -v [version] -m [method]                    获取服务调用的json格式样例在控制台打印;eg:  json -s com.today.api.order.service.OrderService -m queryOrderList -v 1.0.0
-      5.2 json -s [serviceName] -v [version] -m [method] -f [path+filename] 获取服务调用的json格式样例,保存到指定文件
+      5.2 json -s [serviceName] -v [version] -m [method] -o [path+filename] 获取服务调用的json格式样例,保存到指定文件
       
 ###    6. service 命令使用说明[获取当前运行时实例的服务列表]  
       6.1 service -list    获取当前运行时实例的服务列表;eg: service -list
@@ -73,7 +73,7 @@
           6.5.2 service -method                               获取服务方法列表 输出到控制台
      6.6 service -whitelist 增加服务白名单设置 控制台显示
           6.6.1 service -whitelist                                          获取白名单服务信息 输出到控制台
-          6.6.2 service -whitelist -f /tmp/whitelist.json                   获取白名单服务信息 输出到文件
+          6.6.2 service -whitelist -o /tmp/whitelist.json                   获取白名单服务信息 输出到文件
           6.6.3 service -whitelist -d com.today.api.idgen.service.IDservice 设置白名单服务信息
       
 ###    7. method 命令使用说明[获取服务接口的方法列表]  
@@ -86,10 +86,22 @@
           -m method        方法名
           -f fileName      请求的json格式文件    
       8.2 request -metadata [serviceName] -v [version]                     请求服务接口的元数据;eg: request -metadata com.today.api.order.service.OrderService -v 1.0.0
-      8.3 request -metadata [serviceName] -v [version]  -f [path+fileName] 请求服务接口的元数据,并保存到指定文件
+      8.3 request -metadata [serviceName] -v [version]  -o [path+fileName] 请求服务接口的元数据,并保存到指定文件
       8.4 request -echo [serviceName] -v [version]                         请求服务接口echo检查;eg: request -echo com.today.api.order.service.OrderService -v 1.0.0
-      8.5 request -echo [serviceName] -v [version]  -f [path+fileName]     请求服务接口echo检查,并保存到指定文件
+      8.5 request -echo [serviceName] -v [version]  -o [path+fileName]     请求服务接口echo检查,并保存到指定文件
 
-###    9. help 命令使用说明[通过  help cmd 可以查看命令使用指南]  
-      9.1 help     查看所有指令的用法
-      9.2 help cmd 查看某个指令的详细用法
+###    9. log 命令使用说明[查看堆栈错误日志]  
+      使用例子： log -date 2018.07.05 -o g://log.txt -slogtime 07-05 16:42:01 121 -elogtime 07-05 16:44:00 126 -hostname 127.0.0.1 -tag OrderService 
+      可选参数：
+          -date 2018.07.05        日期
+          -hostname hostname      hostName
+          -sessiontid sessiontid  sessiontid
+          -threadpool threadpool  线程号    
+          -tag tag                tag 
+          -slogtime slogtime      日志开始时间
+          -elogtime elogtime      日志结束时间
+          -o                      查询日志保存到指定文件
+      
+###    10. help 命令使用说明[通过  help cmd 可以查看命令使用指南]  
+      10.1 help     查看所有指令的用法
+      10.2 help cmd 查看某个指令的详细用法
