@@ -10,4 +10,5 @@ com.github.dapeng.plugins.RequestCmd
 com.github.dapeng.plugins.SetCmd
 com.github.dapeng.plugins.UnSetCmd
 com.github.dapeng.plugins.MethodCmd
-com.github.dapeng.plugins.logAnalysCmd
+com.github.dapeng.plugins.LogAnalysCmd
+com.github.dapeng.plugins.DecodeCmd

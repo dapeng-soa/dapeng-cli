@@ -1,9 +1,6 @@
 package com.github.dapeng.plugins;
 
-import com.github.dapeng.utils.CmdProperties;
-import com.github.dapeng.utils.CmdUtils;
-import com.github.dapeng.utils.HttpUtils;
-import com.github.dapeng.utils.ServiceUtils;
+import com.github.dapeng.utils.*;
 import com.google.gson.Gson;
 import org.apache.commons.lang.StringUtils;
 import org.clamshellcli.api.Command;
@@ -12,19 +9,20 @@ import org.clamshellcli.api.Context;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
 
 /**
- * error 日志分析
- *
- * @author huyj
- * @Created 2018/6/20 19:36
+ * json 反序列化
  */
-public class logAnalysCmd implements Command {
-    private static final Logger logger = LoggerFactory.getLogger(logAnalysCmd.class);
+public class DecodeCmd implements Command {
+    private static final Logger logger = LoggerFactory.getLogger(LogAnalysCmd.class);
 
     private static final String NAMESPACE = "dapeng";
-    private static final String ACTION_NAME = "log";
+    private static final String ACTION_NAME = "decode";
 
     @Override
     public Command.Descriptor getDescriptor() {
@@ -38,18 +36,18 @@ public class logAnalysCmd implements Command {
             }
 
             public String getDescription() {
-                return "query the Error stack Info. ";
+                return "decode the req/resp Binary to json. ";
             }
 
             public String getUsage() {
                 StringBuilder sb = new StringBuilder();
-                sb.append(Configurator.VALUE_LINE_SEP).append(" log -date");
-                sb.append(Configurator.VALUE_LINE_SEP).append(" log -hostname");
-                sb.append(Configurator.VALUE_LINE_SEP).append(" log -sessiontid");
-                sb.append(Configurator.VALUE_LINE_SEP).append(" log -threadpool");
-                sb.append(Configurator.VALUE_LINE_SEP).append(" log -tag");
-                sb.append(Configurator.VALUE_LINE_SEP).append(" log -slogtime");
-                sb.append(Configurator.VALUE_LINE_SEP).append(" log -elogtime");
+                sb.append(Configurator.VALUE_LINE_SEP).append(" decode -s");
+                sb.append(Configurator.VALUE_LINE_SEP).append(" decode -v");
+                sb.append(Configurator.VALUE_LINE_SEP).append(" decode -m");
+                sb.append(Configurator.VALUE_LINE_SEP).append(" decode -req");
+                sb.append(Configurator.VALUE_LINE_SEP).append(" decode -resp");
+                sb.append(Configurator.VALUE_LINE_SEP).append(" decode -f");
+                sb.append(Configurator.VALUE_LINE_SEP).append(" decode -o");
                 return sb.toString();
             }
 
@@ -58,20 +56,18 @@ public class logAnalysCmd implements Command {
             public Map<String, String> getArguments() {
                 if (args != null) return args;
                 args = new LinkedHashMap();
-                args.put(CmdProperties.KEY_ARGS_DATE, "type '-date [2018.02.16]' to query the date error log.....");
-
-                args.put(CmdProperties.KEY_ARGS_HOSTNAME, "type '-hostname ' to filter the log by hostname .....");
-                args.put(CmdProperties.KEY_ARGS_SESSIONTID, "type '-sessiontid ' to filter the log by sessiontid .....");
-                args.put(CmdProperties.KEY_ARGS_THREADPOOL, "type '-threadpool ' to filter the log by threadpool .....");
-                args.put(CmdProperties.KEY_ARGS_TAG, "type '-tag ' to filter the log by tag .....");
-                args.put(CmdProperties.KEY_ARGS_SLOGTIME, "type '-slogtime ' to query log after the time .....");
-                args.put(CmdProperties.KEY_ARGS_ELOGTIME, "type '-elogtime ' to query log before the time .....");
-
-                args.put(CmdProperties.KEY_ARGS_FILE_OUT, "type '-o ' to write data to file.");
+                args.put(CmdProperties.KEY_ARGS_SERVICE, "type '-s service' to specific service(package + serviceName).");
+                args.put(CmdProperties.KEY_ARGS_VERSION, "type '-v serviceVersion' to specific serviceVersion.");
+                args.put(CmdProperties.KEY_ARGS_SERVICE_METHOD, "type '-m method' to specific service method.");
+                args.put(CmdProperties.KEY_ARGS_FILE_READ, "type '-f file(path + fileName)' to get request json content from file.");
+                args.put(CmdProperties.KEY_ARGS_FILE_OUT, "type '-o file(path + fileName)' to save data to file.");
+                args.put(CmdProperties.KEY_ARGS_REQ, "type '-req' to Deserialize request.");
+                args.put(CmdProperties.KEY_ARGS_RESP, "type '-resp'  to Deserialize response.");
                 return args;
             }
         };
     }
+
 
     /**
      * 1. 获取运行时服务的 方法列表   log  -date
@@ -84,49 +80,36 @@ public class logAnalysCmd implements Command {
         boolean handled = false;
         Map<String, String> inputArgs = CmdUtils._getCmdArgs(context);
         logger.info("[execute] ==> inputArgs=[{}]", inputArgs);
-        String args_date = inputArgs.get(CmdProperties.KEY_ARGS_DATE);
+
+        String args_service = inputArgs.get(CmdProperties.KEY_ARGS_SERVICE);
+        String args_method = inputArgs.get(CmdProperties.KEY_ARGS_SERVICE_METHOD);
+        String args_version = inputArgs.get(CmdProperties.KEY_ARGS_VERSION);
+
+        String args_req = inputArgs.get(CmdProperties.KEY_ARGS_REQ);
+        String args_resp = inputArgs.get(CmdProperties.KEY_ARGS_RESP);
+
         String file_out = inputArgs.get(CmdProperties.KEY_ARGS_FILE_OUT);
-        // query param
-        //String args_level
-        String args_hostname = inputArgs.get(CmdProperties.KEY_ARGS_HOSTNAME);
-        String args_sessionTid = inputArgs.get(CmdProperties.KEY_ARGS_SESSIONTID);
-        String args_tag = inputArgs.get(CmdProperties.KEY_ARGS_TAG);
-        String args_threadPool = inputArgs.get(CmdProperties.KEY_ARGS_THREADPOOL);
-        String args_slogtime = inputArgs.get(CmdProperties.KEY_ARGS_SLOGTIME);
-        String args_elogtime = inputArgs.get(CmdProperties.KEY_ARGS_ELOGTIME);
+        String file_read = inputArgs.get(CmdProperties.KEY_ARGS_FILE_READ);
 
-        List<Map> listParamMap = new ArrayList<>();
+        if (CmdUtils.isNotEmpty(args_service) && CmdUtils.isNotEmpty(args_method) && CmdUtils.isNotEmpty(args_version) && CmdUtils.isNotEmpty(file_read)) {
+            String hexStr = ServiceUtils.readFromeFileByline(file_read);
 
-        if (!CmdUtils.isEmpty(args_date)) {
+            String parseType = null;
+            if (CmdUtils.isNotEmpty(args_req)) parseType = "request";
+            if (CmdUtils.isNotEmpty(args_resp)) parseType = "response";
 
-            listParamMap.add(putMap(null, "term", putMap(null, "level", "ERROR")));
-            if (!CmdUtils.isEmpty(args_hostname))
-                listParamMap.add(putMap(null, "term", putMap(null, "hostname", args_hostname)));
-            if (!CmdUtils.isEmpty(args_sessionTid))
-                listParamMap.add(putMap(null, "term", putMap(null, "sessionTid", args_sessionTid)));
-            if (!CmdUtils.isEmpty(args_tag)) listParamMap.add(putMap(null, "term", putMap(null, "tag", args_tag)));
-            if (!CmdUtils.isEmpty(args_threadPool))
-                listParamMap.add(putMap(null, "term", putMap(null, "threadPool", args_threadPool)));
-
-            if (!CmdUtils.isEmpty(args_slogtime) || !CmdUtils.isEmpty(args_elogtime)) {
-                Map timeMap = new HashMap();
-                if (!CmdUtils.isEmpty(args_slogtime)) putMap(timeMap, "gt", args_slogtime);
-                if (!CmdUtils.isEmpty(args_elogtime)) putMap(timeMap, "lt", args_elogtime);
-
-                listParamMap.add(putMap(null, "range", putMap(null, "logtime", timeMap)));
+            if (CmdUtils.isNotEmpty(parseType)) {
+                String result = JsonSerializerUtils.toJson(args_service, args_method, args_version, hexStr, parseType);
+                //-o
+                if (CmdUtils.isNotEmpty(file_out)) {
+                    ServiceUtils.writerFile(context, file_out, result);
+                } else {
+                    //print console
+                    CmdUtils.writeMsg(context, result);
+                }
+                handled = true;
             }
-
-            String errorLog = loadErrorLog(args_date, listParamMap);
-            //-o
-            if (!CmdUtils.isEmpty(file_out)) {
-                ServiceUtils.writerFile(context, file_out, errorLog);
-            } else {
-                //print console
-                CmdUtils.writeMsg(context, errorLog);
-            }
-            handled = true;
         }
-
         CmdUtils.handledStatus(context, handled, this.getDescriptor().getUsage());
         return null;
     }

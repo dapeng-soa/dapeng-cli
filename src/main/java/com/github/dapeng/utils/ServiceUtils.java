@@ -225,6 +225,19 @@ public class ServiceUtils {
         return sb.toString();
     }
 
+    public static String readFromeFileByline(String jsonFile) {
+        StringBuilder sb = new StringBuilder();
+        try {
+            List<String> lines = Files.readAllLines(Paths.get(jsonFile), StandardCharsets.UTF_8);
+            for (String line : lines) {
+                sb.append(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return sb.toString();
+    }
+
     public static List<String> readFromeFile2List(String jsonFile) {
         List<String> lines = null;
         try {

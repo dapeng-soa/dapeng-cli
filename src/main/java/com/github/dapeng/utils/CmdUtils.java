@@ -123,7 +123,7 @@ public class CmdUtils {
                     default:
                         if ((i + 1) < inputArgs.length && arg.contains("-")) {
                             args.put(arg, inputArgs[i + 1]);
-                        }else if((i + 1) == inputArgs.length && arg.contains("-")){
+                        } else if ((i + 1) == inputArgs.length && arg.contains("-")) {
                             args.put(arg, arg);
                         }
                         break;
@@ -137,15 +137,19 @@ public class CmdUtils {
         return value == null || value.length() <= 0;
     }
 
+    public static boolean isNotEmpty(String value) {
+        return !isEmpty(value);
+    }
+
     public static Map<String, String> _getCmdArgs(Context ctx) {
         String cmdLine = (String) ctx.getValue(Context.KEY_COMMAND_LINE_INPUT);
-        cmdLine+=" ";//不加" "  类似这种会报错 service -list
-        logger.info("[_getCmdArgs] ==>cmdLine=[{}]",cmdLine);
+        cmdLine += " ";//不加" "  类似这种会报错 service -list
+        logger.info("[_getCmdArgs] ==>cmdLine=[{}]", cmdLine);
         Map<String, String> args = new HashMap<>();
         int charIndex = 0;
 
         while (charIndex < cmdLine.length()) {
-            int startIndex = cmdLine.indexOf(" -", charIndex)+1;
+            int startIndex = cmdLine.indexOf(" -", charIndex) + 1;
             int endIndex = cmdLine.indexOf(' ', startIndex);
             String key = cmdLine.substring(startIndex, endIndex);
 
@@ -211,7 +215,7 @@ public class CmdUtils {
         }
     }
 
-    public static void handledStatus(Context context, boolean handled,String cmdUsage) {
+    public static void handledStatus(Context context, boolean handled, String cmdUsage) {
         //没有处理  打印help info
         if (!handled) {
             CmdUtils.writeMsg(context, cmdUsage);

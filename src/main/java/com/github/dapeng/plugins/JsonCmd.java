@@ -12,7 +12,6 @@ import java.util.Map;
 
 public class JsonCmd implements Command {
 
-
     private static final String NAMESPACE = "syscmd";
     private static final String ACTION_NAME = "json";
 

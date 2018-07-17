@@ -36,6 +36,9 @@ public class CmdProperties {
     public static final String KEY_ARGS_METHOD = "-method";
     public static final String KEY_ARGS_DATE = "-date";
 
+    public static final String KEY_ARGS_REQ= "-req";
+    public static final String KEY_ARGS_RESP= "-resp";
+
     public static final String KEY_SOA_ZOO_KEEPER_HOST = "soa.zookeeper.host";
 
     //log
