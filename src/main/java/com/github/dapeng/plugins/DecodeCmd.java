@@ -105,7 +105,7 @@ public class DecodeCmd implements Command {
                     ServiceUtils.writerFile(context, file_out, result);
                 } else {
                     //print console
-                    CmdUtils.writeMsg(context, result);
+                    CmdUtils.writeMsg(context, "the "+parseType+" json is:\n"+ result);
                 }
                 handled = true;
             }

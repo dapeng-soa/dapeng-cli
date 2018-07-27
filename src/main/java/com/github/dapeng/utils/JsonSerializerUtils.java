@@ -27,7 +27,6 @@ public class JsonSerializerUtils {
         logger.info("***********");
         System.out.println("***********");
         //System.exit(-1);
-
     }
 
 
@@ -56,7 +55,7 @@ public class JsonSerializerUtils {
             e.printStackTrace();
             logger.error("SoaMessageParser parse info Error", e);
         }
-        System.out.println(parser.getBody());
+        //System.out.println(parser.getBody());
         byteBuf.release();
         return parser.getBody();
     }
