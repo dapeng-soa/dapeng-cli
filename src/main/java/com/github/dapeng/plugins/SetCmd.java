@@ -8,6 +8,7 @@ import com.github.dapeng.core.InvocationContext;
 import com.github.dapeng.core.InvocationContextImpl;
 import com.github.dapeng.core.enums.CodecProtocol;
 import com.github.dapeng.core.enums.LoadBalanceStrategy;
+import com.github.dapeng.core.helper.DapengUtil;
 import com.github.dapeng.core.helper.IPUtils;
 import com.github.dapeng.utils.CmdEnumUtils;
 import com.github.dapeng.utils.CmdUtils;
@@ -147,7 +148,7 @@ public class SetCmd implements Command {
             StringBuilder info = new StringBuilder(128);
             info.append("the setting info is:").append("\n");
             info.append("-- the Timeout: ").append(invocationContext.timeout().orElse(null)).append("\n");
-            info.append("-- the CalleeIp: ").append(invocationContext.calleeIp().orElse(null)).append("\n");
+            info.append("-- the CalleeIp: ").append(invocationContext.calleeIp().map(IPUtils::transferIp).orElse(null)).append("\n");
             info.append("-- the CalleePort: ").append(invocationContext.calleePort().orElse(null)).append("\n");
             info.append("-- the CallerMid: ").append(invocationContext.callerMid().orElse(null)).append("\n");
             /*info.append("-- the CallerFrom: ").append(invocationContext.callerFrom().orElse(null)).append("\n");
@@ -155,12 +156,12 @@ public class SetCmd implements Command {
             info.append("-- the zkHost: ").append(ZookeeperUtils.getZkHost()).append("\n");
             info.append("-- the cookie: ").append(invocationContext.cookies()).append("\n");
 
-            info.append("-- the sessionTid: ").append(invocationContext.sessionTid().orElse(null)).append("\n");
+            info.append("-- the sessionTid: ").append(invocationContext.sessionTid().map(DapengUtil::longToHexStr).orElse(null)).append("\n");
             info.append("-- the userId: ").append(invocationContext.userId().orElse(null)).append("\n");
-            info.append("-- the userIp: ").append(invocationContext.userIp().orElse(null)).append("\n");
+            info.append("-- the userIp: ").append(invocationContext.userIp().map(IPUtils::transferIp).orElse(null)).append("\n");
             //info.append("transactionId: ").append(invocationContext.transactionId.orElse(null)).append("\n");
             //info.append("transactionSequence: ").append(invocationContext.transactionSequence.orElse(null)).append("\n");
-            info.append("-- the callerTid: ").append(invocationContext.callerTid()).append("\n");
+            info.append("-- the callerTid: ").append(DapengUtil.longToHexStr(invocationContext.callerTid())).append("\n");
             info.append("-- the operatorId: ").append(invocationContext.operatorId().orElse(null)).append("\n");
             info.append("-- the loadBalanceStrategy: ").append(invocationContext.loadBalanceStrategy().orElse(null)).append("\n");
             //info.append("-- the seqId").append(Objects.isNull(invocationContext.seqId()) ? null : invocationContext.seqId()).append("\n");
