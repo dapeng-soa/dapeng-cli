@@ -16,7 +16,7 @@
         <scala.version>2.12.2</scala.version>
         <clamshellcli.groupId>org.clamshellcli</clamshellcli.groupId>
         <clamshellcli.version>0.5.2</clamshellcli.version>
-        <dapeng.version>2.0.4</dapeng.version>
+        <dapeng.version>2.0.5</dapeng.version>
         <jcommander.version>1.17</jcommander.version>
     </properties>
 
@@ -143,6 +143,12 @@
             <version>2.6</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.fusesource.jansi/jansi -->
+        <dependency>
+            <groupId>org.fusesource.jansi</groupId>
+            <artifactId>jansi</artifactId>
+            <version>1.11</version>
+        </dependency>
 
     </dependencies>
 

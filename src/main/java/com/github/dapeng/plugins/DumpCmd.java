@@ -48,7 +48,7 @@ public class DumpCmd implements Command {
             @Override
             public String getUsage() {
                 StringBuilder result = new StringBuilder();
-                result.append(Configurator.VALUE_LINE_SEP).append(" method -f /data/shm.data");
+                result.append(Configurator.VALUE_LINE_SEP).append(" dumpmem -f /data/shm.data");
                 return result.toString();
             }
 

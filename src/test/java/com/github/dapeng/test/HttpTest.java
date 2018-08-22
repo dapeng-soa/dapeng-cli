@@ -41,7 +41,7 @@ public class HttpTest {
 
     public static void main(String[] arg0) {
 
-        String date = "2018.07.05";
+        String date = "2018.07.22";
 
         List<Map> listParam = new ArrayList<>();
         listParam.add(putMap(null, "term", putMap(null, "level", "ERROR")));
@@ -49,10 +49,10 @@ public class HttpTest {
         //listParam.add(putMap(null, "term", putMap(null, "hostname", "192.168.10.125")));
        // listParam.add(putMap(null, "term", putMap(null, "sessionTid", "ac19000404c4ef77")));
 
-        Map timeMap = new HashMap();
+       /* Map timeMap = new HashMap();
         putMap(timeMap, "gt", "07-05 16:42:01 121");
         putMap(timeMap, "lt", "07-05 16:44:00 126");
-        listParam.add(putMap(null, "range", putMap(null, "logtime", timeMap)));
+        listParam.add(putMap(null, "range", putMap(null, "logtime", timeMap)));*/
 
 
         //listParam.add(putMap(null, "term", putMap(null, "logtime", "06-21 00:00:01 398")));

@@ -101,7 +101,10 @@
           -slogtime slogtime      日志开始时间
           -elogtime elogtime      日志结束时间
           -o                      查询日志保存到指定文件
+          
+  ###    10. dumpmem 命令使用说明[查看共享内存的限流数据]  
+       10.1  dumpmem -f [/data/shm.data]    查看共享内存的限流数据
       
-###    10. help 命令使用说明[通过  help cmd 可以查看命令使用指南]  
-      10.1 help     查看所有指令的用法
-      10.2 help cmd 查看某个指令的详细用法
+###    11. help 命令使用说明[通过  help cmd 可以查看命令使用指南]  
+      11.1 help     查看所有指令的用法
+      11.2 help cmd 查看某个指令的详细用法
