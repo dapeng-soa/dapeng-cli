@@ -50,8 +50,8 @@ public class SetCmd implements Command {
         public boolean calleeport = false;
         @Parameter(names = {"-callermid"}, required = false, description = "set the invocationContext attribute CallerMid. Usage -callermid.")
         public boolean callermid = false;
-        @Parameter(names = {"-callerfrom"}, required = false, description = "set the invocationContext attribute CallerFrom. Usage -callerfrom.")
-        public boolean callerfrom = false;
+        /*  @Parameter(names = {"-callerfrom"}, required = false, description = "set the invocationContext attribute CallerFrom. Usage -callerfrom.")
+          public boolean callerfrom = false;*/
         @Parameter(names = {"-callerip"}, required = false, description = "set the invocationContext attribute CallerIp. Usage -callerip.")
         public boolean callerip = false;
         @Parameter(names = {"-timeout"}, required = false, description = "set the invocationContext  TimeOut. Usage -timeout.")
@@ -151,8 +151,8 @@ public class SetCmd implements Command {
             info.append("-- the CalleeIp: ").append(invocationContext.calleeIp().map(IPUtils::transferIp).orElse(null)).append("\n");
             info.append("-- the CalleePort: ").append(invocationContext.calleePort().orElse(null)).append("\n");
             info.append("-- the CallerMid: ").append(invocationContext.callerMid().orElse(null)).append("\n");
-            /*info.append("-- the CallerFrom: ").append(invocationContext.callerFrom().orElse(null)).append("\n");
-            info.append("-- the CallerIp: ").append(invocationContext.call().orElse(null)).append("\n");*/
+            /*info.append("-- the CallerFrom: ").append(invocationContext.callerFrom().orElse(null)).append("\n");*/
+            info.append("-- the CallerIp: ").append(invocationContext.callerIp().map(IPUtils::transferIp).orElse(null)).append("\n");
             info.append("-- the zkHost: ").append(ZookeeperUtils.getZkHost()).append("\n");
             info.append("-- the cookie: ").append(invocationContext.cookies()).append("\n");
 
@@ -185,11 +185,12 @@ public class SetCmd implements Command {
                 case SET_CALLER_MID:
                     invocationContext.callerMid(cmdParams.get(k));
                     break;
-                //todo
-               /* case SET_CALLER_IP:
-                    ((InvocationContextImpl)invocationContext).callerIp(cmdParams.get(k));
+                case SET_CALLER_IP:
+                    invocationContext.callerIp(IPUtils.transferIp(cmdParams.get(k)));
                     break;
-                case SET_CALLER_FROM:
+
+                //todo
+               /*   case SET_CALLER_FROM:
                     break;*/
 
                 case SET_TIMEOUT:

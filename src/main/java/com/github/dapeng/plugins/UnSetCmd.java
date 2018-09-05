@@ -135,11 +135,11 @@ public class UnSetCmd implements Command {
                     case SET_CALLER_MID:
                         invocationContext.callerMid(null);
                         break;
-                    //todo
-                   /* case SET_CALLER_IP:
-                        ((InvocationContextImpl)invocationContext).callerIp(cmdParams.get(k));
+                   case SET_CALLER_IP:
+                       invocationContext.callerIp(null);
                         break;
-                    case SET_CALLER_FROM:
+                    //todo
+                   /* case SET_CALLER_FROM:
                         break;*/
 
                     case SET_TIMEOUT:

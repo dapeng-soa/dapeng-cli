@@ -3,6 +3,7 @@ package com.github.dapeng.utils;
 import com.github.dapeng.core.metadata.Method;
 import com.github.dapeng.core.metadata.Service;
 import com.github.dapeng.json.JsonSerializer;
+import com.github.dapeng.json.OptimizedMetadata;
 import com.github.dapeng.org.apache.thrift.TException;
 import com.github.dapeng.util.SoaMessageParser;
 import io.netty.buffer.ByteBuf;
@@ -43,9 +44,9 @@ public class JsonSerializerUtils {
         // System.out.println(dumpToStr(requestBuf));
         JsonSerializer jsonDecoder;
         if (parseType.equalsIgnoreCase("request")) {
-            jsonDecoder = new JsonSerializer(service, serviceMethod, version, serviceMethod.request);
+            jsonDecoder = new JsonSerializer(new OptimizedMetadata.OptimizedService(service), serviceMethod, version, new OptimizedMetadata.OptimizedStruct(serviceMethod.request));
         } else {
-            jsonDecoder = new JsonSerializer(service, serviceMethod, version, serviceMethod.response);
+            jsonDecoder = new JsonSerializer(new OptimizedMetadata.OptimizedService(service), serviceMethod, version, new OptimizedMetadata.OptimizedStruct(serviceMethod.response));
         }
         SoaMessageParser<String> parser = new SoaMessageParser<>(byteBuf, jsonDecoder);
         try {

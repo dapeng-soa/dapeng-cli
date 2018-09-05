@@ -6,6 +6,7 @@ import com.github.dapeng.core.SoaCode;
 import com.github.dapeng.core.SoaException;
 import com.github.dapeng.core.enums.CodecProtocol;
 import com.github.dapeng.core.metadata.*;
+import com.github.dapeng.json.OptimizedMetadata;
 import com.github.dapeng.metadata.MetadataClient;
 import com.github.dapeng.openapi.cache.ServiceCache;
 import com.github.dapeng.plugins.SetCmd;
@@ -280,7 +281,7 @@ public class ServiceUtils {
         InvocationContextImpl.Factory.currentInstance(invocationCtx);
         JsonPost jsonPost = new JsonPost(service, version, method, true);
         try {
-            return jsonPost.callServiceMethod(parameter, bizService);
+            return jsonPost.callServiceMethod(parameter, new OptimizedMetadata.OptimizedService(bizService));
         } catch (SoaException e) {
 
             System.out.println(e.getMsg());
