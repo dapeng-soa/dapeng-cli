@@ -6,7 +6,7 @@ import com.github.dapeng.core.SoaCode;
 import com.github.dapeng.core.SoaException;
 import com.github.dapeng.core.enums.CodecProtocol;
 import com.github.dapeng.core.metadata.*;
-import com.github.dapeng.json.OptimizedMetadata;
+import com.github.dapeng.json.OptimizedMetadata.OptimizedService;
 import com.github.dapeng.metadata.MetadataClient;
 import com.github.dapeng.openapi.cache.ServiceCache;
 import com.github.dapeng.plugins.SetCmd;
@@ -101,7 +101,7 @@ public class ServiceUtils {
 
     private static Service getService(String serviceName, String versionName) {
 
-        Service service = ServiceCache.getService(serviceName, versionName);
+        Service service = ServiceCache.getService(serviceName, versionName).getService();
         return service;
     }
 
@@ -267,7 +267,7 @@ public class ServiceUtils {
             invocationCtx.timeout(timeOut);
         }
         invocationCtx.codecProtocol(CodecProtocol.CompressedBinary);
-        Service bizService = ServiceCache.getService(service, version);
+        OptimizedService bizService = ServiceCache.getService(service, version);
         if (bizService == null) {
             System.out.println("bizService not found[service:" + service + ", version:" + version + "]");
             return String.format("{\"" +
@@ -281,7 +281,7 @@ public class ServiceUtils {
         InvocationContextImpl.Factory.currentInstance(invocationCtx);
         JsonPost jsonPost = new JsonPost(service, version, method, true);
         try {
-            return jsonPost.callServiceMethod(parameter, new OptimizedMetadata.OptimizedService(bizService));
+            return jsonPost.callServiceMethod(parameter, bizService);
         } catch (SoaException e) {
 
             System.out.println(e.getMsg());

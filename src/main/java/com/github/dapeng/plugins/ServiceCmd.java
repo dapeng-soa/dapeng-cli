@@ -253,7 +253,7 @@ public class ServiceCmd implements Command {
         }
         logger.info("[getRuntimeService] ==>ServiceCache.getServices()=[{}]", ServiceCache.getServices());
         //List<String> services = ZookeeperUtils.getRuntimeServices();
-        List<String> services = ServiceCache.getServices().entrySet().stream().map(i -> i.getValue().getNamespace() + "." + i.getKey()).collect(Collectors.toList());
+        List<String> services = ServiceCache.getServices().entrySet().stream().map(i -> i.getValue().getService().getNamespace() + "." + i.getKey()).collect(Collectors.toList());
         //Collections.sort(services);
         services.sort(String::compareToIgnoreCase);
         return services;

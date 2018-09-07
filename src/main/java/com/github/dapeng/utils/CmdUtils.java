@@ -1,6 +1,6 @@
 package com.github.dapeng.utils;
 
-import com.github.dapeng.core.metadata.Service;
+import com.github.dapeng.json.OptimizedMetadata;
 import com.github.dapeng.openapi.cache.ServiceCache;
 import org.clamshellcli.api.Context;
 import org.clamshellcli.api.IOConsole;
@@ -199,10 +199,10 @@ public class CmdUtils {
             ZookeeperUtils.connect();
         }
         logger.info("[getRuntimeServiceMethods] ==>ServiceCache.getServices()=[{}]", ServiceCache.getServices());
-        List<Map.Entry<String, Service>> serviceMapLists = ServiceCache.getServices().entrySet().stream().filter(i -> (i.getValue().getNamespace() + "." + i.getKey().split(":")[0]).equalsIgnoreCase(serviceName)).collect(Collectors.toList());
+        List<Map.Entry<String, OptimizedMetadata.OptimizedService>> serviceMapLists = ServiceCache.getServices().entrySet().stream().filter(i -> (i.getValue().getService().getNamespace() + "." + i.getKey().split(":")[0]).equalsIgnoreCase(serviceName)).collect(Collectors.toList());
         if (serviceMapLists != null && !serviceMapLists.isEmpty()) {
             List<String> methods = new ArrayList<>();
-            serviceMapLists.get(0).getValue().getMethods().stream().forEach(i -> {
+            serviceMapLists.get(0).getValue().getService().getMethods().stream().forEach(i -> {
                 methods.add(i.getName());
             });
             logger.info("[getRuntimeServiceMethods] ==>methods=[{}]", methods);
