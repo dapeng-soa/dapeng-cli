@@ -1,5 +1,6 @@
 package com.github.dapeng.plugins.commands;
 
+import com.github.dapeng.plugins.SetCmd;
 import com.github.dapeng.utils.CmdUtils;
 import jline.console.ConsoleReader;
 import jline.console.completer.FileNameCompleter;
@@ -71,6 +72,11 @@ public class ZkController implements InputController {
 
             //初始化zookeeper
             //ZookeeperUtils.connect();
+            //设置 callerMid   默认值dapeng-cli
+            SetCmd.invocationContext.callerMid("dapeng-cli");
+
+
+
         } else {
             //plug.getIoConsole().printf("%nNo commands were found for input controller [%s].%n", new Object[]{this.getClass().getName()});
         }
