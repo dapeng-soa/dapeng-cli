@@ -5,6 +5,7 @@ import com.github.dapeng.core.InvocationContextImpl;
 import com.github.dapeng.core.SoaCode;
 import com.github.dapeng.core.SoaException;
 import com.github.dapeng.core.enums.CodecProtocol;
+import com.github.dapeng.core.helper.DapengUtil;
 import com.github.dapeng.core.metadata.*;
 import com.github.dapeng.json.OptimizedMetadata.OptimizedService;
 import com.github.dapeng.metadata.MetadataClient;
@@ -258,7 +259,10 @@ public class ServiceUtils {
         invocationCtx.serviceName(service);
         invocationCtx.versionName(version);
         invocationCtx.methodName(method);
-        invocationCtx.callerMid("CmdCaller");
+        // TODO: 2018-10-24 设置callerMid 默认值 dapeng-cli
+        invocationCtx.callerMid("dapeng-cli");
+        // TODO: 2018-10-24 每次调用设置sessionTid
+        invocationCtx.sessionTid(DapengUtil.generateTid());
 
         logger.info("inCtx info: {}", invocationCtx.toString());
         if (!invocationCtx.timeout().isPresent()) {

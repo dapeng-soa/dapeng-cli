@@ -72,7 +72,7 @@ public class ZkController implements InputController {
 
             //初始化zookeeper
             //ZookeeperUtils.connect();
-            //设置 callerMid   默认值dapeng-cli
+            //// TODO: 2018-10-22  设置 callerMid   默认值dapeng-cli
             SetCmd.invocationContext.callerMid("dapeng-cli");
 
 
