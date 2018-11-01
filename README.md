@@ -9,7 +9,7 @@
         > cd dist  
         > java -jar cli.jar service -list  
  
-###   2.2 指令集(支持shell的标准用法)调用:  
+###   2.2 指令集(支持shell的标准用法,此方法在linux和mac上调用有效)调用:  
         > cd dist
         > java -jar cli.jar <<!
         > service -list
