@@ -16,19 +16,19 @@
         <scala.version>2.12.2</scala.version>
         <clamshellcli.groupId>org.clamshellcli</clamshellcli.groupId>
         <clamshellcli.version>0.5.2</clamshellcli.version>
-        <dapeng.version>2.0.5</dapeng.version>
+        <dapeng.version>2.1.1-SNAPSHOT</dapeng.version>
         <jcommander.version>1.17</jcommander.version>
     </properties>
 
 
     <dependencies>
         <dependency>
-            <groupId>com.github.dapeng</groupId>
+            <groupId>com.github.dapeng-soa</groupId>
             <artifactId>dapeng-open-api</artifactId>
             <version>${dapeng.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.github.dapeng</groupId>
+            <groupId>com.github.dapeng-soa</groupId>
             <artifactId>dapeng-core</artifactId>
             <version>${dapeng.version}</version>
         </dependency>
@@ -58,13 +58,13 @@
             </exclusions>
         </dependency>
         <dependency>
-            <groupId>com.github.dapeng</groupId>
+            <groupId>com.github.dapeng-soa</groupId>
             <artifactId>dapeng-client-netty</artifactId>
             <version>${dapeng.version}</version>
         </dependency>
 
         <dependency>
-            <groupId>com.github.dapeng</groupId>
+            <groupId>com.github.dapeng-soa</groupId>
             <artifactId>dapeng-json</artifactId>
             <version>${dapeng.version}</version>
         </dependency>
