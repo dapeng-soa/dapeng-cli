@@ -1,4 +1,4 @@
-命令行工具下载 http://pms.today36524.com.cn:8083/basic-services/dapeng-cli
+命令行工具下载 http://pms.today36524.td:8083/basic-services/dapeng-cli
 
 ## 1.普通使用方式:  
     > cd dist  
