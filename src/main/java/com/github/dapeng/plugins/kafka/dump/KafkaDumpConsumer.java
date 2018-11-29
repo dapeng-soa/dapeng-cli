@@ -77,30 +77,37 @@ public class KafkaDumpConsumer implements DumpConsumer {
         while (isRunning) {
             ConsumerRecords<Long, byte[]> records = consumer.poll(100);
             for (ConsumerRecord<Long, byte[]> record : records) {
-                if (counter.incrementAndGet() <= config.getLimit()) {
-                    //metadata
-                    MsgMetadata metadata = DumpUtils.buildConsumerMetadata(record);
-                    String json = null;
-                    try {
-                        json = KafkaMessageDecoder.dealMessage(record.value());
-                    } catch (Exception e) {
-                        log.info("consumer fetch message failed when dump some message,cause:{}", e.getMessage());
-                    }
-                    if (json == null) {
-                        json = new String(record.value(), StandardCharsets.UTF_8);
-                    }
-
-                    String output = String.format("序号:%d,当前消息元数据信息:\n %s \n消息内容:\n %s \n",
-                            counter.get(), DumpUtils.toJson(metadata), json);
-                    log.info(output);
-
-                    CmdUtils.writeMsg(context, output);
+                if (config.getLimit() == null) {
+                    doConsumer(record);
+                } else if (counter.incrementAndGet() <= config.getLimit()) {
+                    doConsumer(record);
                 } else {
                     break loop;
                 }
             }
         }
         stop();
+    }
+
+
+    private void doConsumer(ConsumerRecord<Long, byte[]> record) {
+        //metadata
+        MsgMetadata metadata = DumpUtils.buildConsumerMetadata(record);
+        String json = null;
+        try {
+            json = KafkaMessageDecoder.dealMessage(record.value());
+        } catch (Exception e) {
+            log.info("consumer fetch message failed when dump some message,cause:{}", e.getMessage());
+        }
+        if (json == null) {
+            json = new String(record.value(), StandardCharsets.UTF_8);
+        }
+
+        String output = String.format("序号:%d,当前消息元数据信息:\n %s \n消息内容:\n %s \n",
+                counter.get(), DumpUtils.toJson(metadata), json);
+        log.info(output);
+
+        CmdUtils.writeMsg(context, output);
     }
 
     @Override
