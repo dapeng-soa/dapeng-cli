@@ -1,10 +1,14 @@
 package com.github.dapeng.plugins.kafka;
 
+import com.github.dapeng.plugins.kafka.dump.DumpConfig;
+import com.github.dapeng.plugins.kafka.dump.KafkaDumpConsumer;
 import com.github.dapeng.utils.CmdProperties;
 import com.github.dapeng.utils.CmdUtils;
 import org.clamshellcli.api.Command;
 import org.clamshellcli.api.Configurator;
 import org.clamshellcli.api.Context;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -13,6 +17,7 @@ import java.util.Map;
  * Kafka 消息 dump
  */
 public class KafkaDumpCmd implements Command {
+    private static final Logger log = LoggerFactory.getLogger(KafkaDumpCmd.class);
 
     private static final String NAMESPACE = "syscmd";
     private static final String ACTION_NAME = "dump";
@@ -49,6 +54,12 @@ public class KafkaDumpCmd implements Command {
                 if (args != null) return args;
                 args = new LinkedHashMap<>();
 
+                //zkhost
+                args.put(CmdProperties.KEY_ARGS_DUMP_ZKHOST, "[required] type '-zkhost zkhost' to specific  zkhost.");
+                //kafkahost
+                args.put(CmdProperties.KEY_ARGS_DUMP_KAFKA_HOST, "type '-kafkahost kafkahost' to specific kafka host.. ");
+
+
                 //topic
                 args.put(CmdProperties.KEY_ARGS_DUMP_TOPIC, "[required] type '-topic topic' to specific kafka topic.");
                 //offset
@@ -70,6 +81,9 @@ public class KafkaDumpCmd implements Command {
     public Object execute(Context context) {
         Map<String, String> inputArgs = CmdUtils.getCmdArgs(context);
 
+        String zkHost = inputArgs.get(CmdProperties.KEY_ARGS_DUMP_ZKHOST);
+        String kafkaHost = inputArgs.get(CmdProperties.KEY_ARGS_DUMP_KAFKA_HOST);
+
         String topic = inputArgs.get(CmdProperties.KEY_ARGS_DUMP_TOPIC);
         String partition = inputArgs.get(CmdProperties.KEY_ARGS_DUMP_PARTITION);
         String offset = inputArgs.get(CmdProperties.KEY_ARGS_DUMP_OFFSET);
@@ -79,6 +93,20 @@ public class KafkaDumpCmd implements Command {
 
         CmdUtils.writeMsg(context, String.format("inputParams: topic:%s, partition:%s, offset:%s, limit:%s, info:%s, broker:%s",
                 topic, partition, offset, limit, info, broker));
+
+        DumpConfig config = DumpUtils.buildDumpConfig(zkHost, kafkaHost, "TEST-GROUP", topic,
+                Integer.valueOf(partition), Long.valueOf(offset), Long.valueOf(limit));
+
+        KafkaDumpConsumer kafkaDumpConsumer = new KafkaDumpConsumer(config, context);
+
+        try {
+            kafkaDumpConsumer.init();
+            kafkaDumpConsumer.start();
+        } catch (Throwable ex) {
+            log.error(ex.getMessage(), ex);
+            kafkaDumpConsumer.stop();
+        }
+        //
 
         //3. validate kafka dump some args.
         if (CmdUtils.isEmpty(topic) || CmdUtils.isEmpty(partition) || CmdUtils.isEmpty(offset)) {

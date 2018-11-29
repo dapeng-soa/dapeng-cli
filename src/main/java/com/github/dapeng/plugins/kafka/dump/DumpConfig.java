@@ -6,10 +6,6 @@ package com.github.dapeng.plugins.kafka.dump;
  */
 public class DumpConfig {
     /**
-     * key
-     */
-    private String key;
-    /**
      * zookeeper host
      */
     private String zookeeperHost;
@@ -28,23 +24,15 @@ public class DumpConfig {
     /**
      * message which partition
      */
-    private long partition;
+    private Integer partition;
     /**
      * topic message offset
      */
-    private long begin;
+    private Long begin;
     /**
      * message size
      */
-    private long limit;
-
-    public String getKey() {
-        return key;
-    }
-
-    public void setKey(String key) {
-        this.key = key;
-    }
+    private Long limit;
 
     public String getZookeeperHost() {
         return zookeeperHost;
@@ -78,27 +66,27 @@ public class DumpConfig {
         this.topic = topic;
     }
 
-    public long getPartition() {
+    public Integer getPartition() {
         return partition;
     }
 
-    public void setPartition(long partition) {
+    public void setPartition(Integer partition) {
         this.partition = partition;
     }
 
-    public long getBegin() {
+    public Long getBegin() {
         return begin;
     }
 
-    public void setBegin(long begin) {
+    public void setBegin(Long begin) {
         this.begin = begin;
     }
 
-    public long getLimit() {
+    public Long getLimit() {
         return limit;
     }
 
-    public void setLimit(long limit) {
+    public void setLimit(Long limit) {
         this.limit = limit;
     }
 }
