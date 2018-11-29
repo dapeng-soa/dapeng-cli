@@ -1,7 +1,9 @@
 package com.github.dapeng.plugins.kafka;
 
+import com.github.dapeng.plugins.kafka.dump.AssignDumpConsumer;
 import com.github.dapeng.plugins.kafka.dump.DumpConfig;
-import com.github.dapeng.plugins.kafka.dump.KafkaDumpConsumer;
+import com.github.dapeng.plugins.kafka.dump.DefaultDumpConsumer;
+import com.github.dapeng.plugins.kafka.dump.DumpConsumer;
 import com.github.dapeng.utils.CmdProperties;
 import com.github.dapeng.utils.CmdUtils;
 import org.clamshellcli.api.Command;
@@ -94,17 +96,29 @@ public class KafkaDumpCmd implements Command {
         CmdUtils.writeMsg(context, String.format("inputParams: topic:%s, partition:%s, offset:%s, limit:%s, info:%s, broker:%s",
                 topic, partition, offset, limit, info, broker));
 
-        DumpConfig config = DumpUtils.buildDumpConfig(zkHost, kafkaHost, "TEST-GROUP", topic,
-                Integer.valueOf(partition), Long.valueOf(offset), Long.valueOf(limit));
 
-        KafkaDumpConsumer kafkaDumpConsumer = new KafkaDumpConsumer(config, context);
+        Integer partitionInt = CmdUtils.isEmpty(partition) ? null : Integer.valueOf(partition);
+
+        Long offsetLong = CmdUtils.isEmpty(offset) ? null : Long.valueOf(offset);
+        Long limitLong = CmdUtils.isEmpty(limit) ? null : Long.valueOf(limit);
+
+
+        DumpConfig config = DumpUtils.buildDumpConfig(zkHost, kafkaHost, "TEST-GROUP", topic,
+                partitionInt, offsetLong, limitLong);
+
+        DumpConsumer dumpConsumer;
+        if (config.getPartition() != null) {
+            dumpConsumer = new AssignDumpConsumer(config, context);
+        } else {
+            dumpConsumer = new DefaultDumpConsumer(config, context);
+        }
 
         try {
-            kafkaDumpConsumer.init();
-            kafkaDumpConsumer.start();
+            dumpConsumer.init();
+            dumpConsumer.start();
         } catch (Throwable ex) {
             log.error(ex.getMessage(), ex);
-            kafkaDumpConsumer.stop();
+            dumpConsumer.stop();
         }
         //
 
