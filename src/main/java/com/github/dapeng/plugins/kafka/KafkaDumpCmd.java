@@ -6,7 +6,6 @@ import com.github.dapeng.plugins.kafka.dump.DefaultDumpConsumer;
 import com.github.dapeng.plugins.kafka.dump.DumpConsumer;
 import com.github.dapeng.utils.CmdProperties;
 import com.github.dapeng.utils.CmdUtils;
-import com.github.dapeng.utils.ServiceUtils;
 import org.clamshellcli.api.Command;
 import org.clamshellcli.api.Configurator;
 import org.clamshellcli.api.Context;
