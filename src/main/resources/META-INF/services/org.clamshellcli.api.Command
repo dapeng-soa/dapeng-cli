@@ -13,3 +13,5 @@ com.github.dapeng.plugins.MethodCmd
 com.github.dapeng.plugins.LogAnalysCmd
 com.github.dapeng.plugins.DecodeCmd
 com.github.dapeng.plugins.DumpCmd
+
+com.github.dapeng.plugins.kafka.KafkaDumpCmd

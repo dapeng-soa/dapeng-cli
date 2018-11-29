@@ -36,8 +36,8 @@ public class CmdProperties {
     public static final String KEY_ARGS_METHOD = "-method";
     public static final String KEY_ARGS_DATE = "-date";
 
-    public static final String KEY_ARGS_REQ= "-req";
-    public static final String KEY_ARGS_RESP= "-resp";
+    public static final String KEY_ARGS_REQ = "-req";
+    public static final String KEY_ARGS_RESP = "-resp";
 
     public static final String KEY_SOA_ZOO_KEEPER_HOST = "soa.zookeeper.host";
 
@@ -49,6 +49,13 @@ public class CmdProperties {
     public static final String KEY_ARGS_SLOGTIME = "-slogtime";
     public static final String KEY_ARGS_ELOGTIME = "-elogtime";
 
+    //kafka dump
+    public static final String KEY_ARGS_DUMP_TOPIC = "-topic";
+    public static final String KEY_ARGS_DUMP_OFFSET = "-offset";
+    public static final String KEY_ARGS_DUMP_PARTITION = "-partition";
+    public static final String KEY_ARGS_DUMP_LIMIT = "-limit";
+    public static final String KEY_ARGS_DUMP_INFO = "-info";
+    public static final String KEY_ARGS_DUMP_BROKER = "-broker";
 
 
     //zookeeper properties
@@ -63,5 +70,6 @@ public class CmdProperties {
     public static final String DEFAULT_ZK_IP = "127.0.0.1";
     public static final String DEFAULT_ZK_PORT = "2181";
     public static final String DEFAULT_ZK_HOST = "127.0.0.1:2181";
+
 
 }
