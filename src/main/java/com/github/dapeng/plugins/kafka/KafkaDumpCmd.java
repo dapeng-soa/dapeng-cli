@@ -6,6 +6,7 @@ import com.github.dapeng.plugins.kafka.dump.DefaultDumpConsumer;
 import com.github.dapeng.plugins.kafka.dump.DumpConsumer;
 import com.github.dapeng.utils.CmdProperties;
 import com.github.dapeng.utils.CmdUtils;
+import com.github.dapeng.utils.ServiceUtils;
 import org.clamshellcli.api.Command;
 import org.clamshellcli.api.Configurator;
 import org.clamshellcli.api.Context;
@@ -13,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -112,6 +114,8 @@ public class KafkaDumpCmd implements Command {
         } else {
             dumpConsumer = new DefaultDumpConsumer(config, context);
         }
+        //fetch metadata
+        fetchMetadata();
 
         try {
             dumpConsumer.init();
@@ -138,6 +142,12 @@ public class KafkaDumpCmd implements Command {
 
         }
         return null;
+    }
+
+    private void fetchMetadata() {
+        //************************【获取服务列表 service -list】****************
+        List<String> services = DumpUtils.getRuntimeService();
+        log.info("[execute] ==>services=[{}]", services);
     }
 
     @Override

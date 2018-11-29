@@ -1,7 +1,9 @@
 package com.github.dapeng.plugins.kafka;
 
+import com.github.dapeng.openapi.cache.ServiceCache;
 import com.github.dapeng.plugins.kafka.config.MsgMetadata;
 import com.github.dapeng.plugins.kafka.dump.DumpConfig;
+import com.github.dapeng.utils.ZookeeperUtils;
 import com.google.gson.Gson;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.common.record.TimestampType;
@@ -11,6 +13,8 @@ import org.slf4j.LoggerFactory;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author <a href=mailto:leihuazhe@gmail.com>maple</a>
@@ -35,9 +39,6 @@ public class DumpUtils {
             typeName = timestampType.name;
         }
         log.info("record info: {}  ==> timestampType: {} ", record.toString(), typeName);
-
-
-
 
 
         return new MsgMetadata(record.key(), record.topic(), record.offset(), record.partition(),
@@ -70,6 +71,17 @@ public class DumpUtils {
             return "";
         }
         return LocalDateTime.now(ZoneId.of("Asia/Shanghai")).format(formatter);
+    }
+
+    public static List<String> getRuntimeService() {
+        log.info("[getRuntimeService] ==>!ZookeeperUtils.isContextInitialized()=[{}]", !ZookeeperUtils.isContextInitialized());
+        if (!ZookeeperUtils.isContextInitialized()) {
+            ZookeeperUtils.connect();
+        }
+        log.info("[getRuntimeService] ==>ServiceCache.getServices()=[{}]", ServiceCache.getServices());
+        List<String> services = ServiceCache.getServices().entrySet().stream().map(i -> i.getValue().getService().getNamespace() + "." + i.getKey()).collect(Collectors.toList());
+        services.sort(String::compareToIgnoreCase);
+        return services;
     }
 
 
