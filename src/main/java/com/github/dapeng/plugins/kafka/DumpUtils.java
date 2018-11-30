@@ -3,6 +3,7 @@ package com.github.dapeng.plugins.kafka;
 import com.github.dapeng.openapi.cache.ServiceCache;
 import com.github.dapeng.plugins.kafka.config.MsgMetadata;
 import com.github.dapeng.plugins.kafka.dump.DumpConfig;
+import com.github.dapeng.utils.CmdUtils;
 import com.github.dapeng.utils.ZookeeperUtils;
 import com.google.gson.Gson;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
@@ -40,7 +41,7 @@ public class DumpUtils {
      * 根据 cli 的输入创建 DumpConfig 对象。
      */
     public static DumpConfig buildDumpConfig(String zkHost, String broker, String groupId,
-                                             String topic, Integer partition, Long begin, Long limit) {
+                                             String topic, Integer partition, Long begin, Long limit, String info) {
         DumpConfig config = new DumpConfig();
         config.setZookeeperHost(zkHost);
         config.setBroker(broker);
@@ -49,7 +50,7 @@ public class DumpUtils {
         config.setPartition(partition);
         config.setBegin(begin);
         config.setLimit(limit);
-
+        config.setShowInfo(!CmdUtils.isEmpty(info));
         return config;
     }
 

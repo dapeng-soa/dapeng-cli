@@ -80,21 +80,27 @@ public abstract class DumpConsumer {
     private void doConsumer(ConsumerRecord<Long, byte[]> record) {
         //metadata
         MsgMetadata metadata = DumpUtils.buildConsumerMetadata(record);
-        String json = null;
-        try {
-            json = KafkaMessageDecoder.dealMessage(record.value());
-        } catch (Exception e) {
-            log.info("consumer fetch message failed when dump some message,cause:{}", e.getMessage());
-        }
-        if (json == null) {
-            json = new String(record.value(), StandardCharsets.UTF_8);
-        }
+        if (config.isShowInfo()) {
+            String output = String.format("序号:%d, 消息分区:%d, offset: %d, 创建时间: %s\n",
+                    counter.get(), metadata.getPartition(), metadata.getOffset(), metadata.getTimeFormat());
+            CmdUtils.writeMsg(context, output);
+        } else {
+            String json = null;
+            try {
+                json = KafkaMessageDecoder.dealMessage(record.value());
+            } catch (Exception e) {
+                log.info("consumer fetch message failed when dump some message,cause:{}", e.getMessage());
+            }
+            if (json == null) {
+                json = new String(record.value(), StandardCharsets.UTF_8);
+            }
 
-        String output = String.format("序号:%d,当前消息元数据信息:\n %s \n消息内容:\n %s \n",
-                counter.get(), DumpUtils.toJson(metadata), json);
-        log.info(output);
+            String output = String.format("序号:%d,当前消息元数据信息:\n %s \n消息内容:\n %s \n",
+                    counter.get(), DumpUtils.toJson(metadata), json);
+            log.info(output);
 
-        CmdUtils.writeMsg(context, output);
+            CmdUtils.writeMsg(context, output);
+        }
     }
 
     public void stop() {

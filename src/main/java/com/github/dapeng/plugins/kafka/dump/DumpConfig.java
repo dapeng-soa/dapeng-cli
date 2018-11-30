@@ -34,6 +34,11 @@ public class DumpConfig {
      */
     private Long limit;
 
+    /**
+     * 只显示元信息
+     */
+    private boolean showInfo;
+
     public String getZookeeperHost() {
         return zookeeperHost;
     }
@@ -88,5 +93,13 @@ public class DumpConfig {
 
     public void setLimit(Long limit) {
         this.limit = limit;
+    }
+
+    public boolean isShowInfo() {
+        return showInfo;
+    }
+
+    public void setShowInfo(boolean showInfo) {
+        this.showInfo = showInfo;
     }
 }

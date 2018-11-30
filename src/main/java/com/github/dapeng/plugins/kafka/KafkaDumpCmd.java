@@ -109,7 +109,7 @@ public class KafkaDumpCmd implements Command {
 
 
         DumpConfig config = DumpUtils.buildDumpConfig(zkHost, broker, "TEST-GROUP", topic,
-                partitionInt, offsetLong, limitLong);
+                partitionInt, offsetLong, limitLong, info);
 
         DumpConsumer dumpConsumer;
         if (config.getPartition() != null) {
