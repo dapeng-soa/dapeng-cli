@@ -49,6 +49,8 @@ public class KafkaDumpCmd implements Command {
                         .append(" dump -broker 127.0.0.1:9092 -topic member_test -offset 20 ")
                         .append(Configurator.VALUE_LINE_SEP)
                         .append(" dump -broker 127.0.0.1:9092 -topic member_test -partition 2 -offset 20 -limit 20 ")
+                        .append(Configurator.VALUE_LINE_SEP)
+                        .append(" dump -broker 127.0.0.1:9092 -topic member_test -partition 2  ")
                         .append(Configurator.VALUE_LINE_SEP);
                 return sb.toString();
             }

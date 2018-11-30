@@ -97,7 +97,7 @@ public abstract class DumpConsumer {
 
             String output = String.format("序号:%d,当前消息元数据信息:\n %s \n消息内容:\n %s \n",
                     counter.get(), DumpUtils.toJson(metadata), json);
-            log.info(output);
+            log.info("\n" + output);
 
             CmdUtils.writeMsg(context, output);
         }

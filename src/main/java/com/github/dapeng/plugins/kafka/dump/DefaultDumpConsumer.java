@@ -28,12 +28,13 @@ public class DefaultDumpConsumer extends DumpConsumer {
 
             @Override
             public void onPartitionsAssigned(Collection<TopicPartition> partitions) {
-                partitions.forEach(p -> {
+                if (config.getBegin() != null)
+                    partitions.forEach(p -> {
 
-                    CmdUtils.writeMsg(context, "partition:");
-                    consumer.seek(p, config.getBegin());
-                    log.info("Assigned partition {} to offset {}", p.partition(), config.getBegin());
-                });
+                        CmdUtils.writeMsg(context, "partition:");
+                        consumer.seek(p, config.getBegin());
+                        log.info("Assigned partition {} to offset {}", p.partition(), config.getBegin());
+                    });
             }
         });
         log.info("start to analyze event,groupId:{},topic:{},begin offset:{},limit:{}",

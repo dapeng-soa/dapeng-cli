@@ -21,7 +21,8 @@ public class AssignDumpConsumer extends DumpConsumer {
         TopicPartition topicPartition = new TopicPartition(config.getTopic(), config.getPartition());
         List<TopicPartition> topicPartitions = Collections.singletonList(topicPartition);
         consumer.assign(topicPartitions);
-        consumer.seek(topicPartition, config.getBegin());
+        if (config.getBegin() != null)
+            consumer.seek(topicPartition, config.getBegin());
     }
 
 }
