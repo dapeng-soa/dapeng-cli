@@ -6,10 +6,10 @@ import com.github.dapeng.plugins.kafka.dump.DumpConfig;
 import com.github.dapeng.utils.ZookeeperUtils;
 import com.google.gson.Gson;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
-import org.apache.kafka.common.record.TimestampType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -30,16 +30,7 @@ public class DumpUtils {
      * 根据每条消息元信息记录构造该条消息的元数据信息对象 {@link MsgMetadata}
      */
     public static MsgMetadata buildConsumerMetadata(ConsumerRecord<Long, byte[]> record) {
-        String typeName;
-        TimestampType timestampType = record.timestampType();
-
-        if (timestampType == null) {
-            typeName = "";
-        } else {
-            typeName = timestampType.name;
-        }
-        log.info("record info: {}  ==> timestampType: {} ", record.toString(), typeName);
-
+        String typeName = record.timestampType() == null ? "" : record.timestampType().name;
 
         return new MsgMetadata(record.key(), record.topic(), record.offset(), record.partition(),
                 record.timestamp(), typeName);
@@ -48,11 +39,11 @@ public class DumpUtils {
     /**
      * 根据 cli 的输入创建 DumpConfig 对象。
      */
-    public static DumpConfig buildDumpConfig(String zkHost, String kafkaHost, String groupId,
+    public static DumpConfig buildDumpConfig(String zkHost, String broker, String groupId,
                                              String topic, Integer partition, Long begin, Long limit) {
         DumpConfig config = new DumpConfig();
         config.setZookeeperHost(zkHost);
-        config.setKafkaHost(kafkaHost);
+        config.setBroker(broker);
         config.setGroupId(groupId);
         config.setTopic(topic);
         config.setPartition(partition);
@@ -70,7 +61,8 @@ public class DumpUtils {
         if (timeStamp == null) {
             return "";
         }
-        return LocalDateTime.now(ZoneId.of("Asia/Shanghai")).format(formatter);
+
+        return LocalDateTime.ofInstant(Instant.ofEpochMilli(timeStamp), ZoneId.of("Asia/Shanghai")).format(formatter);
     }
 
     public static List<String> getRuntimeService() {

@@ -1,5 +1,6 @@
 package com.github.dapeng.plugins.kafka.dump;
 
+import com.github.dapeng.utils.CmdUtils;
 import org.apache.kafka.clients.consumer.*;
 import org.apache.kafka.common.TopicPartition;
 import org.clamshellcli.api.Context;
@@ -19,7 +20,7 @@ public class DefaultDumpConsumer extends DumpConsumer {
     }
 
     @Override
-    protected void subscribe() {
+    protected void subscribe(Context context) {
         consumer.subscribe(Collections.singletonList(config.getTopic()), new ConsumerRebalanceListener() {
             @Override
             public void onPartitionsRevoked(Collection<TopicPartition> partitions) {
@@ -28,6 +29,8 @@ public class DefaultDumpConsumer extends DumpConsumer {
             @Override
             public void onPartitionsAssigned(Collection<TopicPartition> partitions) {
                 partitions.forEach(p -> {
+
+                    CmdUtils.writeMsg(context, "partition:");
                     consumer.seek(p, config.getBegin());
                     log.info("Assigned partition {} to offset {}", p.partition(), config.getBegin());
                 });

@@ -51,8 +51,6 @@ public class CmdProperties {
 
     //kafka dump
     public static final String KEY_ARGS_DUMP_ZKHOST = "-zkhost";
-    public static final String KEY_ARGS_DUMP_KAFKA_HOST = "-kafkahost";
-
     public static final String KEY_ARGS_DUMP_TOPIC = "-topic";
     public static final String KEY_ARGS_DUMP_OFFSET = "-offset";
     public static final String KEY_ARGS_DUMP_PARTITION = "-partition";

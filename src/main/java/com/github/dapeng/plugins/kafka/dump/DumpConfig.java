@@ -12,7 +12,7 @@ public class DumpConfig {
     /**
      * kafka host
      */
-    private String kafkaHost;
+    private String broker;
     /**
      * group id
      */
@@ -42,12 +42,12 @@ public class DumpConfig {
         this.zookeeperHost = zookeeperHost;
     }
 
-    public String getKafkaHost() {
-        return kafkaHost;
+    public String getBroker() {
+        return broker;
     }
 
-    public void setKafkaHost(String kafkaHost) {
-        this.kafkaHost = kafkaHost;
+    public void setBroker(String broker) {
+        this.broker = broker;
     }
 
     public String getGroupId() {

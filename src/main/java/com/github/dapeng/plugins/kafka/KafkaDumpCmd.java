@@ -42,12 +42,14 @@ public class KafkaDumpCmd implements Command {
 
             public String getUsage() {
                 StringBuilder sb = new StringBuilder();
+                sb.append(Configurator.VALUE_LINE_SEP).append("示例:").append(Configurator.VALUE_LINE_SEP);
                 sb.append(Configurator.VALUE_LINE_SEP)
-                        .append(" dump -topic member_test   ")
+                        .append(" dump -broker 127.0.0.1:9092 -topic member_test ")
                         .append(Configurator.VALUE_LINE_SEP)
-                        .append(" dump -topic member_test -partition 1 -offset 20  ")
+                        .append(" dump -broker 127.0.0.1:9092 -topic member_test -offset 20 ")
+                        .append(Configurator.VALUE_LINE_SEP)
+                        .append(" dump -broker 127.0.0.1:9092 -topic member_test -partition 2 -offset 20 -limit 20 ")
                         .append(Configurator.VALUE_LINE_SEP);
-
                 return sb.toString();
             }
 
@@ -59,10 +61,8 @@ public class KafkaDumpCmd implements Command {
 
                 //zkhost
                 args.put(CmdProperties.KEY_ARGS_DUMP_ZKHOST, "[required] type '-zkhost zkhost' to specific  zkhost.");
-                //kafkahost
-                args.put(CmdProperties.KEY_ARGS_DUMP_KAFKA_HOST, "type '-kafkahost kafkahost' to specific kafka host.. ");
-
-
+                //broker
+                args.put(CmdProperties.KEY_ARGS_DUMP_BROKER, "type '-broker 127.0.0.1:9092' to specific kafka host.. ");
                 //topic
                 args.put(CmdProperties.KEY_ARGS_DUMP_TOPIC, "[required] type '-topic topic' to specific kafka topic.");
                 //offset
@@ -73,8 +73,6 @@ public class KafkaDumpCmd implements Command {
                 args.put(CmdProperties.KEY_ARGS_DUMP_LIMIT, "type '-offset 12' to specific kafka limit.. ");
                 //info
                 args.put(CmdProperties.KEY_ARGS_DUMP_INFO, "type '-offset 12' to specify kafka info.. ");
-                //broker
-                args.put(CmdProperties.KEY_ARGS_DUMP_BROKER, "type '-offset 12' to specific kafka broker.. ");
                 return args;
             }
         };
@@ -85,18 +83,24 @@ public class KafkaDumpCmd implements Command {
         Map<String, String> inputArgs = CmdUtils.getCmdArgs(context);
 
         String zkHost = inputArgs.get(CmdProperties.KEY_ARGS_DUMP_ZKHOST);
-        String kafkaHost = inputArgs.get(CmdProperties.KEY_ARGS_DUMP_KAFKA_HOST);
+        String broker = inputArgs.get(CmdProperties.KEY_ARGS_DUMP_BROKER);
 
         String topic = inputArgs.get(CmdProperties.KEY_ARGS_DUMP_TOPIC);
         String partition = inputArgs.get(CmdProperties.KEY_ARGS_DUMP_PARTITION);
         String offset = inputArgs.get(CmdProperties.KEY_ARGS_DUMP_OFFSET);
         String limit = inputArgs.get(CmdProperties.KEY_ARGS_DUMP_LIMIT);
         String info = inputArgs.get(CmdProperties.KEY_ARGS_DUMP_INFO);
-        String broker = inputArgs.get(CmdProperties.KEY_ARGS_DUMP_BROKER);
 
         CmdUtils.writeMsg(context, String.format("inputParams: topic:%s, partition:%s, offset:%s, limit:%s, info:%s, broker:%s",
                 topic, partition, offset, limit, info, broker));
 
+        //3. validate kafka dump some args.
+        if (CmdUtils.isEmpty(broker) || CmdUtils.isEmpty(topic)) {
+            CmdUtils.writeMsg(context, "dump kafka 消息时 kafka host 或者 topic 不能为空");
+            String usage = getDescriptor().getUsage();
+            CmdUtils.writeMsg(context, usage);
+            return null;
+        }
 
         Integer partitionInt = CmdUtils.isEmpty(partition) ? null : Integer.valueOf(partition);
 
@@ -104,7 +108,7 @@ public class KafkaDumpCmd implements Command {
         Long limitLong = CmdUtils.isEmpty(limit) ? null : Long.valueOf(limit);
 
 
-        DumpConfig config = DumpUtils.buildDumpConfig(zkHost, kafkaHost, "TEST-GROUP", topic,
+        DumpConfig config = DumpUtils.buildDumpConfig(zkHost, broker, "TEST-GROUP", topic,
                 partitionInt, offsetLong, limitLong);
 
         DumpConsumer dumpConsumer;
@@ -125,21 +129,7 @@ public class KafkaDumpCmd implements Command {
         }
         //
 
-        //3. validate kafka dump some args.
-        if (CmdUtils.isEmpty(topic) || CmdUtils.isEmpty(partition) || CmdUtils.isEmpty(offset)) {
-            CmdUtils.writeMsg(context, " request format is invalid.. please check your input.....");
-            String usage = getDescriptor().getUsage();
-            CmdUtils.writeMsg(context, usage);
-        } else {
-//            String jsonRequestSample = ServiceUtils.getJsonRequestSample(sName, sVersion, sMethod);
-//            if (!CmdUtils.isEmpty(file_out)) {
-//                ServiceUtils.writerFile(context, file_out, jsonRequestSample);
-//                //CmdUtils.writeMsg(context, file_out + "is generated . ");
-//            } else {
-//                CmdUtils.writeMsg(context, CmdUtils.getResult(jsonRequestSample));
-//            }
 
-        }
         return null;
     }
 

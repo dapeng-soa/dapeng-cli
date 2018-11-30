@@ -40,7 +40,7 @@ public abstract class DumpConsumer {
 
     public void init() {
         Properties props = new Properties();
-        props.put("bootstrap.servers", config.getKafkaHost());
+        props.put("bootstrap.servers", config.getBroker());
         props.put("group.id", config.getGroupId());
         //no commit to broker, unnecessary
         props.put("enable.auto.commit", "false");
@@ -52,10 +52,10 @@ public abstract class DumpConsumer {
         //设置如何把byte转成object类型，例子中，通过指定string解析器，我们告诉获取到的消息的key和value只是简单个string类型。
         consumer = new KafkaConsumer<>(props);
 
-        subscribe();
+        subscribe(context);
     }
 
-    protected abstract void subscribe();
+    protected abstract void subscribe(Context context);
 
 
     public void start() {

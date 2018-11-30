@@ -17,7 +17,7 @@ public class AssignDumpConsumer extends DumpConsumer {
     }
 
     @Override
-    protected void subscribe() {
+    protected void subscribe(Context context) {
         TopicPartition topicPartition = new TopicPartition(config.getTopic(), config.getPartition());
         List<TopicPartition> topicPartitions = Collections.singletonList(topicPartition);
         consumer.assign(topicPartitions);
