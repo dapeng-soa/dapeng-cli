@@ -81,18 +81,20 @@ public abstract class DumpConsumer {
                     log.error(e.getMessage(), e);
                 }
             });
-
-            for (ConsumerRecord<Long, byte[]> record : records) {
-                if (config.getLimit() == null) {
-                    counter.incrementAndGet();
-                    doConsumer(record);
-                } else if (counter.incrementAndGet() <= config.getLimit()) {
-                    doConsumer(record);
-                } else {
-                    break loop;
+            if (records != null && records.count() > 0) {
+                for (ConsumerRecord<Long, byte[]> record : records) {
+                    if (config.getLimit() == null) {
+                        counter.incrementAndGet();
+                        doConsumer(record);
+                    } else if (counter.incrementAndGet() <= config.getLimit()) {
+                        doConsumer(record);
+                    } else {
+                        break loop;
+                    }
+                    consumer.commitAsync();
                 }
-                consumer.commitAsync();
             }
+
         }
         stop();
     }
@@ -119,7 +121,6 @@ public abstract class DumpConsumer {
             }
         }
     }
-
 
     private void doConsumer(ConsumerRecord<Long, byte[]> record) {
         //metadata
