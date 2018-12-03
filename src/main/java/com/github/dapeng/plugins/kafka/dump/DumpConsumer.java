@@ -7,13 +7,21 @@ import com.github.dapeng.plugins.kafka.decode.KafkaMessageDecoder;
 import com.github.dapeng.utils.CmdUtils;
 import com.today.eventbus.serializer.KafkaLongDeserializer;
 import org.apache.kafka.clients.consumer.*;
+import org.apache.kafka.clients.consumer.internals.SubscriptionState;
+import org.apache.kafka.common.TopicPartition;
 import org.apache.kafka.common.serialization.ByteArrayDeserializer;
 import org.clamshellcli.api.Context;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.lang.reflect.Field;
 import java.nio.charset.StandardCharsets;
+import java.util.Map;
 import java.util.Properties;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -28,6 +36,13 @@ public abstract class DumpConsumer {
     protected KafkaConsumer<Long, byte[]> consumer;
 
     protected volatile boolean isRunning = true;
+
+
+    private volatile boolean readyFlag = true;
+
+    private AtomicInteger readyCounter = new AtomicInteger(0);
+
+    private ExecutorService executor = Executors.newSingleThreadExecutor();
 
     //field
     protected final DumpConfig config;
@@ -56,10 +71,19 @@ public abstract class DumpConsumer {
     }
 
 
-    public void start() {
+    public void start() throws Exception {
         loop:
         while (isRunning) {
             ConsumerRecords<Long, byte[]> records = consumer.poll(100);
+            //启动打印任务...
+            executor.execute(() -> {
+                try {
+                    processPartitionAndOffset();
+                } catch (Exception e) {
+                    log.error(e.getMessage(), e);
+                }
+            });
+
             for (ConsumerRecord<Long, byte[]> record : records) {
                 if (config.getLimit() == null) {
                     counter.incrementAndGet();
@@ -69,9 +93,33 @@ public abstract class DumpConsumer {
                 } else {
                     break loop;
                 }
+                consumer.commitAsync();
             }
         }
         stop();
+    }
+
+    private void processPartitionAndOffset() throws Exception {
+        while (readyFlag) {
+            int counter = readyCounter.incrementAndGet();
+            Field subscriptions = consumer.getClass().getDeclaredField("subscriptions");
+            subscriptions.setAccessible(true);
+            SubscriptionState state = (SubscriptionState) subscriptions.get(consumer);
+            Map<TopicPartition, OffsetAndMetadata> topicPartitionOffsetAndMetadataMap = state.allConsumed();
+            StringBuilder append = new StringBuilder();
+            append.append("\n分区和初始Offset信息:\n");
+            topicPartitionOffsetAndMetadataMap.forEach((k, v) -> {
+                String info = String.format("\n主题: %s,分区名: %d, offset: %d\n", k.topic(), k.partition(), v.offset());
+                append.append(info);
+            });
+            CmdUtils.writeMsg(context, append.toString());
+
+            Thread.sleep(3000);
+            if (readyCounter.get() >= 2) {
+                readyFlag = false;
+                log.info("processPartitionAndOffset break loop");
+            }
+        }
     }
 
 
