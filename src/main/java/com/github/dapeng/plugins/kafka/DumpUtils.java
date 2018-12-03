@@ -77,5 +77,7 @@ public class DumpUtils {
         return services;
     }
 
+    public static final String DIVIDING_LINE = "---------------------------------------------------------------------------------------------------------------------------";
+
 
 }

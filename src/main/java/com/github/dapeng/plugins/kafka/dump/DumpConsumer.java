@@ -55,8 +55,6 @@ public abstract class DumpConsumer {
         subscribe(context);
     }
 
-    protected abstract void subscribe(Context context);
-
 
     public void start() {
         loop:
@@ -89,14 +87,17 @@ public abstract class DumpConsumer {
             try {
                 json = KafkaMessageDecoder.dealMessage(record.value());
             } catch (Exception e) {
-                log.info("consumer fetch message failed when dump some message,cause:{}", e.getMessage());
+                log.error("consumer fetch message failed when dump some message,cause:{}", e.getMessage());
             }
             if (json == null) {
-                json = new String(record.value(), StandardCharsets.UTF_8);
+                String noDecodeValue = new String(record.value(), StandardCharsets.UTF_8);
+                log.error("dump {} 消息失败，可能元信息不存在或者版本不对...", noDecodeValue);
+                json = String.format("当前消息Thrift元信息不存在或版本信息不对,Dump失败。内容: %s", noDecodeValue);
             }
 
-            String output = String.format("序号:%d,当前消息元数据信息:\n %s \n消息内容:\n %s \n",
-                    counter.get(), DumpUtils.toJson(metadata), json);
+            String output = String.format("\n序号:%d,当前消息元数据信息:\n %s \n\n消息内容:\n %s \n \n  %s",
+                    counter.get(), DumpUtils.toJson(metadata), json, DumpUtils.DIVIDING_LINE);
+
             log.info("\n" + output);
 
             CmdUtils.writeMsg(context, output);
@@ -108,4 +109,6 @@ public abstract class DumpConsumer {
         consumer.close();
         log.info("DefaultDumpConsumer::stop the kafka consumer to fetch message ");
     }
+
+    protected abstract void subscribe(Context context);
 }
