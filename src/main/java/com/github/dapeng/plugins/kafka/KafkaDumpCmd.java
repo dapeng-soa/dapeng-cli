@@ -42,15 +42,45 @@ public class KafkaDumpCmd implements Command {
 
             public String getUsage() {
                 StringBuilder sb = new StringBuilder();
-                sb.append(Configurator.VALUE_LINE_SEP).append("示例:").append(Configurator.VALUE_LINE_SEP);
-                sb.append(Configurator.VALUE_LINE_SEP)
-                        .append(" dump -broker 127.0.0.1:9092 -topic member_test ")
+                sb.append(Configurator.VALUE_LINE_SEP).append("示例:")
                         .append(Configurator.VALUE_LINE_SEP)
-                        .append(" dump -broker 127.0.0.1:9092 -topic member_test -offset 20 ")
                         .append(Configurator.VALUE_LINE_SEP)
-                        .append(" dump -broker 127.0.0.1:9092 -topic member_test -partition 2 -offset 20 -limit 20 ")
+                        .append("1.显示最新的一条消息，以及它的 offset 、partition")
                         .append(Configurator.VALUE_LINE_SEP)
-                        .append(" dump -broker 127.0.0.1:9092 -topic member_test -partition 2  ")
+                        .append(Configurator.VALUE_LINE_SEP)
+                        .append("1.1不显示指定broker，默认值 127.0.0.1:9092")
+                        .append(Configurator.VALUE_LINE_SEP)
+                        .append(Configurator.VALUE_LINE_SEP)
+                        .append("dump -topic member_rest")
+                        .append(Configurator.VALUE_LINE_SEP)
+                        .append(Configurator.VALUE_LINE_SEP)
+                        .append("1.2指定 broker \n")
+                        .append(Configurator.VALUE_LINE_SEP)
+                        .append("dump -broker 192.168.100.1:9092 -topic member_test")
+                        .append(Configurator.VALUE_LINE_SEP)
+                        .append(Configurator.VALUE_LINE_SEP)
+                        .append("2. 指定 offset 不显示指定 partition")
+                        .append(Configurator.VALUE_LINE_SEP)
+                        .append(Configurator.VALUE_LINE_SEP)
+                        .append("dump -broker 127.0.0.1:9092 -topic member_test -offset 200000")
+                        .append(Configurator.VALUE_LINE_SEP)
+                        .append(Configurator.VALUE_LINE_SEP)
+                        .append("3. 指定分区信息和 offset 信息")
+                        .append(Configurator.VALUE_LINE_SEP)
+                        .append(Configurator.VALUE_LINE_SEP)
+                        .append("dump -broker 127.0.0.1:9092  -topic member_test  -partition 1 -offset 40")
+                        .append(Configurator.VALUE_LINE_SEP)
+                        .append(Configurator.VALUE_LINE_SEP)
+                        .append("4.指定消费消息的范围")
+                        .append(Configurator.VALUE_LINE_SEP)
+                        .append(Configurator.VALUE_LINE_SEP)
+                        .append("dump -broker 127.0.0.1:9092 -topic member_test -offset 20 -limit 10")
+                        .append(Configurator.VALUE_LINE_SEP)
+                        .append(Configurator.VALUE_LINE_SEP)
+                        .append("5.通过 -info 只显示消息元信息(消息创建时间，分区，offset信息)")
+                        .append(Configurator.VALUE_LINE_SEP)
+                        .append(Configurator.VALUE_LINE_SEP)
+                        .append("dump -broker 127.0.0.1:9092 -topic member_test -partition 1  -offset 40 -info")
                         .append(Configurator.VALUE_LINE_SEP);
                 return sb.toString();
             }
@@ -97,8 +127,8 @@ public class KafkaDumpCmd implements Command {
                 topic, partition, offset, limit, info, broker));
 
         //3. validate kafka dump some args.
-        if (CmdUtils.isEmpty(broker) || CmdUtils.isEmpty(topic)) {
-            CmdUtils.writeMsg(context, "dump kafka 消息时 kafka host 或者 topic 不能为空");
+        if (CmdUtils.isEmpty(topic)) {
+            CmdUtils.writeMsg(context, "dump kafka 消息时 topic 不能为空");
             String usage = getDescriptor().getUsage();
             CmdUtils.writeMsg(context, usage);
             return null;
@@ -109,6 +139,10 @@ public class KafkaDumpCmd implements Command {
         Long offsetLong = CmdUtils.isEmpty(offset) ? null : Long.valueOf(offset);
         Long limitLong = CmdUtils.isEmpty(limit) ? null : Long.valueOf(limit);
 
+        if (CmdUtils.isEmpty(broker)) {
+            CmdUtils.writeMsg(context, "kafka broker host is not set, use default 127.0.0.1:9092");
+            broker = "127.0.0.1:9092";
+        }
 
         DumpConfig config = DumpUtils.buildDumpConfig(zkHost, broker, "TEST-GROUP", topic,
                 partitionInt, offsetLong, limitLong, info);
