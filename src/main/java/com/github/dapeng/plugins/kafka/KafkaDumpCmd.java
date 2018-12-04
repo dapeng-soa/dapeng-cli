@@ -81,6 +81,12 @@ public class KafkaDumpCmd implements Command {
                         .append(Configurator.VALUE_LINE_SEP)
                         .append(Configurator.VALUE_LINE_SEP)
                         .append("dump -broker 127.0.0.1:9092 -topic member_test -partition 1  -offset 40 -info")
+                        .append(Configurator.VALUE_LINE_SEP)
+                        .append(Configurator.VALUE_LINE_SEP)
+                        .append("更多使用指南:")
+                        .append(Configurator.VALUE_LINE_SEP)
+                        .append(Configurator.VALUE_LINE_SEP)
+                        .append("https://www.jianshu.com/p/763f2e257f8d")
                         .append(Configurator.VALUE_LINE_SEP);
                 return sb.toString();
             }
