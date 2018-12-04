@@ -95,32 +95,25 @@ public abstract class DumpConsumer {
     }
 
     private void processPartitionAndOffset() throws Exception {
-        if (config.getBegin() == null) {
-            executor.execute(() -> {
-                while (readyFlag) {
-                    try {
-                        int counter = readyCounter.incrementAndGet();
-                        Field subscriptions = consumer.getClass().getDeclaredField("subscriptions");
-                        subscriptions.setAccessible(true);
-                        SubscriptionState state = (SubscriptionState) subscriptions.get(consumer);
-                        Map<TopicPartition, OffsetAndMetadata> topicPartitionOffsetAndMetadataMap = state.allConsumed();
-                        StringBuilder append = new StringBuilder();
-                        append.append("\n分区和初始Offset信息:\n");
-                        topicPartitionOffsetAndMetadataMap.forEach((k, v) -> {
-                            String info = String.format("\n主题: %s,分区名: %d, offset: %d\n", k.topic(), k.partition(), v.offset());
-                            append.append(info);
-                        });
-                        CmdUtils.writeMsg(context, append.toString());
-                        Thread.sleep(3000);
-                        if (readyCounter.get() >= 2) {
-                            readyFlag = false;
-                            log.info("processPartitionAndOffset break loop");
-                        }
-                    } catch (Exception e) {
-                        log.error(e.getMessage(), e);
-                    }
-                }
-            });
+        int counter = readyCounter.incrementAndGet();
+        if (counter == 2) {
+            try {
+                Thread.sleep(2000);
+                Field subscriptions = consumer.getClass().getDeclaredField("subscriptions");
+                subscriptions.setAccessible(true);
+                SubscriptionState state = (SubscriptionState) subscriptions.get(consumer);
+                Map<TopicPartition, OffsetAndMetadata> topicPartitionOffsetAndMetadataMap = state.allConsumed();
+                StringBuilder append = new StringBuilder();
+                append.append("\n分区和初始Offset信息:\n");
+                topicPartitionOffsetAndMetadataMap.forEach((k, v) -> {
+                    String info = String.format("\n主题: %s,分区名: %d, offset: %d\n", k.topic(), k.partition(), v.offset());
+                    append.append(info);
+                });
+                CmdUtils.writeMsg(context, append.toString());
+
+            } catch (Exception e) {
+                log.error(e.getMessage(), e);
+            }
         }
     }
 

@@ -31,7 +31,7 @@
             <level>DEBUG</level>
         </filter>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>logs/debug-detail-cli.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>logs/level-debug-cli.%d{yyyy-MM-dd}.log</fileNamePattern>
             <maxHistory>30</maxHistory>
         </rollingPolicy>
         <encoder>
@@ -42,7 +42,6 @@
     <logger name="org.apache.kafka.clients" level="INFO"/>
 
     <root level="DEBUG">
-        <!--<appender-ref ref="STDOUT"/>-->
         <appender-ref ref="INFO"/>
         <appender-ref ref="DEBUG"/>
     </root>
