@@ -18,8 +18,6 @@ import java.lang.reflect.Field;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.Properties;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -29,18 +27,13 @@ import java.util.concurrent.atomic.AtomicInteger;
 public abstract class DumpConsumer {
     protected static Logger log = LoggerFactory.getLogger(DefaultDumpConsumer.class);
 
-    protected AtomicInteger counter = new AtomicInteger(0);
-
     protected KafkaConsumer<Long, byte[]> consumer;
 
-    protected volatile boolean isRunning = true;
+    private AtomicInteger counter = new AtomicInteger(0);
 
-
-    private volatile boolean readyFlag = true;
+    private volatile boolean isRunning = true;
 
     private AtomicInteger readyCounter = new AtomicInteger(0);
-
-    private ExecutorService executor = Executors.newSingleThreadExecutor();
 
     //field
     protected final DumpConfig config;
@@ -86,7 +79,8 @@ public abstract class DumpConsumer {
                     } else {
                         break loop;
                     }
-                    consumer.commitAsync();
+//                    没有必要提交偏移量
+//                    consumer.commitAsync();
                 }
             }
 
@@ -94,28 +88,6 @@ public abstract class DumpConsumer {
         stop();
     }
 
-    private void processPartitionAndOffset() throws Exception {
-        int counter = readyCounter.incrementAndGet();
-        if (counter == 2) {
-            try {
-                Thread.sleep(2000);
-                Field subscriptions = consumer.getClass().getDeclaredField("subscriptions");
-                subscriptions.setAccessible(true);
-                SubscriptionState state = (SubscriptionState) subscriptions.get(consumer);
-                Map<TopicPartition, OffsetAndMetadata> topicPartitionOffsetAndMetadataMap = state.allConsumed();
-                StringBuilder append = new StringBuilder();
-                append.append("\n分区和初始Offset信息:\n");
-                topicPartitionOffsetAndMetadataMap.forEach((k, v) -> {
-                    String info = String.format("\n主题: %s,分区名: %d, offset: %d\n", k.topic(), k.partition(), v.offset());
-                    append.append(info);
-                });
-                CmdUtils.writeMsg(context, append.toString());
-
-            } catch (Exception e) {
-                log.error(e.getMessage(), e);
-            }
-        }
-    }
 
     private void doConsumer(ConsumerRecord<Long, byte[]> record) {
         //metadata
@@ -143,6 +115,29 @@ public abstract class DumpConsumer {
             log.info("\n" + output);
 
             CmdUtils.writeMsg(context, output);
+        }
+    }
+
+    private void processPartitionAndOffset() throws Exception {
+        int counter = readyCounter.incrementAndGet();
+        if (counter == 2) {
+            try {
+                Thread.sleep(2000);
+                Field subscriptions = consumer.getClass().getDeclaredField("subscriptions");
+                subscriptions.setAccessible(true);
+                SubscriptionState state = (SubscriptionState) subscriptions.get(consumer);
+                Map<TopicPartition, OffsetAndMetadata> topicPartitionOffsetAndMetadataMap = state.allConsumed();
+                StringBuilder append = new StringBuilder();
+                append.append("\n分区和初始Offset信息:\n");
+                topicPartitionOffsetAndMetadataMap.forEach((k, v) -> {
+                    String info = String.format("\n主题: %s,分区名: %d, offset: %d\n", k.topic(), k.partition(), v.offset());
+                    append.append(info);
+                });
+                CmdUtils.writeMsg(context, append.toString());
+
+            } catch (Exception e) {
+                log.error(e.getMessage(), e);
+            }
         }
     }
 
