@@ -16,7 +16,7 @@
         <scala.version>2.12.2</scala.version>
         <clamshellcli.groupId>org.clamshellcli</clamshellcli.groupId>
         <clamshellcli.version>0.5.2</clamshellcli.version>
-        <dapeng.version>2.1.1-SNAPSHOT</dapeng.version>
+        <dapeng.version>2.1.2-SNAPSHOT</dapeng.version>
         <jcommander.version>1.17</jcommander.version>
     </properties>
 
@@ -161,7 +161,7 @@
         <dependency>
             <groupId>com.today</groupId>
             <artifactId>event-bus_2.12</artifactId>
-            <version>3.0.0</version>
+            <version>2.1.2-SNAPSHOT</version>
         </dependency>
 
     </dependencies>
