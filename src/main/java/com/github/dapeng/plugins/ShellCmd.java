@@ -9,6 +9,7 @@ import org.clamshellcli.api.Context;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -64,7 +65,13 @@ public class ShellCmd implements Command {
 
     @Override
     public Object execute(Context context) {
-        Map<String, String> inputArgs = CmdUtils._getCmdArgs(context);
+        Map<String, String> inputArgs = new HashMap<>();
+        String commandLine = (String) context.getValue(Context.KEY_COMMAND_LINE_INPUT);
+        if (commandLine.contains("-f")) {
+            inputArgs = CmdUtils._getCmdArgs(context);
+        } else {
+            inputArgs.put(ACTION_NAME, commandLine.substring(commandLine.indexOf(" ") + 1));
+        }
         String scriptFile = inputArgs.get(CmdProperties.KEY_ARGS_FILE_READ);
         String command = inputArgs.get(ACTION_NAME);
         logger.info("[execute] ==>inputArgs=[{}]", inputArgs);
