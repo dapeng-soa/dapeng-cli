@@ -43,7 +43,7 @@ public class ShellCmd implements Command {
             @Override
             public String getUsage() {
                 StringBuilder result = new StringBuilder();
-                result.append(Configurator.VALUE_LINE_SEP).append(" shell script command");
+                result.append(Configurator.VALUE_LINE_SEP).append(" shell \"script command\"");
                 result.append(Configurator.VALUE_LINE_SEP).append(" shell -f fileName");
                 return result.toString();
             }

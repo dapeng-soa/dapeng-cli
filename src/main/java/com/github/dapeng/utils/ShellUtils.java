@@ -19,14 +19,14 @@ public class ShellUtils {
     public static void executeShellScriptFromFile(String scriptFile) {
         logger.info("execute Shell Script from file: " + scriptFile);
         try {
-            StringBuilder command = new StringBuilder();
+            StringBuilder command = new StringBuilder("\"");
 
             List<String> lines = Files.readAllLines(Paths.get(scriptFile), StandardCharsets.UTF_8);
 
             for (String line : lines) {
                 command.append(line).append(System.getProperty("line.separator"));
             }
-            executeShellScript(command.toString());
+            executeShellScript(command.append("\"").toString());
 
         } catch (IOException e) {
             logger.error("fail to execute shell script" + e.getMessage());
@@ -35,8 +35,9 @@ public class ShellUtils {
 
     public static void executeShellScript(String command) {
         try {
-            logger.info("command:" + command);
-            String[] cmd = new String[]{"/bin/sh", "-c", command};
+            int endIndex = command.lastIndexOf("\"");
+            logger.info("command:" + command.substring(1,endIndex));
+            String[] cmd = new String[]{"/bin/sh", "-c", command.substring(1,endIndex)};
 
             Process process = Runtime.getRuntime().exec(cmd);
             process.waitFor();
