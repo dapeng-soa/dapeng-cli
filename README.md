@@ -1,5 +1,3 @@
-命令行工具下载 http://pms.today36524.td/basic-services/dapeng-cli
-
 ## 1.普通使用方式:  
     > cd dist  
     > java -jar cli.jar
