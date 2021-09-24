@@ -1,5 +1,7 @@
 package com.github.dapeng.plugins.commands;
 
+import com.github.dapeng.core.InvocationContext;
+import com.github.dapeng.core.InvocationContextImpl;
 import com.github.dapeng.plugins.SetCmd;
 import com.github.dapeng.utils.CmdUtils;
 import jline.console.ConsoleReader;
@@ -73,8 +75,9 @@ public class ZkController implements InputController {
             //初始化zookeeper
             //ZookeeperUtils.connect();
             //// TODO: 2018-10-22  设置 callerMid   默认值dapeng-cli
-            SetCmd.invocationContext.callerMid("dapeng-cli");
-
+            //SetCmd.invocationContext.callerMid("dapeng-cli");
+            InvocationContextImpl invocationContext = (InvocationContextImpl)InvocationContextImpl.Factory.currentInstance();
+            invocationContext.callerMid("dapeng-cli");
 
 
         } else {

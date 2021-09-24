@@ -255,7 +255,7 @@ public class ServiceUtils {
                               String method,
                               String parameter) {
 
-        InvocationContextImpl invocationCtx = (InvocationContextImpl) SetCmd.invocationContext;
+        InvocationContextImpl invocationCtx = (InvocationContextImpl)InvocationContextImpl.Factory.currentInstance();
         invocationCtx.serviceName(service);
         invocationCtx.versionName(version);
         invocationCtx.methodName(method);

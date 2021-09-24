@@ -1,14 +1,17 @@
 package com.github.dapeng.utils;
 
+import com.github.dapeng.core.helper.SoaSystemEnvProperties;
 import com.github.dapeng.openapi.cache.ServiceCache;
 import com.github.dapeng.openapi.cache.ZkBootstrap;
-import jline.internal.Log;
+import com.github.dapeng.registry.zookeeper.ClientZkAgent;
 import org.apache.zookeeper.*;
 import org.apache.zookeeper.data.Stat;
 import org.clamshellcli.api.Context;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -257,7 +260,7 @@ public class ZookeeperUtils {
                 children = zk.getChildren(path, watchedEvent -> {
                     //Children发生变化，则重新获取最新的services列表
                     if (watchedEvent.getType() == Watcher.Event.EventType.NodeChildrenChanged) {
-                        Log.info("节点变更: 重新获取节点信息.......");
+                        logger.info("节点变更: 重新获取节点信息.......");
                         getAllNodes(path, zkPaths);
                     }
                 });
@@ -274,7 +277,18 @@ public class ZookeeperUtils {
         //System.getenv("soa.zookeeper.host");
         System.setProperty(KEY_SOA_ZOO_KEEPER_HOST, host);
         //SoaSystemEnvProperties.SOA_ZOOKEEPER_HOST
-
+        try {
+            Field field = SoaSystemEnvProperties.class.getField("SOA_ZOOKEEPER_HOST");
+            field.setAccessible(true);
+            Field modifiersField = Field.class.getDeclaredField("modifiers");
+            modifiersField.setAccessible(true);
+            modifiersField.setInt(field, field.getModifiers() & ~Modifier.FINAL);
+            field.set(null, host);
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
         logger.info("[getZkHost] ==>System.getenv(soa.zookeeper.host)=[{}]", System.getenv("soa.zookeeper.host".replace('.', '_')));
         logger.info("[getZkHost] ==>System.getProperty(KEY_SOA_ZOO_KEEPER_HOST) =[{}]", System.getProperty(KEY_SOA_ZOO_KEEPER_HOST));
         resetConnect();

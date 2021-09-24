@@ -36,7 +36,7 @@ public class SetCmd implements Command {
     private static final String NAMESPACE = "dapeng";
     private static final String CMD_NAME = "set";
     private CmdDescriptor cmdDescriptor;
-    public static final InvocationContext invocationContext = InvocationContextImpl.Factory.currentInstance();
+    //public static final InvocationContext invocationContext = InvocationContextImpl.Factory.currentInstance();
 
 
     //参数设置
@@ -144,6 +144,7 @@ public class SetCmd implements Command {
         Map<String, String> cmdParams = CmdUtils.getCmdArgs(context);
 
         logger.info("[execute] ==> cmdParams=[{}]", cmdParams);
+        InvocationContext invocationContext = InvocationContextImpl.Factory.currentInstance();
         if (cmdParams.isEmpty()) {
             StringBuilder info = new StringBuilder(128);
             info.append("the setting info is:").append("\n");
@@ -153,7 +154,7 @@ public class SetCmd implements Command {
             info.append("-- the CallerMid: ").append(invocationContext.callerMid().orElse(null)).append("\n");
             /*info.append("-- the CallerFrom: ").append(invocationContext.callerFrom().orElse(null)).append("\n");*/
             info.append("-- the CallerIp: ").append(invocationContext.callerIp().map(IPUtils::transferIp).orElse(null)).append("\n");
-            info.append("-- the zkHost: ").append(ZookeeperUtils.getZkHost()).append("\n");
+            //info.append("-- the zkHost: ").append(ZookeeperUtils.getZkHost()).append("\n");
             info.append("-- the cookie: ").append(invocationContext.cookies()).append("\n");
 
             info.append("-- the sessionTid: ").append(invocationContext.sessionTid().map(DapengUtil::longToHexStr).orElse(null)).append("\n");
